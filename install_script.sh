@@ -221,7 +221,7 @@ export kargs="${kargs} net.ifnames=1,biosdevname=1"
 wwsh -y provision set --postnetdown=1 "${compute_regex}"
 
 # Define provisioning image for hosts
-wwsh -y provision set "${compute_regex}" --vnfs=rocky9.3 --bootstrap=`uname -r` \
+wwsh -y provision set "${compute_regex}" --vnfs=rocky9.6 --bootstrap=`uname -r` \
 --files=dynamic_hosts,passwd,group,shadow,munge.key,network
 
 # Restart dhcp / update PXE
