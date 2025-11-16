@@ -6,7 +6,7 @@ echo "Finished helyxSolve $(date)"
 
 echo "Send results to master $(date)"
 echo "Staging-Out results to $SHARED_CASE_DIR..."
-srun --ntasks=$SLURM_NNODES bash send_results.sh $WDIR $LOCAL_CASE_DIR
+srun --ntasks=$SLURM_NNODES bash $WDIR/pipeline/send_results.sh $WDIR $LOCAL_CASE_DIR
 echo "Finished send results to master $(date)"
 
 cd $WDIR

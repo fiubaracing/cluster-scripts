@@ -25,7 +25,7 @@ sed "s/{{ TASKS }}/$TASKS/g; s/{{ N }}/$N/" decomposeParDict > "$SCDIR/system/de
 
 echo "Creating slurm batch job"
 echo " - Adding header from template"
-sed "s/{{ JOB_NAME }}/$JOB_NAME/g; s/{{ NODES }}/$NODES/g; s/{{ TASKS }}/$TASKS/g; s/{{ TASKS_PER_NODE }}/$TASKS_PER_NODE/g; s/{{ OUTPUT }}/$JOB_NAME.out/g; s/{{ OERROR }}/$JOB_NAME.err/" job.sbatch.header > $SCDIR/job.sbatch
+sed "s/{{ JOB_NAME }}/$JOB_NAME/g; s/{{ NODES }}/$NODES/g; s/{{ TASKS }}/$TASKS/g; s/{{ TASKS_PER_NODE }}/$TASKS_PER_NODE/g; s/{{ OUTPUT }}/pipeline\/$JOB_NAME.out/g; s/{{ OERROR }}/pipeline\/$JOB_NAME.err/" job.sbatch.header > $SCDIR/job.sbatch
 
 if [ -f "$SCDIR/Allrun" ]; then
         cat $SCDIR/Allrun >> $SCDIR/job.sbatch
@@ -64,4 +64,4 @@ cd $SCDIR
 
 echo "Running helyx simulation"
 sbatch pipeline/job.sbatch
-echo "Check slurm-$JOB_NAME.out and slurm-$JOB_NAME.err for job output and errors."
+echo "Check pipeline/$JOB_NAME.out and pipeline/$JOB_NAME.err for job output and errors."
