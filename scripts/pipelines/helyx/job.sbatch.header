@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#------------------------------------------------------------------------------
+# SLURM Directives
+# DO NOT EDIT THESE SETTINGS
+#------------------------------------------------------------------------------
+
+# Job name
+#SBATCH --job-name="{{ JOB_NAME }}"       
+
+# Number of nodes
+#SBATCH --nodes={{ NODES }}                    
+
+# Total number of MPI ranks (nodes * cores/node)
+#SBATCH --ntasks={{ TASKS }}                  
+
+# Cores per node
+#SBATCH --ntasks-per-node={{ TASKS_PER_NODE }}          
+
+# Standard output log
+#SBATCH --output={{ OUTPUT }}      
+
+# Standard error log
+#SBATCH --error={{ OERROR }}       
+
+#------------------------------------------------------------------------------
+# Environment Setup
+#------------------------------------------------------------------------------
+echo "Job started on $(date)"
+echo "Running on nodes: $SLURM_JOB_NODELIST using $SLURM_NTASKS tasks"
+set -e
+
+LOCAL_STORAGE_PATH="/tmp/shm"
+
+# Create a unique directory for this job on the local storage
+LOCAL_CASE_DIR="$LOCAL_STORAGE_PATH/job_$SLURM_JOB_ID"
+WDIR=$SLURM_SUBMIT_DIR
+cd $WDIR
+source /home/admin/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc
+SECONDS=0
+
+#------------------------------------------------------------------------------
+# HELYX simulation commands
+#------------------------------------------------------------------------------

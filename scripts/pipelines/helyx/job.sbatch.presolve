@@ -1,0 +1,14 @@
+
+#------------------------------------------------------------------------------
+# Pre-solve: Copy split tasks to local node directories
+#------------------------------------------------------------------------------
+echo "Copy split in nodes $(date)"
+srun --ntasks $SLURM_NNODES bash copy_tasks.sh $WDIR $LOCAL_CASE_DIR
+echo "Finished copy task splits $(date)"
+
+cd $LOCAL_CASE_DIR
+
+#------------------------------------------------------------------------------
+# Run helyxSolve
+#------------------------------------------------------------------------------
+echo "Running helyxSolve $(date)"

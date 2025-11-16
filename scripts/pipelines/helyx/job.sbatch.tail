@@ -1,0 +1,26 @@
+
+#------------------------------------------------------------------------------
+# Create dummy file for ParaView visualisation
+#------------------------------------------------------------------------------
+touch $JOB_NAME.foam
+echo "Finished Reconstruct $(date)"
+
+#------------------------------------------------------------------------------
+#  Cleanup local temp directories on all nodes
+#------------------------------------------------------------------------------
+echo "Cleaning up $LOCAL_CASE_DIR from all nodes..."
+srun -N $SLURM_NNODES rm -rf $LOCAL_CASE_DIR
+echo "Cleanup complete."
+
+#------------------------------------------------------------------------------
+# Gather metrics
+#------------------------------------------------------------------------------
+echo "Job ended on $(date)"
+TOTAL_RUNTIME=$SECONDS
+
+hours=$(( TOTAL_RUNTIME / 3600 ))
+minutes=$(( (TOTAL_RUNTIME % 3600) / 60 ))
+seconds=$(( TOTAL_RUNTIME % 60 ))
+
+# For padded HH:MM:SS format, use printf
+printf "Runtime duration: %02dh %02dm %02ds\n" $hours $minutes $seconds
