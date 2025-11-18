@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ $# -ne 4 ]; then
   # Print an error message to standard error (>&2)
   echo "Usage: $0 <JOB_NAME> <NODES> <TASKS> <TASKS_PER_NODE>" >&2
