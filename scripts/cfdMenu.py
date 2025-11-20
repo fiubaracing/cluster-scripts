@@ -160,6 +160,7 @@ def helyx_menu_setup():
         name = input("Enter the name for the Helyx case: ")
         nodes = input("Enter the number of nodes to use: ")
         tasks_per_node = input("Enter the number of tasks per node: ")
+        email_address = input("Enter your email address for notifications: ")
 
         if not nodes.isdigit() or not tasks_per_node.isdigit():
             print("Error: Number of nodes and tasks per node must be integers.")
@@ -169,7 +170,7 @@ def helyx_menu_setup():
         total_tasks = str(int(nodes) * int(tasks_per_node))
         # Call the script directly (no shell) and raise on non-zero exit
         subprocess.run(["bash", script, name, nodes, total_tasks,
-                        tasks_per_node], check=True)
+                        tasks_per_node, email_address], check=True)
 
     def run_check_mesh_only():
         subprocess.run(

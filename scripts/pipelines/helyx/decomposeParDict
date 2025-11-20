@@ -16,15 +16,15 @@ FoamFile
 
 numberOfSubdomains {{ TASKS }};
 
-method          hierarchical;
+method          scotch;
 
-distributed     false;
+// distributed     false;
 
-hierarchicalCoeffs
-{
-    n               {{ N }};
-    order           xyz;
-}
+// hierarchicalCoeffs
+// {
+//     n               {{ N }};
+//     order           xyz;
+// }
 
 
 // ************************************************************************* //

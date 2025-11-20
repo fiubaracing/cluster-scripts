@@ -23,6 +23,12 @@
 # Standard error log
 #SBATCH --error={{ OERROR }}       
 
+# Email notifications (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-type=ALL
+
+# Email address
+#SBATCH --mail-user={{ EMAIL }}
+
 #------------------------------------------------------------------------------
 # Environment Setup
 #------------------------------------------------------------------------------

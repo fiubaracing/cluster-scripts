@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [ $# -ne 4 ]; then
+if [ $# -ne 5 ]; then
   # Print an error message to standard error (>&2)
-  echo "Usage: $0 <JOB_NAME> <NODES> <TASKS> <TASKS_PER_NODE>" >&2
-  echo "Error: This script requires exactly 4 arguments." >&2
+  echo "Usage: $0 <JOB_NAME> <NODES> <TASKS> <TASKS_PER_NODE> <EMAIL>" >&2
+  echo "Error: This script requires exactly 5 arguments." >&2
   
   # Exit with a non-zero status
   exit 1
@@ -13,6 +13,7 @@ JOB_NAME=$1
 NODES=$2
 TASKS=$3
 TASKS_PER_NODE=$4
+EMAIL=$5
 SCDIR=$PWD # Script Call Directory
 
 THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
@@ -27,7 +28,7 @@ sed "s/{{ TASKS }}/$TASKS/g; s/{{ N }}/$N/" decomposeParDict > "$SCDIR/system/de
 
 echo "Creating slurm batch job"
 echo " - Adding header from template"
-sed "s/{{ JOB_NAME }}/$JOB_NAME/g; s/{{ NODES }}/$NODES/g; s/{{ TASKS }}/$TASKS/g; s/{{ TASKS_PER_NODE }}/$TASKS_PER_NODE/g; s/{{ OUTPUT }}/pipeline\/$JOB_NAME.out/g; s/{{ OERROR }}/pipeline\/$JOB_NAME.err/" job.sbatch.header > $SCDIR/job.sbatch
+sed "s/{{ JOB_NAME }}/$JOB_NAME/g; s/{{ EMAIL }}/$EMAIL/g; s/{{ NODES }}/$NODES/g; s/{{ TASKS }}/$TASKS/g; s/{{ TASKS_PER_NODE }}/$TASKS_PER_NODE/g; s/{{ OUTPUT }}/pipeline\/$JOB_NAME.out/g; s/{{ OERROR }}/pipeline\/$JOB_NAME.err/" job.sbatch.header > $SCDIR/job.sbatch
 
 if [ -f "$SCDIR/Allrun" ]; then
         cat $SCDIR/Allrun >> $SCDIR/job.sbatch
