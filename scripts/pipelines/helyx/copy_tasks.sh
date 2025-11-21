@@ -23,7 +23,9 @@ echo "[Node $SLURM_NODEID] Created $LOCAL_CASE_DIR"
 echo "[Node $SLURM_NODEID] Copying common files (system, constant, 0)..."
 rsync -a $SHARED_CASE_DIR/system $LOCAL_CASE_DIR/
 rsync -a $SHARED_CASE_DIR/constant $LOCAL_CASE_DIR/
-#rsync -a $SHARED_CASE_DIR/0 $LOCAL_CASE_DIR/
+if [ -d "$SHARED_CASE_DIR/0" ]; then
+    rsync -a $SHARED_CASE_DIR/0 $LOCAL_CASE_DIR/
+fi
 
 # --- Calculate and copy processor directories ---
 # This is the core logic.
