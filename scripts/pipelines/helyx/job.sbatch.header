@@ -46,5 +46,50 @@ source /home/admin/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc
 SECONDS=0
 
 #------------------------------------------------------------------------------
+#  Retrieve logs to master node
+#------------------------------------------------------------------------------
+retrieve_logs_to_master() {
+    # Only the slurm task selected master node retrieves logs
+    if [ "$SLURM_NODEID" -eq 0 ]; then
+        echo "[Node $SLURM_NODEID] Retrieving logs to master node..."
+        rsync -a $LOCAL_CASE_DIR/postProcessing $WDIR/
+        rsync -a $LOCAL_CASE_DIR/log.* $WDIR/
+        echo "[Node $SLURM_NODEID] Logs retrieval complete."
+    fi
+}
+
+#------------------------------------------------------------------------------
+#  Cleanup local temp directories on all nodes
+#------------------------------------------------------------------------------
+remove_local_case_dir() {
+    echo "[Node $SLURM_NODEID] Cleaning up local case directory..."
+    srun -N $SLURM_NNODES rm -rf $LOCAL_CASE_DIR
+    echo "[Node $SLURM_NODEID] Local case directory removed."
+}
+
+#------------------------------------------------------------------------------
+# Gather metrics
+#------------------------------------------------------------------------------
+gather_metrics() {
+    echo "Job ended on $(date)"
+    TOTAL_RUNTIME=$SECONDS
+
+    hours=$(( TOTAL_RUNTIME / 3600 ))
+    minutes=$(( (TOTAL_RUNTIME % 3600) / 60 ))
+    seconds=$(( TOTAL_RUNTIME % 60 ))
+
+    # For padded HH:MM:SS format, use printf
+    printf "Runtime duration: %02dh %02dm %02ds\n" $hours $minutes $seconds
+}
+
+on_exit() {
+    retrieve_logs_to_master
+    remove_local_case_dir
+    gather_metrics
+}
+
+trap on_exit EXIT
+
+#------------------------------------------------------------------------------
 # HELYX simulation commands
 #------------------------------------------------------------------------------
