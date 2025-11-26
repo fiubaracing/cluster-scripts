@@ -12,14 +12,13 @@ EOF'
 chmod 440 /etc/sudoers.d/slurm-wwsh
 
 # Scripts
-sed -i 's|^ResumeProgram=.*|ResumeProgram=/etc/slurm/resume_program.sh|' /etc/slurm/slurm.conf
-sed -i 's|^SuspendProgram=.*|SuspendProgram=/etc/slurm/suspend_program.sh|' /etc/slurm/slurm.conf
-# The Timeout (How long to wait before turning off)
+sed -i -E 's|^[[:space:]]*#?[[:space:]]*ResumeProgram=.*|ResumeProgram=/etc/slurm/resume_program.sh|' /etc/slurm/slurm.conf
+sed -i -E 's|^[[:space:]]*#?[[:space:]]*SuspendProgram=.*|SuspendProgram=/etc/slurm/suspend_program.sh|' /etc/slurm/slurm.conf
+# SuspendTimeout: how long to wait (in seconds) before powering off an idle node
 # 300 seconds = 5 minutes of being IDLE
-sed -i 's|^SuspendTimeout=.*|SuspendTimeout=300|' /etc/slurm/slurm.conf
+sed -i -E 's|^[[:space:]]*#?[[:space:]]*SuspendTimeout=.*|SuspendTimeout=300|' /etc/slurm/slurm.conf
 # Timeout (How long Slurm waits for the node to boot)
 # If the node doesn't register within this time, Slurm marks it DOWN.
 # 600 seconds = 10 minutes (Adjust based on your boot speed)
-sed -i 's|^ResumeTimeout=.*|ResumeTimeout=600|' /etc/slurm/slurm.conf
-
+sed -i -E 's|^[[:space:]]*#?[[:space:]]*ResumeTimeout=.*|ResumeTimeout=600|' /etc/slurm/slurm.conf
 systemctl restart slurmctld
