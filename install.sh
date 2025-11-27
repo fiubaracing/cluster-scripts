@@ -16,10 +16,7 @@ UTILS="$THIS_SCRIPT_DIR/utils"
 # bash $UTILS/slurm-email/install.sh
 # bash $UTILS/slurm-power/install.sh
 
-chmod +x $UTILS/update-menu.sh
-chmod +x $UTILS/pipelines/helyx/create_scripts.sh
-chmod +x $UTILS/pipelines/helyx/send_results.sh
-chmod +x $UTILS/pipelines/helyx/copy_tasks.sh
+git config --global --add safe.directory $THIS_SCRIPT_DIR
 
 cat >> /etc/profile.d/cfd-env.sh << EOF
 # CFD Environment Variables and aliases
