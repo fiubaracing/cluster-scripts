@@ -226,7 +226,7 @@ def paraview_menu_setup():
     return paraview_menu
 
 
-def utils_menu_setup():
+def root_utils_menu_setup():
     def power_on_nodes():
         nodes = input(
             "Enter the list of nodes to power on (e.g., c[1,3,4-6], c1, c[1-12]): ")
@@ -245,7 +245,7 @@ def utils_menu_setup():
         subprocess.run(
             ["bash", MENU_PWD + "/update-menu.sh"], check=True)
 
-    utils_menu = OptionNode("UTILS MENU")
+    utils_menu = OptionNode("ROOT UTILS MENU")
     utils_menu.add_child(OptionNode("Power on nodes", handler=power_on_nodes))
     utils_menu.add_child(OptionNode(
         "Power off nodes", handler=power_off_nodes))
@@ -256,7 +256,7 @@ def utils_menu_setup():
 
 cfd_menu = OptionNode("CFD MENU")
 
-if UNIX_USER == "admin":
+if UNIX_USER == "admin" or UNIX_USER == "root":
     cfd_menu.add_child(helyx_menu_setup())
 
 for menu in [
@@ -265,9 +265,11 @@ for menu in [
     # xcompact3d_menu_setup,
     # ansys_menu_setup,
     # paraview_menu_setup,
-    utils_menu_setup,
 ]:
     cfd_menu.add_child(menu())
+
+if UNIX_USER == "root":
+    cfd_menu.add_child(root_utils_menu_setup())
 
 # ==========================================
 # Example Usage
