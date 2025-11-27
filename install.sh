@@ -5,13 +5,13 @@ source .env
 set -e
 
 THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-TARGET_DIR=/opt/ohpc/pub/apps/
+TARGET_DIR=/opt/ohpc/pub/apps
 mkdir -p $TARGET_DIR
 
 mv -f "$THIS_SCRIPT_DIR/" "$TARGET_DIR/"
 THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
-UTILS="$THIS_SCRIPT_DIR/utils/"
+UTILS="$THIS_SCRIPT_DIR/utils"
 
 # bash $UTILS/slurm-email/install.sh
 # bash $UTILS/slurm-power/install.sh
