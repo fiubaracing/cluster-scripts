@@ -1,17 +1,13 @@
-import json
 import sys
 import os
 import subprocess
-from typing import Callable, Optional
+from typing import Callable, Literal, Optional
 import getpass
 import tty
 import termios
 import pwd
 
-SHARED_DIR = '/opt/ohpc/pub'
-HELYX_BASHRC_PATH = '/home/admin/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc'
-HELYX_SCRIPTS_PATH = '/home/admin/scripts/slurm/helyx'
-OPENFOAM_BASHRC_PATH = SHARED_DIR + '/apps/openFOAM/OpenFOAM-v2506/etc/bashrc'
+MENU_PWD = os.path.dirname(os.path.abspath(__file__))
 
 
 def get_unix_username() -> str:
@@ -156,7 +152,7 @@ def interactive_menu(node: OptionNode) -> Optional[OptionNode]:
 
 
 def helyx_menu_setup():
-    def run_helyx_pipeline():
+    def run_pipeline(type: Literal["run", "check"]):
         name = input("Enter the name for the Helyx case: ")
         nodes = input("Enter the number of nodes to use: ")
         tasks_per_node = input("Enter the number of tasks per node: ")
@@ -166,27 +162,31 @@ def helyx_menu_setup():
             print("Error: Number of nodes and tasks per node must be integers.")
             return
 
-        script = os.path.join(HELYX_SCRIPTS_PATH, "create_scripts.sh")
+        script = MENU_PWD + "/pipelines/helyx/create_scripts.sh"
         total_tasks = str(int(nodes) * int(tasks_per_node))
         # Call the script directly (no shell) and raise on non-zero exit
-        subprocess.run(["bash", script, name, nodes, total_tasks,
-                        tasks_per_node, email_address], check=True)
-
-    def run_check_mesh_only():
-        subprocess.run(
-            ["echo", "WIP..."])
+        subprocess.run([
+            "bash",
+            script,
+            name,
+            nodes,
+            total_tasks,
+            tasks_per_node,
+            email_address,
+            type
+        ], check=True)
 
     helyx_menu = OptionNode("HELYX MENU")
     # Example action
     helyx_menu.add_child(
         OptionNode(
             name="Run pipeline",
-            handler=run_helyx_pipeline
+            handler=lambda: run_pipeline("run")
         ))
     helyx_menu.add_child(
         OptionNode(
             name="Run check mesh only",
-            handler=run_check_mesh_only
+            handler=lambda: run_pipeline("check")
         ))
     return helyx_menu
 
@@ -226,17 +226,46 @@ def paraview_menu_setup():
     return paraview_menu
 
 
+def utils_menu_setup():
+    def power_on_nodes():
+        nodes = input(
+            "Enter the list of nodes to power on (e.g., c[1,3,4-6], c1, c[1-12]): ")
+
+        subprocess.run(
+            [MENU_PWD + "/slurm-power/resume-program.sh", nodes], check=True)
+
+    def power_off_nodes():
+        nodes = input(
+            "Enter the list of nodes to power off (e.g., c[1,3,4-6], c1, c[1-12]): ")
+
+        subprocess.run(
+            [MENU_PWD + "/slurm-power/suspend-program.sh", nodes], check=True)
+
+    def update_menu():
+        subprocess.run(
+            [MENU_PWD + "/update-menu.sh"], check=True)
+
+    utils_menu = OptionNode("UTILS MENU")
+    utils_menu.add_child(OptionNode("Power on nodes", handler=power_on_nodes))
+    utils_menu.add_child(OptionNode(
+        "Power off nodes", handler=power_off_nodes))
+    utils_menu.add_child(OptionNode(
+        "Update menu", handler=update_menu))
+    return utils_menu
+
+
 cfd_menu = OptionNode("CFD MENU")
 
 if UNIX_USER == "admin":
     cfd_menu.add_child(helyx_menu_setup())
 
 for menu in [
-    openfoam_menu_setup,
-    basilisk_menu_setup,
-    xcompact3d_menu_setup,
-    ansys_menu_setup,
-    paraview_menu_setup
+    # openfoam_menu_setup,
+    # basilisk_menu_setup,
+    # xcompact3d_menu_setup,
+    # ansys_menu_setup,
+    # paraview_menu_setup,
+    utils_menu_setup,
 ]:
     cfd_menu.add_child(menu())
 
