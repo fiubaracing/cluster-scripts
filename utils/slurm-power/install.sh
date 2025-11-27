@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cp ./resume-program.sh /etc/slurm/resume_program.sh
 cp ./suspend-program.sh /etc/slurm/suspend_program.sh
 chmod +x /etc/slurm/resume_program.sh

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "${RESEND_API_KEY}" ] || [ -z "${RESEND_VERIFIED_DOMAIN}" ]; then
+    echo "Error: RESEND_API_KEY and RESEND_VERIFIED_DOMAIN environment variables must be set in .env." >&2
+    exit 1
+fi
+
 cat >> /usr/local/bin/slurm_mail.py <<EOF
 #!/usr/bin/env python3
 import sys
