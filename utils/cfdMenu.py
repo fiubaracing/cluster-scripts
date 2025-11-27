@@ -277,6 +277,10 @@ if UNIX_USER == "root":
 
 
 def main():
+    if cfd_menu is None or not cfd_menu.children:
+        print("No menu options available for this user.")
+        return
+
     while True:
         # Launch recursive menu starting at root
         selected = interactive_menu(cfd_menu)
