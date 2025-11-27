@@ -2,19 +2,21 @@
 
 source .env
 
-./slurm-email/install.sh
-./slurm-power/install.sh
-
 THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 TARGET_DIR=/opt/ohpc/pub/apps/
 MENU_PWD="$TARGET_DIR/utils/"
 mkdir -p $TARGET_DIR
-mv -f "$THIS_SCRIPT_DIR/" "$TARGET_DIR/"
+
+bash $THIS_SCRIPT_DIR/utils/slurm-email/install.sh
+bash $THIS_SCRIPT_DIR/utils/slurm-power/install.sh
+
 
 chmod +x $TARGET_DIR/utils/update-menu.sh
 chmod +x $TARGET_DIR/utils/pipelines/helyx/create_scripts.sh
 chmod +x $TARGET_DIR/utils/pipelines/helyx/send_results.sh
 chmod +x $TARGET_DIR/utils/pipelines/helyx/copy_tasks.sh
+
+mv -f "$THIS_SCRIPT_DIR/" "$TARGET_DIR/"
 
 cat >> /etc/profile.d/cfd-env.sh << EOF
 # CFD Environment Variables and aliases
