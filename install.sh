@@ -11,6 +11,11 @@ MENU_PWD="$TARGET_DIR/utils/"
 mkdir -p $TARGET_DIR
 mv -f "$THIS_SCRIPT_DIR/" "$TARGET_DIR/"
 
+chmod +x $TARGET_DIR/utils/update-menu.sh
+chmod +x $TARGET_DIR/utils/pipelines/helyx/create_scripts.sh
+chmod +x $TARGET_DIR/utils/pipelines/helyx/send_results.sh
+chmod +x $TARGET_DIR/utils/pipelines/helyx/copy_tasks.sh
+
 cat >> /etc/profile.d/cfd-env.sh << EOF
 # CFD Environment Variables and aliases
 

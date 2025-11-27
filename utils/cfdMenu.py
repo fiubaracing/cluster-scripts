@@ -232,18 +232,18 @@ def utils_menu_setup():
             "Enter the list of nodes to power on (e.g., c[1,3,4-6], c1, c[1-12]): ")
 
         subprocess.run(
-            [MENU_PWD + "/slurm-power/resume-program.sh", nodes], check=True)
+            ["bash", MENU_PWD + "/slurm-power/resume-program.sh", nodes], check=True)
 
     def power_off_nodes():
         nodes = input(
             "Enter the list of nodes to power off (e.g., c[1,3,4-6], c1, c[1-12]): ")
 
         subprocess.run(
-            [MENU_PWD + "/slurm-power/suspend-program.sh", nodes], check=True)
+            ["bash", MENU_PWD + "/slurm-power/suspend-program.sh", nodes], check=True)
 
     def update_menu():
         subprocess.run(
-            [MENU_PWD + "/update-menu.sh"], check=True)
+            ["bash", MENU_PWD + "/update-menu.sh"], check=True)
 
     utils_menu = OptionNode("UTILS MENU")
     utils_menu.add_child(OptionNode("Power on nodes", handler=power_on_nodes))
