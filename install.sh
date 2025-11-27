@@ -9,7 +9,7 @@ THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 TARGET_DIR=/opt/ohpc/pub/apps/
 MENU_PWD="$TARGET_DIR/utils/"
 mkdir -p $TARGET_DIR
-mv -f "$THIS_SCRIPT_DIR/"* "$TARGET_DIR/"
+mv -f "$THIS_SCRIPT_DIR/" "$TARGET_DIR/"
 
 cat >> /etc/profile.d/cfd-env.sh << EOF
 # CFD Environment Variables and aliases
