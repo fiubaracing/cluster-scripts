@@ -41,15 +41,28 @@ alias useOpenFOAM='source /opt/ohpc/pub/apps/openFOAM/OpenFOAM-v2506/etc/bashrc'
 export BASILISK=/opt/ohpc/pub/apps/basilisk/src
 export PATH=$PATH:$BASILISK
 
-# Setting up ILO interface for node power management
+# Setting up ILO interface for node power management (idempotent)
 
-ILO_INTERFACE=$(ip a | grep 10.2.1.2)
+ILO_IP="10.2.1.2/24"
+ILO_ADDR="10.2.1.2"
+ILO_DEV="eno1"
 
-if [ -z "$ILO_INTERFACE" ]; then
-    ip addr add 10.2.1.2/24 dev eno1
-    systemctl restart NetworkManager
+# Only proceed if the device exists
+if ip -o link show "$ILO_DEV" >/dev/null 2>&1; then
+    # If the address is already present on the device, do nothing
+    if ip -o addr show dev "$ILO_DEV" | grep -qw "$ILO_ADDR"; then
+        :
+    else
+        # Add address (ignore failure if it races or is already added)
+        ip addr add "$ILO_IP" dev "$ILO_DEV" >/dev/null 2>&1 || true
+
+        # Restart NetworkManager only if it's running
+        if systemctl is-active --quiet NetworkManager; then
+            systemctl restart NetworkManager >/dev/null 2>&1 || true
+        fi
+    fi
 fi
 
-unset ILO_INTERFACE
+unset ILO_IP ILO_ADDR ILO_DEV
 
 EOF
