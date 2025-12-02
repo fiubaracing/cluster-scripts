@@ -13,7 +13,9 @@ for host in $HOSTS; do
     sudo /usr/bin/wwsh ipmi poweron $host
 done
 
-# (
+echo "Waiting for nodes to power on in background..."
+
+(
     for i in {1..12}; do
         ALL_UP=true
         for host in $HOSTS; do
@@ -24,7 +26,7 @@ done
         done
 
         if [ "$ALL_UP" = true ]; then
-            logger -t slurm_resume "All nodes are up."
+            logger -t slurm_resume "All nodes $1 are up."
             break
         else
             logger -t slurm_resume "Waiting for nodes to come up... (Attempt $i/12)"
@@ -37,7 +39,7 @@ done
     for host in $HOSTS; do
         sudo scontrol update NodeName="$host" state=RESUME
     done
-# ) >/dev/null 2>&1 &
+) >/dev/null 2>&1 &
 
 
 exit 0
