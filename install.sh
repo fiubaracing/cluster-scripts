@@ -19,7 +19,10 @@ fi
 
 UTILS="$THIS_SCRIPT_DIR/utils"
 
-bash $UTILS/slurm-email/install.sh
+if [ -n "${RESEND_API_KEY}" ] && [ -n "${RESEND_VERIFIED_DOMAIN}" ]; then
+    bash $UTILS/slurm-email/install.sh
+fi
+
 bash $UTILS/slurm-power/install.sh
 
 git config --global --add safe.directory $THIS_SCRIPT_DIR
