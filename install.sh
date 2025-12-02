@@ -6,15 +6,21 @@ set -e
 
 THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 TARGET_DIR=/opt/ohpc/pub/apps
-mkdir -p $TARGET_DIR
 
-mv -f "$THIS_SCRIPT_DIR/" "$TARGET_DIR/"
-THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+if [[ "$THIS_SCRIPT_DIR" == "$TARGET_DIR"* ]]; then
+    echo "Target directory is the script directory or inside it: $TARGET_DIR"
+    echo "Skipping move operation."
+else 
+    mkdir -p $TARGET_DIR
+
+    mv -f "$THIS_SCRIPT_DIR/" "$TARGET_DIR/"
+    THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+fi
 
 UTILS="$THIS_SCRIPT_DIR/utils"
 
-# bash $UTILS/slurm-email/install.sh
-# bash $UTILS/slurm-power/install.sh
+bash $UTILS/slurm-email/install.sh
+bash $UTILS/slurm-power/install.sh
 
 git config --global --add safe.directory $THIS_SCRIPT_DIR
 
@@ -29,5 +35,16 @@ alias useOpenFOAM='source /opt/ohpc/pub/apps/openFOAM/OpenFOAM-v2506/etc/bashrc'
 
 export BASILISK=/opt/ohpc/pub/apps/basilisk/src
 export PATH=$PATH:$BASILISK
+
+# Setting up ILO interface for node power management
+
+ILO_INTERFACE=$(ip a | grep 10.2.1.2)
+
+if [ -z "$ILO_INTERFACE" ]; then
+    ip addr add 10.2.1.2/24 dev eno1
+    systemctl restart NetworkManager
+fi
+
+unset ILO_INTERFACE
 
 EOF
