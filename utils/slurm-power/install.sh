@@ -1,31 +1,33 @@
 #!/bin/bash
 
-cp ./resume-program.sh /etc/slurm/resume_program.sh
-cp ./suspend-program.sh /etc/slurm/suspend_program.sh
+THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+cp $THIS_SCRIPT_DIR/resume-program.sh /etc/slurm/resume_program.sh
+cp $THIS_SCRIPT_DIR/suspend-program.sh /etc/slurm/suspend_program.sh
 chmod +x /etc/slurm/resume_program.sh
 chmod +x /etc/slurm/suspend_program.sh
 chown slurm:slurm /etc/slurm/resume_program.sh /etc/slurm/suspend_program.sh
 
-VARIABLES=( 
+VARIABLES=(
     # Programs to handle node power management
-    ("ResumeProgram" "/etc/slurm/resume_program.sh")
-    ("SuspendProgram" "/etc/slurm/suspend_program.sh")
+    "ResumeProgram /etc/slurm/resume_program.sh"
+    "SuspendProgram /etc/slurm/suspend_program.sh"
     # SuspendTime: how long to wait (in seconds) before powering off an idle node
     # 300 seconds = 5 minutes of being IDLE
-    ("SuspendTime" "300")
+    "SuspendTime 300"
     # SuspendTimeout: how long to wait (in seconds) for the suspend program to complete
     # In other words, how long to wait for the node to power off
-    ("SuspendTimeout" "30")
+    "SuspendTimeout 30"
     # ResumeTimeout (How long Slurm waits for the node to boot)
     # If the node doesn't register within this time, Slurm marks it DOWN.
     # 600 seconds = 10 minutes (Adjust based on your boot speed)
-    ("ResumeTimeout" "600")
+    "ResumeTimeout 600"
     # ResumeRate: Number of nodes to resume simultaneously
     # Adjust based on your power infrastructure capacity
-    ("ResumeRate" "4")
+    "ResumeRate 4"
     # SuspendRate: Number of nodes to suspend simultaneously
     # Adjust based on your power infrastructure capacity
-    ("SuspendRate" "4")
+    "SuspendRate 4"
 )
 
 for VAR in "${VARIABLES[@]}"; do
