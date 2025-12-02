@@ -239,7 +239,7 @@ def root_utils_menu_setup():
             "Enter the list of nodes to power off (e.g., c[1,3,4-6], c1, c[1-12]): ")
 
         subprocess.run(
-            ["bash", MENU_PWD + "/slurm-power/suspend-program.sh", nodes], check=True)
+            ["bash", MENU_PWD + "/slurm-power/suspend-program-manual.sh", nodes], check=True)
 
     def update_menu():
         subprocess.run(
