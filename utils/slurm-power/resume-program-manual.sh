@@ -13,7 +13,7 @@ for host in $HOSTS; do
     sudo /usr/bin/wwsh ipmi poweron $host
 done
 
-(
+# (
     for i in {1..12}; do
         ALL_UP=true
         for host in $HOSTS; do
@@ -37,7 +37,7 @@ done
     for host in $HOSTS; do
         sudo scontrol update NodeName="$host" state=RESUME
     done
-) >/dev/null 2>&1 &
+# ) >/dev/null 2>&1 &
 
 
 exit 0
