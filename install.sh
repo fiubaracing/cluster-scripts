@@ -27,7 +27,9 @@ bash $UTILS/slurm-power/install.sh
 
 git config --global --add safe.directory $THIS_SCRIPT_DIR
 
-cat >> /etc/profile.d/cfd-env.sh << EOF
+echo "Setting up CFD environment variables and aliases in /etc/profile.d/cfd-env.sh"
+
+cat > /etc/profile.d/cfd-env.sh << EOF
 # CFD Environment Variables and aliases
 
 alias cfd='source $UTILS/menu.env && python3 $UTILS/cfdMenu.py'
