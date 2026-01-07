@@ -27,6 +27,10 @@ bash $UTILS/slurm-power/install.sh
 
 git config --global --add safe.directory $THIS_SCRIPT_DIR
 
+# Only add the IP if it's not already in the config
+nmcli -g ipv4.addresses con show "eno1" | grep -q "10.2.1.2" \
+|| nmcli con mod "eno1" +ipv4.addresses "10.2.1.2/24"
+
 echo "Setting up CFD environment variables and aliases in /etc/profile.d/cfd-env.sh"
 
 cat > /etc/profile.d/cfd-env.sh << EOF
@@ -40,29 +44,5 @@ alias useOpenFOAM='source /opt/ohpc/pub/apps/openFOAM/OpenFOAM-v2506/etc/bashrc'
 
 export BASILISK=/opt/ohpc/pub/apps/basilisk/src
 export PATH=$PATH:$BASILISK
-
-# Setting up ILO interface for node power management (idempotent)
-
-ILO_IP="10.2.1.2/24"
-ILO_ADDR="10.2.1.2"
-ILO_DEV="eno1"
-
-# Only proceed if the device exists
-if ip -o link show "$ILO_DEV" >/dev/null 2>&1; then
-    # If the address is already present on the device, do nothing
-    if ip -o addr show dev "$ILO_DEV" | grep -qw "$ILO_ADDR"; then
-        :
-    else
-        # Add address (ignore failure if it races or is already added)
-        ip addr add "$ILO_IP" dev "$ILO_DEV" >/dev/null 2>&1 || true
-
-        # Restart NetworkManager only if it's running
-        if systemctl is-active --quiet NetworkManager; then
-            systemctl restart NetworkManager >/dev/null 2>&1 || true
-        fi
-    fi
-fi
-
-unset ILO_IP ILO_ADDR ILO_DEV
 
 EOF
