@@ -29,7 +29,7 @@ dnf config-manager --set-enabled crb
 
 # Install base meta-packages
 dnf -y install ohpc-base
-dnf -y install ohpc-warewulf
+dnf -y install warewulf-ohpc
 dnf -y install hwloc-ohpc
 
 systemctl enable chronyd.service
@@ -63,25 +63,31 @@ perl -pi -e "s/Nodes=\S+/Nodes=${compute_prefix}[1-${num_computes}]/" /etc/slurm
 #3.7 Complete basic warewulf setup for master node
 
 # Configure Warewulf provisioning to use desired internal interface
-perl -pi -e "s/device = eth1/device = ${sms_eth_internal}/" /etc/warewulf/provision.conf
+perl -pi -e "s/ipaddr:.*/ipaddr: ${sms_ip}/" /etc/warewulf/warewulf.conf
+perl -pi -e "s/netmask:.*/netmask: ${internal_netmask}/" /etc/warewulf/warewulf.conf
+perl -pi -e "s/network:.*/network: ${sms_eth_internal}/" /etc/warewulf/warewulf.conf
 
 # Enable internal interface for provisioning
 ip link set dev ${sms_eth_internal} up
 ip address add ${sms_ip}/${internal_netmask} broadcast + dev ${sms_eth_internal}
 
 # Restart/enable relevant services to support provisioning
-systemctl enable httpd.service
-systemctl restart httpd
-systemctl enable dhcpd.service
-systemctl enable tftp.socket
-systemctl start tftp.socket
+systemctl enable warewulfd
+systemctl start warewulfd
+wwctl configure --all
 
 #3.8 Define compute image for provisioning
 
 #3.8.1 build initial BOS image
 
-# Build initial chroot image
-wwmkchroot -v rocky-9 $CHROOT
+# Build initial container image
+wwctl container import docker://rockylinux:9 rocky-9
+# Get the chroot path for direct modification (best effort)
+CHROOT=$(wwctl container list -a | grep rocky-9 | head -n 1 | awk '{print $1}')
+if [ -z "$CHROOT" ] || [ ! -d "$CHROOT" ]; then
+    CHROOT=/var/lib/warewulf/chroots/rocky-9/rootfs
+fi
+mkdir -p $CHROOT
 
 # Enable OpenHPC and EPEL repos inside chroot
 dnf -y --installroot $CHROOT install epel-release
@@ -119,8 +125,8 @@ dnf -y --installroot=$CHROOT install lmod-ohpc
 # 3.8.3 Customize system configuration
 
 # Initialize warewulf database and ssh_keys
-wwinit database
-wwinit ssh_keys
+wwctl configure --ssh
+wwctl configure --all
 
 # Add NFS client mounts of /home and /opt/ohpc/pub to base image
 echo "${sms_ip}:/home /home nfs nfsvers=4,nodev,nosuid 0 0" >> $CHROOT/etc/fstab
@@ -187,46 +193,42 @@ echo "HealthCheckInterval=${nhc_healtcheck_interval}" >> /etc/slurm/slurm.conf
 
 #3.8.5 Import files
 
-wwsh file import /etc/passwd
-wwsh file import /etc/group
-wwsh file import /etc/shadow
+# Ensure generic overlay exists and has directories
+mkdir -p /var/lib/warewulf/overlays/generic/etc/munge
 
-wwsh file import /etc/munge/munge.key
+# Copy files to overlay to sync
+cp /etc/passwd /var/lib/warewulf/overlays/generic/etc/
+cp /etc/group /var/lib/warewulf/overlays/generic/etc/
+cp /etc/shadow /var/lib/warewulf/overlays/generic/etc/
+cp /etc/munge/munge.key /var/lib/warewulf/overlays/generic/etc/munge/
 
 #3.9 Finalizing provisioning configuration
 
 #3.9.1 Assemble bootstrap image
 
-# Build bootstrap image
-wwbootstrap `uname -r`
+# Import kernel for bootstrap
+wwctl kernel import $(uname -r)
 
-#3.9.2 Assemble Virtual Node File System (VNFS) image
-wwvnfs --chroot $CHROOT
+#3.9.2 Assemble Container image
+wwctl container build rocky-9
 
 #3.9.3 Register nodes for provisioning
 
-# Set provisioning interface as the default networking device
-echo "GATEWAYDEV=${eth_provision}" > /tmp/network.$$
-wwsh -y file import /tmp/network.$$ --name network
-wwsh -y file set network --path /etc/sysconfig/network --mode=0644 --uid=0
-
 # Add nodes to Warewulf data store
 for ((i=0; i<$num_computes; i++)) ; do
-    wwsh -y node new ${c_name[i]} --ipaddr=${c_ip[i]} --hwaddr=${c_mac[i]} -D ${eth_provision}
+    wwctl node add ${c_name[i]} --ipaddr=${c_ip[i]} --hwaddr=${c_mac[i]} --netdev=${eth_provision}
 done
 
 # Additional step required if desiring to use predictable network interface
 # naming schemes (e.g. en4s0f0). Skip if using eth# style names.
 export kargs="${kargs} net.ifnames=1,biosdevname=1"
-wwsh -y provision set --postnetdown=1 "${compute_regex}"
 
 # Define provisioning image for hosts
-wwsh -y provision set "${compute_regex}" --vnfs=rocky9.6 --bootstrap=`uname -r` \
---files=dynamic_hosts,passwd,group,shadow,munge.key,network
+wwctl node set "${compute_regex}" --container rocky-9 --kernel $(uname -r) \
+--kernelargs "${kargs}"
 
 # Restart dhcp / update PXE
-systemctl restart dhcpd
-wwsh pxe update
+wwctl configure --all
 
 #4 Install OpenHPC Development Components
 
