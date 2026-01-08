@@ -114,6 +114,12 @@ mkdir -p /etc/mdadm
 mdadm –-detail -–scan > /etc/mdadm/mdadm.conf
 mdadm –-detail -–scan > /etc/mdadm.conf
 
+# agregamos sda a raid
+mdadm /dev/md0 –-add /dev/sda1
+mdadm /dev/md1 –-add /dev/sda2
+# esperamos q termine de copiar raid
+watch -n 1 cat /proc/mdstat
+
 # Limpiamos el cache de lvms
 vgchange -ay
 pvscan --cache
@@ -131,12 +137,6 @@ dracut -f --kver $DRACUT_KERNEL \
 grub2-install /dev/sda
 grub2-install /dev/sdb
 grub2-mkconfig -o /boot/grub2/grub.cfg
-
-# agregamos sda a raid
-mdadm /dev/md0 –-add /dev/sda1
-mdadm /dev/md1 –-add /dev/sda2
-# esperamos q termine de copiar raid
-watch -n 1 cat /proc/mdstat
 
 # salimos
 exit
