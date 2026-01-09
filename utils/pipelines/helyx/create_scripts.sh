@@ -75,7 +75,7 @@ else
     cp copy_tasks.sh send_results.sh $SCDIR/pipeline/
 fi
 
-mv $SCDIR/job.sbatch $SCDIR/pipeline/
+mv -f $SCDIR/job.sbatch $SCDIR/pipeline/
 
 echo "Changing back to original directory: $SCDIR"
 cd $SCDIR
