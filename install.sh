@@ -46,3 +46,21 @@ export BASILISK=/opt/ohpc/pub/apps/basilisk/src
 export PATH=$PATH:$BASILISK
 
 EOF
+
+NUMBER_OF_DISKS=$(lsblk -d --noheadings | grep disk | wc -l)
+
+if [ "$NUMBER_OF_DISKS" -gt 3 ]; then
+
+    vgimportdevices -a
+    pvscan
+    vgscan
+    vgchange -ay cfd
+    mkdir -p /mnt/cfd
+cat >> /etc/fstab << EOF
+/dev/mapper/cfd-lv_storage /mnt/cfd             xfs     defaults,nofail,noatime,nodiratime,logbsize=256k,allocsize=64m  0  0
+EOF
+    mount -a
+
+else 
+    echo "Not enough disks to setup CFD storage logical volume. Skipping..."
+fi
