@@ -37,12 +37,12 @@ cat > /etc/profile.d/cfd-env.sh << EOF
 # CFD Environment Variables and aliases
 
 alias cfd='source $UTILS/menu.env && python3 $UTILS/cfdMenu.py'
-alias useHelyx='source /opt/cfd/tools/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc'
+alias useHelyx='source /opt/ohpc/pub/apps/cfd/tools/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc'
 
-alias paraview='/opt/cfd/tools/Paraview/ParaView-5.11.2-MPI-Linux-Python3.9-x86_64/bin/paraview'
-alias useOpenFOAM='source /opt/cfd/tools/openFOAM/OpenFOAM-v2506/etc/bashrc'
+alias paraview='/opt/ohpc/pub/apps/cfd/tools/Paraview/ParaView-5.11.2-MPI-Linux-Python3.9-x86_64/bin/paraview'
+alias useOpenFOAM='source /opt/ohpc/pub/apps/cfd/tools/openFOAM/OpenFOAM-v2506/etc/bashrc'
 
-export PATH=$PATH:/opt/cfd/tools/basilisk/src
+export PATH=$PATH:/opt/ohpc/pub/apps/cfd/tools/basilisk/src
 
 EOF
 
