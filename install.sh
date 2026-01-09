@@ -37,13 +37,12 @@ cat > /etc/profile.d/cfd-env.sh << EOF
 # CFD Environment Variables and aliases
 
 alias cfd='source $UTILS/menu.env && python3 $UTILS/cfdMenu.py'
-alias useHelyx='source /home/admin/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc'
+alias useHelyx='source /opt/cfd/tools/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc'
 
-alias paraview='/home/admin/Documents/Paraview/ParaView-5.11.2-MPI-Linux-Python3.9-x86_64/bin/paraview'
-alias useOpenFOAM='source /opt/ohpc/pub/apps/openFOAM/OpenFOAM-v2506/etc/bashrc'
+alias paraview='/opt/cfd/tools/Paraview/ParaView-5.11.2-MPI-Linux-Python3.9-x86_64/bin/paraview'
+alias useOpenFOAM='source /opt/cfd/tools/openFOAM/OpenFOAM-v2506/etc/bashrc'
 
-export BASILISK=/opt/ohpc/pub/apps/basilisk/src
-export PATH=$PATH:$BASILISK
+export PATH=$PATH:/opt/cfd/tools/basilisk/src
 
 EOF
 
@@ -60,6 +59,18 @@ cat >> /etc/fstab << EOF
 /dev/mapper/cfd-lv_storage /mnt/cfd             xfs     defaults,nofail,noatime,nodiratime,logbsize=256k,allocsize=64m  0  0
 EOF
     mount -a
+
+    mkdir $CHROOT/mnt/cfd
+cat >> $CHROOT/etc/fstab << EOF
+192.168.2.100:/mnt/cfd  /mnt/cfd nfs  defaults,_netdev,noatime,nodiratime,hard,rsize=1048576,wsize=1048576,bg  0 0
+EOF
+
+cat >> /etc/exports << EOF
+/mnt/cfd *(rw,no_root_squash,async,no_subtree_check)
+EOF
+
+    exportfs -ra
+    systemctl restart nfs-server
 
 else 
     echo "Not enough disks to setup CFD storage logical volume. Skipping..."
