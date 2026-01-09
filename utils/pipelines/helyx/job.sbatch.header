@@ -42,7 +42,7 @@ LOCAL_STORAGE_PATH="/tmp/shm"
 LOCAL_CASE_DIR="$LOCAL_STORAGE_PATH/job_$SLURM_JOB_ID"
 WDIR=$SLURM_SUBMIT_DIR
 cd $WDIR
-source /home/admin/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc
+source /opt/cfd/tools/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc
 SECONDS=0
 
 #------------------------------------------------------------------------------
