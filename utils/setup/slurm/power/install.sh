@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ -z "$INSTALLER_DIR" ]; then
+    echo "Error: INSTALLER_DIR is not set. Please run this script from the main installer" >&2
+    exit 1
+fi
+
+set -eE
+source $INSTALLER_DIR/.env
+
 THIS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 cp $THIS_SCRIPT_DIR/resume-program.sh /etc/slurm/resume_program.sh

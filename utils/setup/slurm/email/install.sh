@@ -1,11 +1,20 @@
 #!/bin/bash
 
+if [ -z "$INSTALLER_DIR" ]; then
+    echo "Error: INSTALLER_DIR is not set. Please run this script from the main installer" >&2
+    exit 1
+fi
+
+set -eE
+source $INSTALLER_DIR/.env
+
 if [ -z "${RESEND_API_KEY}" ] || [ -z "${RESEND_VERIFIED_DOMAIN}" ]; then
     echo "Error: RESEND_API_KEY and RESEND_VERIFIED_DOMAIN environment variables must be set in .env." >&2
     exit 1
 fi
 
-cat >> /usr/local/bin/slurm_mail.py <<EOF
+# Create SLURM email notification script
+cat > /usr/local/bin/slurm_mail.py <<EOF
 #!/usr/bin/env python3
 import sys
 import json
