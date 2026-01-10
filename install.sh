@@ -75,3 +75,17 @@ EOF
 else 
     echo "Not enough disks to setup CFD storage logical volume. Skipping..."
 fi
+
+# Get node numbers without compute-2 because it's reserved for the head node
+node_numbers=$(seq 1 $num_computes | grep -vx 2)
+# Set IPMI credentials for compute nodes
+for i in $(seq 1 $num_computes); do
+    wwsh object modify \
+        -s IPMI_IPADDR=${IPMI_IPADDR}${c_name[$i-1]} \
+        -s IPMI_NETMASK=${IPMI_NETMASK} \
+        -s IPMI_PROTO=\'$IPMI_PROTO\' \
+        -s IPMI_PASSWORD=\'$IPMI_PASSWORD\' \
+        -s IPMI_USERNAME=\'$IPMI_USERNAME\' \
+        ${c_name[$i-1]} --yes
+done
+
