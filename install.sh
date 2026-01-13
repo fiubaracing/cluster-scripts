@@ -31,5 +31,6 @@ bash $UTILS/setup/slurm/power/install.sh
 # Install IPMI configurations
 bash $UTILS/setup/ipmi/install.sh
 # Install system configurations
+bash $UTILS/setup/system/cloudflared/install.sh
 bash $UTILS/setup/system/path/install.sh
 bash $UTILS/setup/system/disk/install.sh
