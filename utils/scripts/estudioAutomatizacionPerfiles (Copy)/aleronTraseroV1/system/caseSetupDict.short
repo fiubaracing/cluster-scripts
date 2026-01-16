@@ -1,0 +1,313 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX(R): Open-source CFD for Enterprise                 |
+|   o   O   o      | Version: v4.3.1                                          |
+|    o     o       | Engys Ltd. http://www.engys.com                          |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location system;
+    object caseSetupDict;
+}
+    global
+    {
+        modificationSwitches
+        {
+            resetInternalFields true;
+            resetBoundaryFields true;
+            resetSystemDicts true;
+            resetConstDicts true;
+            resetBoundaryMesh true;
+            deleteUnusedFields true;
+            reuseExistingDicts false;
+            strictPatchNameChecking false;
+        }
+        system
+        {
+            controlDict
+            {
+                startFrom latestTime;
+                endTime 5000.0;
+                deltaT constant 1.0;
+                writeFormat binary;
+                writePrecision 6;
+                adjustTimeStep false;
+                maxCo 0;
+                maxAlphaCo 0;
+                minDeltaT 0;
+                maxDeltaT 0;
+                meshChangers false;
+            }
+            meshObjects
+            {
+                e423_0
+                {
+                    type coordinateFrame;
+                    coordinateSystem
+                    {
+                        type cartesian;
+                        origin ( 0.0 0.0 0.0 );
+                        e1 ( 1.0 0.0 0.0 );
+                        e2 ( 0.0 1.0 0.0 );
+                    }
+                }
+            }
+        }
+        functions
+        {
+            FR
+            {
+                type forces;
+                regions ( region0 );
+                patches ( e423_0 );
+                CofR ( 0.0 0.0 0.0 );
+                rhoName rho;
+                pRef 0.0;
+                writeControl timeStep;
+                writeInterval 1;
+                executeControl timeStep;
+                executeInterval 1;
+                functionObjectLibs ("libforces.so" );
+            }
+            LD
+            {
+                type liftDrag;
+                regions ( region0 );
+                patches ( e423_0 );
+                porosity true;
+                nAveragingSteps 1;
+                outputRegionData true;
+                liftDirection ( 0.0 0.0 1.0 );
+                dragDirection ( 1.0 0.0 0.0 );
+                Uinf ( 11.085 0.0 0.0 );
+                Pref 0.0;
+                rhoInf 1.225;
+                referenceArea 1.0;
+                referenceLength 0.66;
+                referencePoint ( 0.0 0.0 0.0 );
+                wheelbase 1.0;
+                cOfPressure true;
+                binData
+                {
+                    nBins 100;
+                    axis ( 1.0 0.0 0.0 );
+                }
+                writeControl timeStep;
+                writeInterval 1;
+                executeControl timeStep;
+                executeInterval 1;
+                functionObjectLibs ("libforces.so" );
+            }
+
+        }
+    }
+    regions
+    {
+        region0
+        {
+            state (steady ras);
+            boundaryMesh
+            {
+                Outlet
+                {
+                    type outlet;
+                }
+                Inlet
+                {
+                    type inlet;
+                }
+                Front
+                {
+                    type empty;
+                }
+                Bottom
+                {
+                    type wall;
+                }
+                Top
+                {
+                    type wall;
+                }
+                e423_0
+                {
+                    type wall;
+                }
+                Back
+                {
+                    type empty;
+                }
+            }
+            turbulenceModel kOmegaSST;
+            materials (air);
+            materialProperties
+            {
+                air
+                {
+                    materialName air;
+                    materialType fluid;
+                    molWeight 28.96;
+                    energy sensibleInternalEnergy;
+                    equationOfState rhoConst;
+                    equationOfStateCoeffs
+                    {
+                        rho 1.225;
+                    }
+                    muModel scalarFunction1;
+                    muModelCoeffs
+                    {
+                        mu constant 1.81006E-5;
+                    }
+                    thermodynamics hConst;
+                    thermodynamicsCoeffs
+                    {
+                        Hf 0.0;
+                        Cp 1004.9;
+                    }
+                    kappaModel scalarFunction1;
+                    kappaModelCoeffs
+                    {
+                        kappa 0.0262;
+                    }
+                    wconcentrationTransport
+                    {
+                        D [0 2 -1 0 0 0 0] 2.0E-5;
+                        Sct 0.6;
+                        Cp [0 2 -2 -1 0 0 0] 1930.0;
+                    }
+                    buoyancyModelCoeffs
+                    {
+                        beta 0.0034;
+                    }
+                    referenceFields
+                    {
+                        p [1 -1 -2 0 0 0 0] 101325.0;
+                        T [0 0 0 1 0 0 0] 0.0;
+                        TConst [0 0 0 1 0 0 0] 300.0;
+                    }
+                    buoyancyModel none;
+                }
+            }
+            constant
+            {
+                g
+                {
+                    value ( 0.0 0.0 -9.81 );
+                    dimensions [0  1 -2  0 0 0 0];
+                }
+                turbulenceProperties
+                {
+                    simulationType RAS;
+                    RAS
+                    {
+                        RASModel kOmegaSST;
+                        turbulence on;
+                        printCoeffs on;
+                        kOmegaSSTCoeffs
+                        {
+                            curvature false;
+                        }
+                    }
+                }
+            }
+            system
+            {
+                fvSchemes
+                {
+                    gradSchemes
+                    {
+                        grad(p) cellLimited Gauss linear 1.0;
+                    }
+                }
+                fvSolution
+                {
+                    relaxationFactors
+                    {
+                        fields
+                        {
+                            p 1.0;
+                        }
+                        equations
+                        {
+                            U 0.6;
+                            k 0.5;
+                            omega 0.5;
+                        }
+                    }
+                    SIMPLE
+                    {
+                        nNonOrthogonalCorrectors 2;
+                        consistent true;
+                        transonic false;
+                    }
+                }
+                fvOptions
+                {
+                    turbulenceSolver
+                    {
+                        type turbulenceSolver;
+                    }
+                }
+            }
+            fields
+            {
+                U
+                {
+                    initialisation
+                    {
+                        type fixedValue;
+                        value uniform ( 11.085 0.0 0.0 );
+                    }
+                }
+                k
+                {
+                    initialisation
+                    {
+                        type turbulentIL;
+                        I 0.05;
+                        L 0.042;
+                        Uref 11.085;
+                    }
+                }
+                omega
+                {
+                    initialisation
+                    {
+                        type turbulentIL;
+                        I 0.05;
+                        L 0.042;
+                        Uref 11.085;
+                    }
+                }
+            }
+            boundaryConditions
+            {
+                Inlet
+                {
+                    U
+                    {
+                        type uniformFixedValue;
+                        value uniform ( 11.085 0.0 0.0 );
+                        uniformValue constant ( 11.085 0.0 0.0 );
+                    }
+                    p
+                    {
+                        type fixedFluxPressure;
+                        value uniform 0.0;
+                    }
+                }
+                Outlet
+                {
+                    type outlet;
+                }
+                e423_0
+                {
+                    type wall;
+                }
+            }
+        }
+    }
+

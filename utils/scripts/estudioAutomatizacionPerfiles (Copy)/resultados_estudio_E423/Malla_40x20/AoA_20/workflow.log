@@ -1,0 +1,1944 @@
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.1-unknown
+API    : 4.4.1
+Arch   : "LSB;label=32;scalar=64"
+Exec   : blockMesh
+Date   : Jan 15 2026
+Time   : 18:27:49
+Host   : "tb133-VirtualBox"
+PID    : 11959
+I/O    : uncollated
+Case   : /home/introcfd/Desktop/estudioAutomatizacionPerfiles/aleronTraseroV1
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (HELYX_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Creating block mesh from
+    "system/blockMeshDict"
+Creating block edges
+No non-planar block faces defined
+Creating topology blocks
+Creating topology patches
+
+Reading patches section
+
+Creating block mesh topology
+
+Reading physicalType from existing boundary file
+
+Default patch type set to empty
+
+Check topology
+
+	Basic statistics
+		Number of internal faces : 0
+		Number of boundary faces : 6
+		Number of defined boundary faces : 6
+		Number of undefined boundary faces : 0
+	Checking patch -> block consistency
+
+Creating block offsets
+Creating merge list .
+
+Creating polyMesh from blockMesh
+Creating patches
+Creating cells
+Creating points with scale 1
+    Block 0 cell size :
+        i : 0.475 .. 0.475
+        j : 0.4 .. 0.4
+        k : 0.8 .. 0.8
+
+
+Writing polyMesh with 0 cellZones
+----------------
+Mesh Information
+----------------
+  boundingBox: ( -4 0 -8 ) ( 15 0.4 8 )
+  nPoints: 1722
+  nCells: 800
+  nFaces: 3260
+  nInternalFaces: 1540
+----------------
+Patches
+----------------
+  patch 0 (start: 1540 size: 20) name: Inlet
+  patch 1 (start: 1560 size: 20) name: Outlet
+  patch 2 (start: 1580 size: 800) name: Back
+  patch 3 (start: 2380 size: 800) name: Front
+  patch 4 (start: 3180 size: 40) name: Bottom
+  patch 5 (start: 3220 size: 40) name: Top
+
+End
+
+
+--- INICIO COMANDO: blockMesh ---
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.1-unknown
+API    : 4.4.1
+Arch   : "LSB;label=32;scalar=64"
+Exec   : decomposePar
+Date   : Jan 15 2026
+Time   : 18:27:49
+Host   : "tb133-VirtualBox"
+PID    : 11961
+I/O    : uncollated
+Case   : /home/introcfd/Desktop/estudioAutomatizacionPerfiles/aleronTraseroV1
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (HELYX_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+
+
+Decomposing mesh region0
+
+Create mesh
+
+Calculating distribution of cells
+Selecting decompositionMethod hierarchical
+
+Finished decomposition in 0 s
+
+Calculating original mesh data
+
+Distributing cells to processors
+
+Distributing faces to processors
+
+Distributing points to processors
+
+Constructing processor meshes
+
+Processor 0
+    Number of cells = 200
+    Number of faces shared with processor 1 = 20
+    Number of processor patches = 1
+    Number of processor faces = 20
+    Number of boundary faces = 440
+
+Processor 1
+    Number of cells = 200
+    Number of faces shared with processor 0 = 20
+    Number of faces shared with processor 2 = 20
+    Number of processor patches = 2
+    Number of processor faces = 40
+    Number of boundary faces = 420
+
+Processor 2
+    Number of cells = 200
+    Number of faces shared with processor 1 = 20
+    Number of faces shared with processor 3 = 20
+    Number of processor patches = 2
+    Number of processor faces = 40
+    Number of boundary faces = 420
+
+Processor 3
+    Number of cells = 200
+    Number of faces shared with processor 2 = 20
+    Number of processor patches = 1
+    Number of processor faces = 20
+    Number of boundary faces = 440
+
+Number of processor faces = 60
+Max number of cells = 200 (0% above average 200)
+Max number of processor patches = 2 (33.33333333% above average 1.5)
+Max number of faces between processors = 40 (33.33333333% above average 30)
+
+Time = 0
+
+Processor 0: field transfer
+Processor 1: field transfer
+Processor 2: field transfer
+Processor 3: field transfer
+
+End
+
+
+--- INICIO COMANDO: decomposePar ---
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.1-unknown
+API    : 4.4.1
+Arch   : "LSB;label=32;scalar=64"
+Exec   : helyxHexMesh -parallel -overwrite
+Date   : Jan 15 2026
+Time   : 18:27:49
+Host   : "tb133-VirtualBox"
+PID    : 11967
+I/O    : uncollated
+Case   : /home/introcfd/Desktop/estudioAutomatizacionPerfiles/aleronTraseroV1
+nProcs : 4
+Slaves : 
+3
+(
+"tb133-VirtualBox.11968"
+"tb133-VirtualBox.11969"
+"tb133-VirtualBox.11970"
+)
+
+Pstream initialized with:
+    floatTransfer      : 0
+    nProcsSimpleSum    : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+sigFpe : Enabling floating point exception trapping (HELYX_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Creating "system/fvSchemes"
+Creating "system/fvSolution"
+Create time
+
+Generating mesh region : region0
+
+Using meshing algorithm: standard
+
+Using meshing method: quality
+
+Using block method: block
+
+Selecting decompositionMethod hierarchical
+Creating block edges
+No non-planar block faces defined
+Creating topology blocks
+Creating topology patches
+
+Reading patches section
+
+Creating block mesh topology
+
+Check topology
+
+	Basic statistics
+		Number of internal faces : 0
+		Number of boundary faces : 6
+		Number of defined boundary faces : 6
+		Number of undefined boundary faces : 0
+	Checking patch -> block consistency
+
+Creating block offsets
+Creating merge list .
+Creating patches
+Creating cells
+Creating points with scale 1
+    Block 0 cell size :
+        i : 0.475 .. 0.475
+        j : 0.4 .. 0.4
+        k : 0.8 .. 0.8
+
+
+Overall mesh bounding box  : ( -4 0 -8 ) ( 15 0.4 8 )
+Relative tolerance         : 1e-06
+Absolute matching distance : 2.484270517e-05
+
+
+Reading geometry: VR1.stl
+
+Reading geometry: VR2.stl
+
+Reading geometry: VR3.stl
+
+Reading geometry: VR4.stl
+
+Reading geometry: VR5.stl
+
+Reading geometry: e423_0.stl
+Read refinement surfaces in = 0.02 s
+
+
+Overall mesh bounding box  : ( -4 0 -8 ) ( 15 0.4 8 )
+Relative tolerance         : 1e-06
+Absolute matching distance : 2.484270517e-05
+
+Creating refinement features.
+Reading external feature lines.
+Calculated refinement features in = 0 s
+Reading refinement shells.
+Refinement level ( 5 5 5 ) for all cells inside VR1.stl
+Refinement level ( 4 4 4 ) for all cells inside VR2.stl
+Refinement level ( 3 3 3 ) for all cells inside VR3.stl
+Refinement level ( 2 2 2 ) for all cells inside VR4.stl
+Refinement level ( 1 1 1 ) for all cells inside VR5.stl
+Refinement level according to distance to e423_0.stl
+    level ( 7 7 7 ) for all cells within (( 0.1 0.1 0.1 ) ( 0.1 0.1 0.1 )) metre.
+Read refinement shells in = 0 s
+
+Setting refinement level of surface to be consistent with shells.
+Caching minimum level field
+For geometry e423_0.stl detected 0 uncached triangles out of 1624
+Checked shell refinement in = 0 s
+
+
+Determining initial surface intersections
+-----------------------------------------
+
+Edge intersection testing:
+    Number of edges             : 3260
+    Number of edges to retest   : 3260
+    Number of intersected edges : 1
+Calculated surface intersections in = 0.01 s
+
+Initial mesh : cells:800  faces:3260  points:1722
+Cells per refinement level:
+    0	800
+
+Adding patches for surface regions
+----------------------------------
+
+Patch Type                Region                        
+----- ----                ------                        
+e423_0:
+
+6     wall                e423_0                        
+
+Added patches in = 0 s
+
+Edge intersection testing:
+    Number of edges             : 3260
+    Number of edges to retest   : 0
+    Number of intersected edges : 1
+
+Snap parameters
+---------------
+
+
+Refinement phase
+----------------
+
+
+Initial refinement iteration 0
+------------------------------
+
+Marked for refinement due to surface bounding box seeding  : 6 cells.
+Determined cells to refine in = 0 s
+Selected for initial refinement : 6 cells (out of 800)
+Edge intersection testing:
+    Number of edges             : 3419
+    Number of edges to retest   : 232
+    Number of intersected edges : 2
+Refined mesh in = 0 s
+After refinement Initial refinement iteration 0 : cells:842  faces:3419  points:1803
+Cells per refinement level:
+    0	794
+    1	48
+Balanced mesh in = 0 s
+
+Initial refinement iteration 1
+------------------------------
+
+Marked for refinement due to surface bounding box seeding  : 0 cells.
+Determined cells to refine in = 0 s
+Selected for initial refinement : 0 cells (out of 842)
+Stopping refining since too few cells selected.
+
+
+Feature refinement iteration 0
+------------------------------
+
+Number of feature lines: 11
+Number of feature points: 826
+Marked for refinement due to explicit features             : 0 cells.
+Determined cells to refine in = 0 s
+Selected for feature refinement : 0 cells (out of 842)
+Stopping refining since too few cells selected.
+
+
+Surface refinement iteration 0
+------------------------------
+
+Marked for refinement due to surface intersection          : 4 cells.
+Determined cells to refine in = 0 s
+Selected for refinement : 4 cells (out of 842)
+Edge intersection testing:
+    Number of edges             : 3527
+    Number of edges to retest   : 178
+    Number of intersected edges : 8
+Refined mesh in = 0 s
+After refinement surface refinement iteration 0 : cells:870  faces:3527  points:1860
+Cells per refinement level:
+    0	794
+    1	44
+    2	32
+Skipping balancing since max unbalance 0.08965517241 is less than allowable 0.1
+
+Surface refinement iteration 1
+------------------------------
+
+Marked for refinement due to surface intersection          : 16 cells.
+Determined cells to refine in = 0 s
+Selected for refinement : 24 cells (out of 870)
+Edge intersection testing:
+    Number of edges             : 4115
+    Number of edges to retest   : 816
+    Number of intersected edges : 68
+Refined mesh in = 0.01 s
+After refinement surface refinement iteration 1 : cells:1038  faces:4115  points:2122
+Cells per refinement level:
+    0	794
+    1	36
+    2	80
+    3	128
+Balanced mesh in = 0 s
+
+Surface refinement iteration 2
+------------------------------
+
+Marked for refinement due to surface intersection          : 88 cells.
+Determined cells to refine in = 0 s
+Selected for refinement : 109 cells (out of 1038)
+Edge intersection testing:
+    Number of edges             : 6704
+    Number of edges to retest   : 3376
+    Number of intersected edges : 312
+Refined mesh in = 0 s
+After refinement surface refinement iteration 2 : cells:1801  faces:6704  points:3208
+Cells per refinement level:
+    0	791
+    1	54
+    2	100
+    3	280
+    4	576
+Balanced mesh in = 0.01 s
+
+Surface refinement iteration 3
+------------------------------
+
+Marked for refinement due to surface intersection          : 400 cells.
+Determined cells to refine in = 0 s
+Selected for refinement : 420 cells (out of 1801)
+Edge intersection testing:
+    Number of edges             : 16265
+    Number of edges to retest   : 12164
+    Number of intersected edges : 1392
+Refined mesh in = 0.02 s
+After refinement surface refinement iteration 3 : cells:4741  faces:16265  points:6920
+Cells per refinement level:
+    0	791
+    1	54
+    2	96
+    3	248
+    4	736
+    5	2816
+Balanced mesh in = 0.01 s
+
+Surface refinement iteration 4
+------------------------------
+
+Marked for refinement due to surface intersection          : 2112 cells.
+Determined cells to refine in = 0 s
+Selected for refinement : 2275 cells (out of 4741)
+Edge intersection testing:
+    Number of edges             : 66770
+    Number of edges to retest   : 62003
+    Number of intersected edges : 5568
+Refined mesh in = 0.06 s
+After refinement surface refinement iteration 4 : cells:20666  faces:66770  points:25640
+Cells per refinement level:
+    0	790
+    1	60
+    2	104
+    3	272
+    4	784
+    5	3040
+    6	15616
+Balanced mesh in = 0.04 s
+
+Surface refinement iteration 5
+------------------------------
+
+Marked for refinement due to surface intersection          : 9008 cells.
+Determined cells to refine in = 0.01 s
+Selected for refinement : 9483 cells (out of 20666)
+Edge intersection testing:
+    Number of edges             : 282485
+    Number of edges to retest   : 274672
+    Number of intersected edges : 22496
+Refined mesh in = 0.18 s
+After refinement surface refinement iteration 5 : cells:87047  faces:282485  points:108687
+Cells per refinement level:
+    0	789
+    1	58
+    2	160
+    3	408
+    4	1056
+    5	3424
+    6	15616
+    7	65536
+Skipping balancing since max unbalance 0.06599882822 is less than allowable 0.1
+
+Surface refinement iteration 6
+------------------------------
+
+Marked for refinement due to surface intersection          : 3904 cells.
+Determined cells to refine in = 0.01 s
+Selected for refinement : 4200 cells (out of 87047)
+Edge intersection testing:
+    Number of edges             : 376616
+    Number of edges to retest   : 126842
+    Number of intersected edges : 31616
+Refined mesh in = 0.21 s
+After refinement surface refinement iteration 6 : cells:116447  faces:376616  points:143922
+Cells per refinement level:
+    0	789
+    1	58
+    2	160
+    3	400
+    4	1088
+    5	3360
+    6	14336
+    7	96256
+Balanced mesh in = 0.22 s
+
+Surface refinement iteration 7
+------------------------------
+
+Marked for refinement due to surface intersection          : 384 cells.
+Determined cells to refine in = 0.02 s
+Selected for refinement : 576 cells (out of 116447)
+Edge intersection testing:
+    Number of edges             : 389282
+    Number of edges to retest   : 21666
+    Number of intersected edges : 32384
+Refined mesh in = 0.17 s
+After refinement surface refinement iteration 7 : cells:120479  faces:389282  points:148528
+Cells per refinement level:
+    0	789
+    1	58
+    2	160
+    3	400
+    4	1024
+    5	3744
+    6	14976
+    7	99328
+Skipping balancing since max unbalance 0.09994272861 is less than allowable 0.1
+
+Surface refinement iteration 8
+------------------------------
+
+Marked for refinement due to surface intersection          : 0 cells.
+Determined cells to refine in = 0.01 s
+Selected for refinement : 0 cells (out of 120479)
+Stopping refining since too few cells selected.
+
+
+Proximity refinement iteration 0
+------------------------------
+
+Marked for refinement due to surface proximity : 0 cells.
+Determined cells to refine in = 0 s
+Selected for refinement : 0 cells (out of 120479)
+Stopping refining since too few cells selected.
+
+
+Removing mesh beyond surface intersections
+------------------------------------------
+
+Setting cellZones according to locationsInMesh:
+Location : ( 0 0.2 0.4 )
+    cellZone : none
+
+For cellZone none found point ( 0 0.2 0.4 ) in global region 0 out of 4 regions.
+Keeping all cells containing points 1(( 0 0.2 0.4 ))
+Selected for keeping : 102047 cells.
+Edge intersection testing:
+    Number of edges             : 339383
+    Number of edges to retest   : 25152
+    Number of intersected edges : 32384
+
+Shell refinement iteration 0
+----------------------------
+
+Marked for refinement due to distance to explicit features : 0 cells.
+Marked for refinement due to refinement shells             : 17343 cells.
+Determined cells to refine in = 0.31 s
+Selected for internal refinement : 17343 cells (out of 102047)
+Edge intersection testing:
+    Number of edges             : 708461
+    Number of edges to retest   : 554038
+    Number of intersected edges : 32384
+Refined mesh in = 0.33 s
+After refinement coarse cell refinement iteration 0 : cells:223448  faces:708461  points:261583
+Cells per refinement level:
+    0	352
+    1	3496
+    2	464
+    3	1280
+    4	3200
+    5	8192
+    6	29952
+    7	176512
+Balanced mesh in = 0.45 s
+
+Shell refinement iteration 1
+----------------------------
+
+Marked for refinement due to distance to explicit features : 0 cells.
+Marked for refinement due to refinement shells             : 40444 cells.
+Determined cells to refine in = 0.35 s
+Selected for internal refinement : 40676 cells (out of 223448)
+Edge intersection testing:
+    Number of edges             : 1573820
+    Number of edges to retest   : 1148218
+    Number of intersected edges : 32384
+Refined mesh in = 0.59 s
+After refinement coarse cell refinement iteration 1 : cells:508180  faces:1573820  points:557597
+Cells per refinement level:
+    0	352
+    1	1340
+    2	17248
+    3	3712
+    4	10240
+    5	30168
+    6	28992
+    7	416128
+Balanced mesh in = 0.89 s
+
+Shell refinement iteration 2
+----------------------------
+
+Marked for refinement due to distance to explicit features : 0 cells.
+Marked for refinement due to refinement shells             : 49484 cells.
+Determined cells to refine in = 0.68 s
+Selected for internal refinement : 51196 cells (out of 508180)
+Edge intersection testing:
+    Number of edges             : 2666408
+    Number of edges to retest   : 1466047
+    Number of intersected edges : 32384
+Refined mesh in = 1.06 s
+After refinement coarse cell refinement iteration 2 : cells:866552  faces:2666408  points:933594
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	72192
+    4	29696
+    5	109928
+    6	20212
+    7	624608
+Balanced mesh in = 1.48 s
+
+Shell refinement iteration 3
+----------------------------
+
+Marked for refinement due to distance to explicit features : 0 cells.
+Marked for refinement due to refinement shells             : 55900 cells.
+Determined cells to refine in = 1.07 s
+Selected for internal refinement : 56906 cells (out of 866552)
+Edge intersection testing:
+    Number of edges             : 3881816
+    Number of edges to retest   : 1558630
+    Number of intersected edges : 32384
+Refined mesh in = 1.74 s
+After refinement coarse cell refinement iteration 3 : cells:1264894  faces:3881816  points:1352442
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	42272
+    4	247808
+    5	278906
+    6	23528
+    7	662464
+Balanced mesh in = 2.16 s
+
+Shell refinement iteration 4
+----------------------------
+
+Marked for refinement due to distance to explicit features : 0 cells.
+Marked for refinement due to refinement shells             : 44568 cells.
+Determined cells to refine in = 1.5 s
+Selected for internal refinement : 45076 cells (out of 1264894)
+Edge intersection testing:
+    Number of edges             : 4839188
+    Number of edges to retest   : 1179979
+    Number of intersected edges : 32384
+Refined mesh in = 1.93 s
+After refinement coarse cell refinement iteration 4 : cells:1580426  faces:4839188  points:1678796
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	42272
+    4	203616
+    5	631934
+    6	27216
+    7	665472
+Balanced mesh in = 2.49 s
+
+Shell refinement iteration 5
+----------------------------
+
+Marked for refinement due to distance to explicit features : 0 cells.
+Marked for refinement due to refinement shells             : 0 cells.
+Determined cells to refine in = 1.93 s
+Selected for internal refinement : 158 cells (out of 1580426)
+Edge intersection testing:
+    Number of edges             : 4842611
+    Number of edges to retest   : 11176
+    Number of intersected edges : 32384
+Refined mesh in = 1.35 s
+After refinement coarse cell refinement iteration 5 : cells:1581532  faces:4842611  points:1680008
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	42272
+    4	203616
+    5	631776
+    6	28480
+    7	665472
+Skipping balancing since max unbalance 0.001302534505 is less than allowable 0.1
+
+Shell refinement iteration 6
+----------------------------
+
+Marked for refinement due to distance to explicit features : 0 cells.
+Marked for refinement due to refinement shells             : 0 cells.
+Determined cells to refine in = 1.85 s
+Selected for internal refinement : 0 cells (out of 1581532)
+Stopping refining since too few cells selected.
+
+
+Dangling cells refinement iteration 0
+-------------------------------------
+
+Determined cells to refine in = 0.03 s
+Selected for refinement : 0 cells (out of 1581532)
+
+Splitting mesh at surface intersections
+---------------------------------------
+
+Introducing baffles for 32384 faces that are intersected by the surface.
+
+Setting cellZones according to locationsInMesh:
+Location : ( 0 0.2 0.4 )
+    cellZone : none
+
+For cellZone none found point ( 0 0.2 0.4 ) in global region 0 out of 4 regions.
+Edge intersection testing:
+    Number of edges             : 4874995
+    Number of edges to retest   : 216848
+    Number of intersected edges : 64768
+Created baffles in = 1.43 s
+
+
+After introducing baffles : cells:1581532  faces:4874995  points:1680008
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	42272
+    4	203616
+    5	631776
+    6	28480
+    7	665472
+
+Introducing baffles to block off problem cells
+----------------------------------------------
+
+markFacesOnProblemCells : marked 51641 additional internal faces to be converted into baffles.
+Analyzed problem cells in = 0.62 s
+
+
+Introducing baffles to delete problem cells.
+
+Edge intersection testing:
+    Number of edges             : 4926252
+    Number of edges to retest   : 159499
+    Number of intersected edges : 64768
+Created baffles in = 1.11 s
+
+
+After introducing baffles : cells:1581532  faces:4926252  points:1680395
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	42272
+    4	203616
+    5	631776
+    6	28480
+    7	665472
+Setting cellZones according to locationsInMesh:
+Location : ( 0 0.2 0.4 )
+    cellZone : none
+
+For cellZone none found point ( 0 0.2 0.4 ) in global region 0 out of 25477 regions.
+Edge intersection testing:
+    Number of edges             : 4926252
+    Number of edges to retest   : 111949
+    Number of intersected edges : 64768
+
+Remove unreachable sections of mesh
+-----------------------------------
+
+Keeping all cells containing points 1(( 0 0.2 0.4 ))
+Selected for keeping : 1550812 cells.
+Split mesh in = 2.32 s
+
+
+After subsetting : cells:1550812  faces:4753795  points:1652660
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	42272
+    4	203616
+    5	631776
+    6	28480
+    7	634752
+
+Introducing zones for interfaces
+--------------------------------
+
+Setting cellZones according to locationsInMesh:
+Location : ( 0 0.2 0.4 )
+    cellZone : none
+
+For cellZone none found point ( 0 0.2 0.4 ) in global region 0 out of 1 regions.
+
+Excluding small regions from zone
+---------------------------------
+
+Setting faceZones according to neighbouring cellZones:
+
+
+Handling cells with snap problems
+---------------------------------
+
+Introducing baffles for 32512 faces that are intersected by the surface.
+
+Setting cellZones according to locationsInMesh:
+Location : ( 0 0.2 0.4 )
+    cellZone : none
+
+For cellZone none found point ( 0 0.2 0.4 ) in global region 0 out of 1 regions.
+Edge intersection testing:
+    Number of edges             : 4753795
+    Number of edges to retest   : 111949
+    Number of intersected edges : 32512
+Created baffles in = 2.51 s
+
+
+After introducing baffles : cells:1550812  faces:4753795  points:1652660
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	42272
+    4	203616
+    5	631776
+    6	28480
+    7	634752
+
+Introducing baffles to block off problem cells
+----------------------------------------------
+
+markFacesOnProblemCells : marked 0 additional internal faces to be converted into baffles.
+Analyzed problem cells in = 0.5 s
+
+
+Introducing baffles to delete problem cells.
+
+Created baffles in = 0.07 s
+
+
+After introducing baffles : cells:1550812  faces:4753795  points:1652660
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	42272
+    4	203616
+    5	631776
+    6	28480
+    7	634752
+Setting cellZones according to locationsInMesh:
+Location : ( 0 0.2 0.4 )
+    cellZone : none
+
+For cellZone none found point ( 0 0.2 0.4 ) in global region 0 out of 1 regions.
+Edge intersection testing:
+    Number of edges             : 4753795
+    Number of edges to retest   : 111949
+    Number of intersected edges : 32512
+
+Remove unreachable sections of mesh
+-----------------------------------
+
+Split mesh in = 1.42 s
+
+
+After subsetting : cells:1550812  faces:4753795  points:1652660
+Cells per refinement level:
+    0	352
+    1	1340
+    2	8224
+    3	42272
+    4	203616
+    5	631776
+    6	28480
+    7	634752
+
+Merge free-standing baffles
+---------------------------
+
+freeStandingBaffles : detected 0 free-standing baffles out of 128
+
+Detected free-standing baffles : 0
+Merged free-standing baffles in = 0.13 s
+
+
+Merging single couples
+Merging 0 coupled faces
+dupNonManifoldPoints : Found : 387 non-manifold points (out of 1675402)
+Detected unsplittable baffles : 0
+
+Merge refined boundary faces
+----------------------------
+
+Merging 0 sets of faces.
+
+No faces merged ...
+
+Merging all points on surface that
+- are used by only two boundary faces and
+- make an angle with a cosine of more than -1.
+
+No straight edges simplified and no points removed ...
+
+Doing final balancing
+---------------------
+
+Found 0 zoned faces to keep together.
+Found 0 separated coupled faces to keep together.
+dupNonManifoldPoints : Found : 0 non-manifold points (out of 1675809)
+Mesh refined in = 37 s.
+Total meshing time to this stage = 37 s.
+
+Morphing phase
+--------------
+
+Duplicating 0 points on faceZones of type boundary
+Checking initial mesh ...
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Detected 0 illegal faces (concave, zero area or negative cell pyramid volume)
+Checked initial mesh in = 0.47 s
+
+
+Smoothing patch points ...
+Smoothing iteration 0
+Found 620 non-manifold point(s).
+
+Scaling iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Successfully moved mesh
+
+Smoothing iteration 1
+Found 0 non-manifold point(s).
+
+Scaling iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Successfully moved mesh
+
+Patch points smoothed in = 1.78 s
+
+
+Merging 5632 sets of faces.
+
+Edge intersection testing:
+    Number of edges             : 4748163
+    Number of edges to retest   : 22572
+    Number of intersected edges : 26752
+
+Undo iteration 0
+----------------
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+
+Merging all points on surface that
+- are used by only two boundary faces and
+- make an angle with a cosine of more than -1.
+
+Removing 5677 straight edge points ...
+
+Edge intersection testing:
+    Number of edges             : 4748163
+    Number of edges to retest   : 22572
+    Number of intersected edges : 25348
+
+Undo iteration 0
+----------------
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+snappySnapDriver : Snap to Preserve Surface Features
+Snapping iteration: 0
+Snapping iteration: 10
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces on cells with determinant < 0.0001               : 0
+Snapping iteration: 20
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces on cells with determinant < 0.0001               : 0
+Snapping iteration: 30
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces on cells with determinant < 0.0001               : 0
+Snapping iteration: 40
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces on cells with determinant < 0.0001               : 0
+Snapping iteration: 50
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces on cells with determinant < 0.0001               : 0
+Snap to preserve surface features in 15.08s
+
+snappyHexMeshDriver: Smoothing displaced mesh interior points ...
+Finished smoothing displaced mesh in = 2.76 s.
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Successfully moved mesh
+Moved mesh in = 0.63 s
+
+
+Calculating patchDisplacement as distance to nearest surface point ...
+Wanted displacement : average:1.035501686e-05 min:1.763898264e-09 max:0.0003129554234
+Calculated surface displacement in = 0.09 s
+
+
+--> HELYX Warning : Displacement ( -1.338724789e-07 0 9.589204867e-07 ) at mesh point 4571 coord ( 0.06347799433 0 0.02100560166 ) points through the surrounding patch faces
+snappyHexMeshDriver: Smoothing displaced mesh interior points ...
+Finished smoothing displaced mesh in = 2.5 s.
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Successfully moved mesh
+Moved mesh in = 0.69 s
+
+
+
+Checking faces are correctly patched
+------------------------------------
+
+Merging 0 sets of faces.
+
+No faces merged ...
+
+Merging all points on surface that
+- are used by only two boundary faces and
+- make an angle with a cosine of more than -1.
+
+No straight edges simplified and no points removed ...
+Preparing feature lines for direct snapping
+-------------------------------------------
+
+ Converting refinement feature meshes to feature lines
+
+Feature lines prepared in 0s
+
+Finding optimal points for direct feature snapping
+--------------------------------------------------
+
+ Building node chains
+ Filtering out duplicates
+  Before removing duplications: 2 chains
+  After removing duplications : 1 chains
+ Cleaning up results
+Filtering 2 points.
+Filtering 0 points.
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Successfully moved mesh
+Moved mesh in = 3.21 s
+
+
+Feature shadow chains constructed in 3.21s
+
+
+Trying to smooth sliver faces
+-----------------------------
+
+Number of sliver points to smooth : 0
+
+Merging all faces of a cell
+---------------------------
+    - which are on the same patch
+    - which make an angle < 45 degrees
+      (cos:0.9396926208)
+    - as long as the resulting face doesn't become concave by more than  80 degrees
+      (0=straight, 180=fully concave)
+
+Merging 640 sets of faces.
+
+
+Undo iteration 0
+----------------
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+
+Merging all points on surface that
+- are used by only two boundary faces and
+- make an angle with a cosine of more than -1.
+
+Removing 645 straight edge points ...
+
+
+Undo iteration 0
+----------------
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+
+Splitting degenerate cell faces
+-------------------------------
+
+Edge collapsing Iter: 0
+Correcting concave faces 
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Moving mesh ...
+
+Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Successfully moved mesh
+Moved mesh in = 5.74 s
+
+
+
+Checking faces are correctly patched
+------------------------------------
+
+
+Merging all faces of a cell
+---------------------------
+    - which are on the same patch
+    - which make an angle < 45 degrees
+      (cos:0.9396926208)
+    - as long as the resulting face doesn't become concave by more than  80 degrees
+      (0=straight, 180=fully concave)
+
+Merging 0 sets of faces.
+
+No faces merged ...
+
+Merging all points on surface that
+- are used by only two boundary faces and
+- make an angle with a cosine of more than -1.
+
+No straight edges simplified and no points removed ...
+
+Cleaning up final snapped mesh
+------------------------------
+
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Removing 0 hanging nodes
+Finished snapping stage in = 40.18 s.
+Total meshing time to this stage = 77.5 s.
+
+Shrinking and layer addition phase
+----------------------------------
+
+Using mesh parameters 
+{
+    maxNonOrtho     70;
+    maxBoundarySkewness 20;
+    maxInternalSkewness 6;
+    maxConcave      80;
+    minFlatness     0.5;
+    minVol          1e-16;
+    minTetQuality   -1e+30;
+    minArea         1e-13;
+    minTwist        0.05;
+    minDeterminant  0.0001;
+    minFaceWeight   0.08;
+    minVolRatio     0.02;
+    angle           0;
+    errorReduction  0.75;
+    nSmoothScale    10;
+    minVolCollapseRatio -1;
+    faceFaceCells   false;
+    minSnapRelativeVolume -1;
+    smoothAlignedEdges false;
+    minSnapRelativeTetVolume -1;
+    maxGaussGreenCentroid -1;
+    nVolSmoothIter  8;
+    maxCellAspectRatio -1;
+    maxFaceCentreNonOrtho 180;
+    minEdgeLength   -1;
+}
+
+
+
+Checking mesh manifoldness ...
+
+Checking initial mesh ...
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Detected 0 illegal faces (concave, zero area or negative cell pyramid volume)
+Duplicating 0 points on faceZones of type boundary
+Patch Inlet cannot be grown up since has no grown neighbour
+Patch Outlet cannot be grown up since has no grown neighbour
+Patch Back chosen for growing up
+Patch Front chosen for growing up
+Patch Bottom cannot be grown up since has no grown neighbour
+Patch Top cannot be grown up since has no grown neighbour
+dupNonManifoldPoints : Found : 0 non-manifold points (out of 1669487)
+
+Handling feature edges ...
+Set displacement to zero for points on 0 feature edges
+
+Handling cells with warped patch faces ...
+Set displacement to zero on 0 warped faces since layer would be > 2 of the size of the bounding box.
+Set displacement to zero on 0 non manifold edges.
+Set displacement to zero on 0 problem grown up points
+Set displacement to zero on 0 faces and edges with single baffle extrusions and zero sized edges
+
+patch  faces    layers avg thickness[m]
+                       near-wall overall
+-----  -----    ------ --------- -------
+e423_0 26240    10     0.00015   0.005   
+
+Selecting externalDisplacementMeshMover displacementMedialAxis
+displacementMedialAxis : Calculating distance to Medial Axis ...
+fieldSmoother : Smoothing normals ...
+    Iteration 0   residual 0.00543
+fieldSmoother : Smoothing normals in interior ...
+    Iteration 0   residual 0.0147
+
+Layer addition iteration 1
+--------------------------
+
+Determining displacement for added points according to pointNormal ...
+Detected 127 points with point normal pointing through faces.
+Reset displacement at 127 points to average of surrounding points.
+
+displacementMedialAxis : Smoothing using Medial Axis ...
+displacementMedialAxis : Reducing layer thickness at 0 nodes where thickness to medial axis distance is large 
+displacementMedialAxis : Removing isolated regions ...
+- if partially extruded faces make angle < 80
+- if exclusively surrounded by non-extruded faces
+displacementMedialAxis : Number of isolated points extrusion stopped : 0
+fieldSmoother : Smoothing field ...
+    Iteration 0   residual 0
+snappyHexMeshDriver: Smoothing displaced mesh interior points ...
+Finished smoothing displaced mesh in = 2.84 s.
+displacementMedialAxis : Moving mesh ...
+displacementMedialAxis : Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+displacementMedialAxis : Successfully moved mesh
+displacementMedialAxis : Finished moving mesh ...
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to non-consecutive vertices being extruded.
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to stringed edges with inconsistent extrusion.
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to non-consecutive vertices being extruded.
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to stringed edges with inconsistent extrusion.
+Prevented extrusion on 0 points due to failure to split face.
+
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to non-consecutive vertices being extruded.
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to stringed edges with inconsistent extrusion.
+
+Setting up information for layer truncation ...
+
+Adding in total 0 inter-processor patches to handle extrusion of non-manifold processor boundaries.
+Detected 0 baffles across faceZones of type internal
+
+
+Checking mesh with layer ...
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 757
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Detected 757 illegal faces (concave, zero area or negative cell pyramid volume)
+Extruding 25984 out of 26240 faces (99%). Removed extrusion at 192 faces.
+Layer iteration performed in 8.94s
+
+
+Layer addition iteration 2
+--------------------------
+
+Determining displacement for added points according to pointNormal ...
+Detected 0 points with point normal pointing through faces.
+Reset displacement at 0 points to average of surrounding points.
+
+displacementMedialAxis : Smoothing using Medial Axis ...
+displacementMedialAxis : Reducing layer thickness at 0 nodes where thickness to medial axis distance is large 
+displacementMedialAxis : Removing isolated regions ...
+- if partially extruded faces make angle < 80
+- if exclusively surrounded by non-extruded faces
+displacementMedialAxis : Number of isolated points extrusion stopped : 0
+fieldSmoother : Smoothing field ...
+    Iteration 0   residual 1.03e-05
+snappyHexMeshDriver: Smoothing displaced mesh interior points ...
+Finished smoothing displaced mesh in = 2.83 s.
+displacementMedialAxis : Moving mesh ...
+displacementMedialAxis : Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+displacementMedialAxis : Successfully moved mesh
+displacementMedialAxis : Finished moving mesh ...
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to non-consecutive vertices being extruded.
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to stringed edges with inconsistent extrusion.
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to non-consecutive vertices being extruded.
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to stringed edges with inconsistent extrusion.
+Prevented extrusion on 0 points due to failure to split face.
+
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to non-consecutive vertices being extruded.
+stopNonConsecutiveExtrusion : Unextruded 0 faces due to stringed edges with inconsistent extrusion.
+
+Setting up information for layer truncation ...
+
+Adding in total 0 inter-processor patches to handle extrusion of non-manifold processor boundaries.
+Detected 0 baffles across faceZones of type internal
+
+
+Checking mesh with layer ...
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-16                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with area < 1e-13 m^2                            : 0
+    faces with skewness > 6   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.08        : 0
+    faces with volume ratio of neighbour cells < 0.02      : 0
+    faces with face twist < 0.05                           : 0
+    faces on cells with determinant < 0.0001               : 0
+Detected 0 illegal faces (concave, zero area or negative cell pyramid volume)
+Extruding 25984 out of 26240 faces (99%). Removed extrusion at 0 faces.
+Total number of layer cells: 248320
+Finished layer stage in = 26.7 s.
+Total meshing time to this stage = 104 s.
+
+Extruding layer at selected boundary faces
+
+Pre-balance before extruding
+Found 0 zoned faces to keep together.
+Found 0 separated coupled faces to keep together.
+Extruding : extrude
+Adding overall 0 processor patches.
+
+Doing final balancing
+---------------------
+
+Selecting decompositionMethod ptscotch
+Final mesh : cells:48175  faces:193535  points:98020
+Cells per refinement level:
+    0	352
+    1	670
+    2	2056
+    3	5284
+    4	12726
+    5	19743
+    6	445
+    7	6899
+Writing mesh to time 0
+Wrote mesh in = 0.03 s.
+Finished meshing in = 110 s.
+
+Final Mesh Summary Report
+-------------------------
+
+Mesh stats
+----------
+
+    points:              99072
+    edges:               244950
+    faces:               194057
+    internal faces:      96338
+    cells:               48175
+    layers cells:        248320
+    layer coverage:      99 %
+    boundary patches:    7
+    point zones:         0
+    face zones:          0
+    cell zones:          0
+    mesh regions:        1
+    domain volume:       72.26
+    domain bounding box: ( -4 0.4 -8 ) ( 15 0.63771 8 )
+
+Overall number of cells of each type
+------------------------------------
+
+    hexahedra:  46809 (97.165 %)
+    prisms:     49 (0.102 %)
+    wedges:     0 (0 %)
+    pyramids:   0 (0 %)
+    tet wedges: 0 (0 %)
+    tetrahedra: 0 (0 %)
+    polyhedra:  1317 (2.73 %)
+
+Cells per refinement level
+--------------------------
+
+    0	352 (spacing: 400 mm)
+    1	670 (spacing: 200 mm)
+    2	2056 (spacing: 100 mm)
+    3	5284 (spacing: 50 mm)
+    4	12726 (spacing: 25 mm)
+    5	19743 (spacing: 12.5 mm)
+    6	445 (spacing: 6.25 mm)
+    7	6899 (spacing: 3.12 mm)
+
+Patch layer info
+----------------
+
+Key:  
+First cell height (fch)
+Final layer height (flh)
+Total layer height (tlh)
+Expansion ratio (exp)
+
+patch  faces    layers fch (m)  flh (m)  tlh (m)  exp      coverage (%)
+-----  -----    ------ -------  -------  -------  ---      ------------
+
+e423_0 26240    9.5    0.000184 0.00113  0.00489  1.25      99      
+
+Mesh quality
+------------
+
+    Point usage OK.
+    Upper triangular ordering OK.
+    Topological cell zip-up check OK.
+    Face vertices OK.
+
+    Boundary openness ( 1.19e-17 1.22e-13 8.16e-19 ) OK.
+ *High aspect ratio cells found, Max aspect ratio: 1.74e+03, number of cells 426
+    Minimum face area = 4.13e-07. Maximum face area = 0.38.  Face area magnitudes OK.
+    Min volume = 9.82e-08. Max volume = 0.0903.  Total volume = 72.3.  Cell volumes OK.
+    Mesh non-orthogonality Max: 50.1 average: 0.718
+    Non-orthogonality check OK.
+    Face pyramids OK.
+
+Warning in 1 mesh checks.
+
+Meshing time
+------------
+
+   Overall Meshing Time 104.27 sec (0.029 hours).
+
+   Performed mesh initialisation in 0.03 sec (0.0288 %).
+   Performed mesh refinement in 37.32 sec (35.8 %).
+   Performed mesh snapping in 40.18 sec (38.5 %).
+   Performed mesh layers in 26.74 sec (25.6 %).
+
+End
+
+Finalising parallel run
+
+--- INICIO COMANDO: mpirun -n 4 helyxHexMesh -parallel -overwrite ---
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.1-unknown
+API    : 4.4.1
+Arch   : "LSB;label=32;scalar=64"
+Exec   : reconstructParMesh -constant
+Date   : Jan 15 2026
+Time   : 18:29:39
+Host   : "tb133-VirtualBox"
+PID    : 11997
+I/O    : uncollated
+Case   : /home/introcfd/Desktop/estudioAutomatizacionPerfiles/aleronTraseroV1
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (HELYX_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Merge tolerance : 1e-07
+Write tolerance : 1e-10
+Doing geometric matching on correct procBoundaries only.
+This assumes a correct decomposition.
+Found 4 processor directories
+
+Reading database "aleronTraseroV1/processor0"
+Reading database "aleronTraseroV1/processor1"
+Reading database "aleronTraseroV1/processor2"
+Reading database "aleronTraseroV1/processor3"
+Time = constant
+
+
+
+Reconstructing for mesh region0
+
+Reading points from "aleronTraseroV1/processor0" for time = constant
+
+Reading points from "aleronTraseroV1/processor1" for time = constant
+
+Reading points from "aleronTraseroV1/processor2" for time = constant
+
+Reading points from "aleronTraseroV1/processor3" for time = constant
+
+Overall mesh bounding box  : ( -4 0.4 -8 ) ( 15 0.6377086141 8 )
+Relative tolerance         : 1e-07
+Absolute matching distance : 2.484062208e-06
+
+Merging mesh 0 with 1
+Merging mesh 2 with 3
+Merging mesh 0 with 2
+Reading mesh to add from "aleronTraseroV1/processor0" for time = constant
+
+
+Reading mesh to add from "aleronTraseroV1/processor1" for time = constant
+
+
+Reading mesh to add from "aleronTraseroV1/processor2" for time = constant
+
+
+Reading mesh to add from "aleronTraseroV1/processor3" for time = constant
+
+
+mergeSharedPoints : detected 0 points that are to be merged.
+
+Writing merged mesh to "/home/introcfd/Desktop/estudioAutomatizacionPerfiles/aleronTraseroV1/constant"
+
+Reconstructing the addressing from the processor meshes to the newly reconstructed mesh
+
+Reading processor 0 mesh from "aleronTraseroV1/processor0"
+Writing pointProcAddressing to "aleronTraseroV1/processor0/constant/polyMesh"
+Writing faceProcAddressing to "aleronTraseroV1/processor0/constant/polyMesh"
+Writing cellProcAddressing to "aleronTraseroV1/processor0/constant/polyMesh"
+
+Reading processor 1 mesh from "aleronTraseroV1/processor1"
+Writing pointProcAddressing to "aleronTraseroV1/processor1/constant/polyMesh"
+Writing faceProcAddressing to "aleronTraseroV1/processor1/constant/polyMesh"
+Writing cellProcAddressing to "aleronTraseroV1/processor1/constant/polyMesh"
+
+Reading processor 2 mesh from "aleronTraseroV1/processor2"
+Writing pointProcAddressing to "aleronTraseroV1/processor2/constant/polyMesh"
+Writing faceProcAddressing to "aleronTraseroV1/processor2/constant/polyMesh"
+Writing cellProcAddressing to "aleronTraseroV1/processor2/constant/polyMesh"
+
+Reading processor 3 mesh from "aleronTraseroV1/processor3"
+Writing pointProcAddressing to "aleronTraseroV1/processor3/constant/polyMesh"
+Writing faceProcAddressing to "aleronTraseroV1/processor3/constant/polyMesh"
+Writing cellProcAddressing to "aleronTraseroV1/processor3/constant/polyMesh"
+
+
+End
+
+
+--- INICIO COMANDO: reconstructParMesh -constant ---
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.1-unknown
+API    : 4.4.1
+Arch   : "LSB;label=32;scalar=64"
+Exec   : caseSetup
+Date   : Jan 15 2026
+Time   : 18:29:39
+Host   : "tb133-VirtualBox"
+PID    : 12003
+I/O    : uncollated
+Case   : /home/introcfd/Desktop/estudioAutomatizacionPerfiles/aleronTraseroV1
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (HELYX_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+Create time
+
+
+Defining regions
+================
+region0 : segregatedS
+
+
+Writing dictionaries
+====================
+Writing "system/fvSchemes"
+Writing "system/fvSolution"
+Writing "system/faSchemes"
+Writing "system/faSolution"
+Writing "system/controlDict"
+Writing "system/materialProperties"
+Writing "system/fvOptions"
+Writing "system/meshObjects"
+Writing "constant/turbulenceProperties"
+Writing "constant/g"
+Writing "constant/regionProperties"
+
+Storing existing fields
+=======================
+	k: not found
+	omega: not found
+	nut: not found
+	p: not found
+	U: not found
+	rho: not found
+
+
+
+Modifying boundary mesh
+=======================
+Modifying boundary patch: Outlet
+Modifying boundary patch: Inlet
+Modifying boundary patch: Front
+Modifying boundary patch: Bottom
+Modifying boundary patch: Top
+Modifying boundary patch: e423_0
+Modifying boundary patch: Back
+
+
+Creating fields
+===============
+
+region0
+----------------------------------------------------------------------------------------
+
+Initialisation
+--------------
+
+   - U : fixedValue
+   - k : turbulentIL
+   - omega : turbulentIL
+   - nut : turbulentIL
+   - p : fixedValue
+   - rho : equationOfState
+Reading thermophysical properties
+
+
+Material settings
+-----------------
+
+Selecting materials package "fluid".
+pRef [1 -1 -2 0 0 0 0] 101325
+TRef [0 0 0 1 0 0 0] 0
+TConst [0 0 0 1 0 0 0] 300
+
+Solver settings from material properties:
+"isochoric" "incompressible" "constant Cv" "isotropic"
+
+----------------------------------------------------------------------------------------
+
+
+end
+
+
+--- INICIO COMANDO: caseSetup ---
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.1-unknown
+API    : 4.4.1
+Arch   : "LSB;label=32;scalar=64"
+Exec   : decomposePar
+Date   : Jan 15 2026
+Time   : 18:29:39
+Host   : "tb133-VirtualBox"
+PID    : 12008
+I/O    : uncollated
+Case   : /home/introcfd/Desktop/estudioAutomatizacionPerfiles/aleronTraseroV1
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (HELYX_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+
+
+Decomposing mesh region0
+
+Create mesh
+
+Calculating distribution of cells
+Selecting decompositionMethod hierarchical
+
+Finished decomposition in 0.01 s
+
+Calculating original mesh data
+
+Distributing cells to processors
+
+Distributing faces to processors
+
+Distributing points to processors
+
+Constructing processor meshes
+
+Processor 0
+    Number of cells = 12043
+    Number of faces shared with processor 1 = 245
+    Number of processor patches = 1
+    Number of processor faces = 245
+    Number of boundary faces = 24230
+
+Processor 1
+    Number of cells = 12043
+    Number of faces shared with processor 0 = 245
+    Number of faces shared with processor 2 = 186
+    Number of processor patches = 2
+    Number of processor faces = 431
+    Number of boundary faces = 24189
+
+Processor 2
+    Number of cells = 12043
+    Number of faces shared with processor 1 = 186
+    Number of faces shared with processor 3 = 136
+    Number of processor patches = 2
+    Number of processor faces = 322
+    Number of boundary faces = 24092
+
+Processor 3
+    Number of cells = 12046
+    Number of faces shared with processor 2 = 136
+    Number of processor patches = 1
+    Number of processor faces = 136
+    Number of boundary faces = 24164
+
+Number of processor faces = 567
+Max number of cells = 12046 (0.01868188895% above average 12043.75)
+Max number of processor patches = 2 (33.33333333% above average 1.5)
+Max number of faces between processors = 431 (52.02821869% above average 283.5)
+
+Time = 0
+
+Processor 0: field transfer
+Processor 1: field transfer
+Processor 2: field transfer
+Processor 3: field transfer
+
+End
+
+
+--- INICIO COMANDO: decomposePar ---

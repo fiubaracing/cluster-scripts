@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       dictionary;
+    arch        "LSB;label=32;scalar=64";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         steadyState;
+}
+
+gradSchemes
+{
+    turbulence      cellLimited Gauss linear 1;
+    grad(k)         cellLimited Gauss linear 1;
+    grad(omega)     cellLimited Gauss linear 1;
+    default         cellLimited Gauss linear 1;
+    gradU           cellLimited Gauss linear 1;
+    grad(p)         cellLimited Gauss linear 1;
+}
+
+divSchemes
+{
+    div(phi,k)      bounded Gauss upwind;
+    div(phi,symm(grad(U))) bounded Gauss linearUpwind turbulence;
+    div(phi,omega)  bounded Gauss upwind;
+    default         none;
+    div(phi,U)      bounded Gauss linearUpwindV gradU;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+    div(R)          Gauss linear;
+    div((rho*R))    Gauss linear;
+    div(nonlinearStress) Gauss linear;
+    div((muEff*dev2(grad(U).T()))) Gauss linear;
+    div((nuEff*dev2(T(grad(U))))) Gauss linear;
+    div((nu*dev2(T(grad(U))))) Gauss linear;
+    div(((rho*(thermo:mu|rho))*dev2(T(grad(U))))) Gauss linear;
+}
+
+laplacianSchemes
+{
+    laplacian((rho*DomegaEff),omega) omegaGauss linear corrected;
+    laplacian((rho*DkEff),k) Gauss linear limited 0.333;
+    laplacian((rho*nuEff),U) Gauss linear limited 0.333;
+    laplacian(rhorAUf,p) Gauss linear limited 0.333;
+    default         Gauss linear limited 0.333;
+}
+
+interpolationSchemes
+{
+    default         linear;
+    interpolate(HbyA) linear;
+}
+
+snGradSchemes
+{
+    default         limited 0.333;
+}
+
+wallDist
+{
+    method          meshWave;
+}
+
+
+// ************************************************************************* //

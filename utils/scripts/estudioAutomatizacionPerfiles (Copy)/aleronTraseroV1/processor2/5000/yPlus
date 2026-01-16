@@ -1,0 +1,75 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       volScalarField;
+    arch        "LSB;label=32;scalar=64";
+    object      yPlus;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+
+internalField   uniform 0;
+
+boundaryField
+{
+    Inlet
+    {
+        type            calculated;
+        value           nonuniform 0();
+    }
+    Outlet
+    {
+        type            calculated;
+        value           nonuniform 0();
+    }
+    Back
+    {
+        type            empty;
+    }
+    Front
+    {
+        type            empty;
+    }
+    Bottom
+    {
+        type            calculated;
+        value           nonuniform List<scalar> 
+3
+(¸”¶UÓ¾e@ó“Ë°c@]š¹í:a@);
+    }
+    Top
+    {
+        type            calculated;
+        value           nonuniform List<scalar> 
+3
+(â=®G¿hr@ittµ7r@»,-ÿcr@);
+    }
+    e423_0
+    {
+        type            calculated;
+        value           nonuniform 0();
+    }
+    procBoundary2to1
+    {
+        type            processor;
+        value           uniform 0;
+    }
+    procBoundary2to3
+    {
+        type            processor;
+        value           uniform 0;
+    }
+}
+
+
+// ************************************************************************* //

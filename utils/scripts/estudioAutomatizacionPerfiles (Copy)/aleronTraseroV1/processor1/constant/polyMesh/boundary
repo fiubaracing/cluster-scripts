@@ -1,0 +1,91 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       polyBoundaryMesh;
+    arch        "LSB;label=32;scalar=64";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+9
+(
+    Inlet
+    {
+        type            patch;
+        physicalType    inlet;
+        nFaces          0;
+        startFace       23815;
+    }
+    Outlet
+    {
+        type            patch;
+        physicalType    outlet;
+        nFaces          0;
+        startFace       23815;
+    }
+    Back
+    {
+        type            empty;
+        inGroups        1(empty);
+        nFaces          11969;
+        startFace       23815;
+    }
+    Front
+    {
+        type            empty;
+        inGroups        1(empty);
+        nFaces          11969;
+        startFace       35784;
+    }
+    Bottom
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          2;
+        startFace       47753;
+    }
+    Top
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          2;
+        startFace       47755;
+    }
+    e423_0
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          76;
+        startFace       47757;
+    }
+    procBoundary1to0
+    {
+        type            processor;
+        inGroups        1(processor);
+        nFaces          245;
+        startFace       47833;
+        matchTolerance  0.0001;
+        myProcNo        1;
+        neighbProcNo    0;
+    }
+    procBoundary1to2
+    {
+        type            processor;
+        inGroups        1(processor);
+        nFaces          186;
+        startFace       48078;
+        matchTolerance  0.0001;
+        myProcNo        1;
+        neighbProcNo    2;
+    }
+)
+
+// ************************************************************************* //

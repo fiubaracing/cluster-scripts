@@ -1,0 +1,59 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      omega.reference;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+Back
+{
+    type            empty;
+}
+
+Front
+{
+    type            empty;
+}
+
+Outlet
+{
+    type            turbulentMixingLengthFrequencyInlet;
+    mixingLength    0.01;
+    k               k;
+    value           uniform 0.01;
+}
+
+Inlet
+{
+    type            turbulentMixingLengthFrequencyInlet;
+    value           uniform 0.01;
+    mixingLength    0.01;
+}
+
+e423_0
+{
+    type            knopOmegaWallFunction;
+    value           uniform 1;
+}
+
+Top
+{
+    type            zeroGradient;
+}
+
+Bottom
+{
+    type            zeroGradient;
+}
+
+
+// ************************************************************************* //

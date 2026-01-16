@@ -1,0 +1,102 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       dictionary;
+    arch        "LSB;label=32;scalar=64";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    k
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        minIter         1;
+        tolerance       1e-06;
+        relTol          0.1;
+    }
+    omega
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        minIter         1;
+        tolerance       1e-06;
+        relTol          0.1;
+    }
+    p
+    {
+        solver          GAMG;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
+        cacheAgglomeration true;
+        nCellsInCoarsestLevel 200;
+        smoother        symGaussSeidel;
+        minIter         1;
+        scaleCorrection true;
+        tolerance       1e-10;
+        relTol          0.01;
+    }
+    U
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        minIter         1;
+        tolerance       1e-06;
+        relTol          0.1;
+        nSweeps         2;
+    }
+}
+
+relaxationFactors
+{
+    fields
+    {
+        p               1;
+        rho             0.05;
+    }
+    equations
+    {
+        k               0.5;
+        omega           0.5;
+        U               0.6;
+    }
+}
+
+cache
+{
+    grad(k)         ;
+    grad(omega)     ;
+    grad(U)         ;
+}
+
+SIMPLE
+{
+    nNonOrthogonalCorrectors 2;
+    pRefCell        0;
+    pRefValue       0;
+    modifiedMomentumInterp true;
+    residualControl
+    {
+        U               1e-07;
+        p               1e-07;
+        k               1e-07;
+        omega           1e-07;
+    }
+    pMin            -1e+10;
+    pMax            1e+10;
+    consistent      true;
+    transonic       false;
+}
+
+
+// ************************************************************************* //

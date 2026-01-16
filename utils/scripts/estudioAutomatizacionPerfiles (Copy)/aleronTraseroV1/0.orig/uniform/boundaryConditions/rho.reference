@@ -1,0 +1,52 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      rho.reference;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+Inlet
+{
+    type            calculated;
+    value           uniform 1;
+}
+
+Outlet
+{
+    type            calculated;
+    value           uniform 1;
+}
+
+Back
+{
+    type            empty;
+}
+
+Front
+{
+    type            empty;
+}
+
+Bottom
+{
+    type            calculated;
+    value           uniform 1;
+}
+
+Top
+{
+    type            calculated;
+    value           uniform 1;
+}
+
+
+// ************************************************************************* //

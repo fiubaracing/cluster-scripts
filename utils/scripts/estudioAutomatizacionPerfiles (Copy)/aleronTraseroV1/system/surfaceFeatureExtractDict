@@ -1,0 +1,33 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | HELYX-Core: Open-source CFD for Enterprise
+   \\    /   O peration     | Version: 4.4.1
+    \\  /    A nd           |
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      surfaceFeatureExtractDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// Nombre del archivo STL que guardaste en constant/triSurface
+e423_0.stl
+{
+    // Método para obtener las líneas de característica
+    extractionMethod    extractFromSurface;
+
+    extractFromSurfaceCoeffs
+    {
+        // Ángulo incluido para capturar aristas. 
+        // 150 es ideal para perfiles alares para capturar el borde de fuga afilado.
+        includedAngle   150;
+    }
+
+    // Opciones de escritura
+    // 'yes' genera un archivo .obj en constant/extendedFeatureEdgeMesh 
+    // que puedes ver en ParaView para verificar si extrajo bien los bordes.
+    writeObj            yes;
+}

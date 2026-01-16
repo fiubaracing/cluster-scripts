@@ -1,0 +1,49 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX(R): Open-source CFD for Enterprise                 |
+|   o   O   o      | Version: v4.3.1                                          |
+|    o     o       | Engys Ltd. http://www.engys.com                          |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location system;
+    object geometryDict;
+}
+    surfaces
+    {
+        e423_0.stl
+        {
+            type triSurfaceMesh;
+            format stl; 
+        }
+        VR1.stl
+        {
+            type triSurfaceMesh;
+            format stl;
+        }
+        VR2.stl
+        {
+            type triSurfaceMesh;
+            format stl;
+        }
+        VR3.stl
+        {
+            type triSurfaceMesh;
+            format stl;
+        }
+        VR4.stl
+        {
+            type triSurfaceMesh;
+            format stl;
+        }
+        VR5.stl
+        {
+            type triSurfaceMesh;
+            format stl;
+        }
+    }
+

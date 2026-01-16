@@ -1,0 +1,127 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.1                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       dictionary;
+    arch        "LSB;label=32;scalar=64";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     helyxSolve;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         5000;
+
+deltaT          constant 1;
+
+writeControl    timeStep;
+
+writeInterval   1000;
+
+purgeWrite      1;
+
+writeFormat     binary;
+
+writePrecision  10;
+
+writeCompression uncompressed;
+
+timeFormat      general;
+
+timePrecision   6;
+
+graphFormat     raw;
+
+runTimeModifiable yes;
+
+libs            2 ( "" "" );
+
+writeEndTime    true;
+
+adjustTimeStep  false;
+
+maxCo           0;
+
+maxAlphaCo      0;
+
+minDeltaT       0;
+
+maxDeltaT       0;
+
+meshChangers    false;
+
+functions
+{
+    FR
+    {
+        functionObjectLibs ( "libforces.so" );
+        directForceDensity false;
+        p               p;
+        U               U;
+        rhoName         rho;
+        rhoInf          1;
+        pRef            0;
+        CofR            ( 0 0 0 );
+        patches         ( e423_0 );
+        executeControl  timeStep;
+        type            forces;
+        regions         ( region0 );
+        writeControl    timeStep;
+        writeInterval   100;
+        executeInterval 1;
+    }
+    LD
+    {
+        patches         ( e423_0 );
+        functionObjectLibs ( "libforces.so" );
+        porosity        true;
+        nAveragingSteps 1;
+        outputRegionData true;
+        binData
+        {
+            nBins           100;
+            axis            ( 1 0 0 );
+        }
+        maxCp           1e+15;
+        minCp           -1e+15;
+        Uinf            ( 11.085 0 0 );
+        rhoInf          1.225;
+        liftDirection   ( 0 0 1 );
+        dragDirection   ( 1 0 0 );
+        referenceArea   0.16;
+        referenceLength 0.4;
+        referencePoint  ( 0 0 0 );
+        wheelbase       1;
+        executeControl  timeStep;
+        type            liftDrag;
+        regions         ( region0 );
+        Pref            0;
+        cOfPressure     true;
+        writeControl    timeStep;
+        writeInterval   100;
+        executeInterval 1;
+    }
+    yPlus
+    {
+        type            yPlus;
+        libs            ( "libfieldFunctionObjects.so" );
+        writeControl    onEnd;
+        patches         ( e423_0 );
+    }
+}
+
+
+// ************************************************************************* //

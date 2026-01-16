@@ -1,0 +1,115 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX(R): Open-source CFD for Enterprise                 |
+|   o   O   o      | Version: v4.3.1                                          |
+|    o     o       | Engys Ltd. http://www.engys.com                          |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location system;
+    object meshInfoDict;
+}
+    points 254834;
+    cells 124874;
+    faces 502036;
+    internalFaces 249303;
+    boundaryPatches 13;
+    faceZones 0;
+    cellZones 0;
+    domainVolume 82.8795;
+    hexahedra 122609;
+    prisms 183;
+    wedges 0;
+    pyramids 0;
+    tetWedges 0;
+    tetrahedra 0;
+    polyhedra 2082;
+    boundingBox ( -12.0 1.0 -8.0 ) ( 8.0 1.25902 8.0 );
+    patchesInfo
+    {
+        flap2
+        {
+            faces 122;
+            points 244;
+            area 0.112062;
+            normal ( -6.09525E-17 -2.50122E-16 -1.25775E-17 );
+        }
+        flap1
+        {
+            faces 120;
+            points 240;
+            area 0.109263;
+            normal ( -3.57223E-17 -2.6569E-17 -3.37377E-17 );
+        }
+        Top
+        {
+            faces 50;
+            points 104;
+            area 5.18039;
+            normal ( 0.0 0.0 1.0 );
+        }
+        e423_v5
+        {
+            faces 325;
+            points 654;
+            area 0.270423;
+            normal ( 0.0 -2.07175E-17 -1.02638E-16 );
+        }
+        Front
+        {
+            faces 124874;
+            points 127417;
+            area 319.974;
+            normal ( 1.61153E-20 1.0 -2.93492E-19 );
+        }
+        Back
+        {
+            faces 124874;
+            points 127417;
+            area 319.974;
+            normal ( -5.97145E-21 -1.0 1.68975E-19 );
+        }
+        Bottom
+        {
+            faces 50;
+            points 104;
+            area 5.18039;
+            normal ( 0.0 0.0 -1.0 );
+        }
+        Inlet
+        {
+            faces 40;
+            points 84;
+            area 4.14431;
+            normal ( 1.0 0.0 0.0 );
+        }
+        Oultet
+        {
+            faces 40;
+            points 82;
+            area 4.14431;
+            normal ( -1.0 0.0 0.0 );
+        }
+    }
+    meshingInfo
+    {
+        overallTime 1063.93;
+        refinementTime 153.44;
+        layersTime 700.62;
+        cellsPerRefinementLevel
+        (
+            ( 0 1038.0 )
+            ( 1 1328.0 )
+            ( 2 4230.0 )
+            ( 3 12600.0 )
+            ( 4 31200.0 )
+            ( 5 46219.0 )
+            ( 6 958.0 )
+            ( 7 27301.0 )
+        );
+    }
+
