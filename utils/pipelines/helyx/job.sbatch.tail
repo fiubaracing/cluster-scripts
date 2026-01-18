@@ -1,0 +1,6 @@
+
+#------------------------------------------------------------------------------
+# Create dummy file for ParaView visualisation
+#------------------------------------------------------------------------------
+touch $JOB_NAME.foam
+echo "Finished Reconstruct $(date)"
