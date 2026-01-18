@@ -20,7 +20,7 @@ systemctl stop firewalld
 #3 Install OpenHPC Components
 #3.1 Enable OpenHPC repository for local use
 
-dnf install -y http://repos.openhpc.community/OpenHPC/3/EL_9/x86_64/ohpc-release-3-1.el9.x86_64.rpm
+dnf install -y http://repos.openhpc.community/OpenHPC/4/EL_10/x86_64/ohpc-release-4-1.el10.x86_64.rpm
 
 dnf install -y dnf-plugins-core
 dnf config-manager --set-enabled crb
@@ -29,7 +29,7 @@ dnf config-manager --set-enabled crb
 
 # Install base meta-packages
 dnf -y install ohpc-base
-dnf -y install ohpc-warewulf
+dnf -y install warewulf-ohpc
 dnf -y install hwloc-ohpc
 
 systemctl enable chronyd.service
@@ -50,35 +50,45 @@ cp /etc/slurm/slurm.conf.ohpc /etc/slurm/slurm.conf
 # Setup default cgroups file
 cp /etc/slurm/cgroup.conf.example /etc/slurm/cgroup.conf
 
+
 # Identify resource manager hostname on master host
-perl -pi -e "s/SlurmctldHost=\S+/SlurmctldHost=${sms_name}/" /etc/slurm/slurm.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*SlurmctldHost=.*|SlurmctldHost=${sms_name}|" /etc/slurm/slurm.conf
 
 
 # Configuración de Topologia, CPUs, Memoria
-perl -pi -e "s/NodeName.*\n/NodeName=${compute_prefix}[1-${num_computes}] RealMemory=${real_memory} Sockets=${sockets} CoresPerSocket=${cores_per_socket} ThreadsPerCore=${threads_per_core} State=UNKNOWN\n/" /etc/slurm/slurm.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*NodeName=.*|NodeName=${compute_prefix}[1-${num_computes}] RealMemory=${real_memory} Sockets=${sockets} CoresPerSocket=${cores_per_socket} ThreadsPerCore=${threads_per_core} State=UNKNOWN|" /etc/slurm/slurm.conf
 
 # Configuración de los nombres de los nodos de cómputo
-perl -pi -e "s/Nodes=\S+/Nodes=${compute_prefix}[1-${num_computes}]/" /etc/slurm/slurm.conf
-
+sed -i -E "s|^[[:space:]]*?[[:space:]]*PartitionName=.*|PartitionName=normal Nodes=${compute_prefix}[1-${num_computes}] Default=YES MaxTime=INFINITE State=UP Oversubscribe=NO|" /etc/slurm/slurm.conf
 #3.7 Complete basic warewulf setup for master node
 
 # Configure Warewulf provisioning to use desired internal interface
-perl -pi -e "s/device = eth1/device = ${sms_eth_internal}/" /etc/warewulf/provision.conf
-
+sed -i -E "s|^[[:space:]]*?[[:space:]]*ipaddr:.*|ipaddr: ${sms_ip}|" /etc/warewulf/warewulf.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*netmask:.*|netmask: ${internal_netmask}|" /etc/warewulf/warewulf.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*network:.*|network: ${internal_ip}|" /etc/warewulf/warewulf.conf
+# dhcp config
+sed -i -E "s|^[[:space:]]*?[[:space:]]*range start:.*|    range start: ${sms_dhcp_start}|" /etc/warewulf/warewulf.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*range end:.*|    range end: ${sms_dhcp_end}|" /etc/warewulf/warewulf.conf
 # Enable internal interface for provisioning
 ip link set dev ${sms_eth_internal} up
 ip address add ${sms_ip}/${internal_netmask} broadcast + dev ${sms_eth_internal}
 
+dnf -y install httpd 
+dnf -y install dnsmasq
+
 # Restart/enable relevant services to support provisioning
-systemctl enable httpd.service
-systemctl restart httpd
-systemctl enable dhcpd.service
-systemctl enable tftp.socket
-systemctl start tftp.socket
+systemctl enable --now httpd
+# 2. Enable dnsmasq (Handles DHCP + TFTP)
+systemctl enable --now dnsmasq
 
 #3.8 Define compute image for provisioning
 
 #3.8.1 build initial BOS image
+
+# TODO 
+# WAIT ROCKY 10 IMAGE TO BE IN DOCKERHUB
+# INSTEAD IF MIGRATION TO ROCKY 10 IS NEEDED
+# USE CENTOS 10 IMAGE
 
 # Build initial chroot image
 wwmkchroot -v rocky-9 $CHROOT
