@@ -65,6 +65,8 @@ pvcreate /dev/md1
 vgextend rl /dev/md1
 pvmove /dev/sda2 /dev/md1
 # si falla pvmove tenemos q achicar el disco
+# ---G es la cantidad de GiB a la que queremos reducir, cambiar ---
+# por un valor, ej 127G
 # -----
 e2fsck -f /dev/mapper/rl-root
 resize2fs /dev/mapper/rl-root ---G
@@ -111,12 +113,12 @@ GRUB_CMDLINE_LINUX="rhgb quiet root=/dev/mapper/rl-root rd.lvm.vg=rl rd.auto=1"
 # Copiamos la config de mdadm
 # Duplicada ante la duda
 mkdir -p /etc/mdadm
-mdadm –-detail -–scan > /etc/mdadm/mdadm.conf
-mdadm –-detail -–scan > /etc/mdadm.conf
+mdadm --detail --scan > /etc/mdadm/mdadm.conf
+mdadm --detail --scan > /etc/mdadm.conf
 
 # agregamos sda a raid
-mdadm /dev/md0 –-add /dev/sda1
-mdadm /dev/md1 –-add /dev/sda2
+mdadm /dev/md0 --add /dev/sda1
+mdadm /dev/md1 --add /dev/sda2
 # esperamos q termine de copiar raid
 watch -n 1 cat /proc/mdstat
 
