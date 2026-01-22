@@ -21,7 +21,7 @@ alias useOpenFOAM='source $REPO_PATH/cfd/tools/openFOAM/OpenFOAM-v2506/etc/bashr
 export PATH=$PATH:$REPO_PATH/cfd/tools/basilisk/src
 export PATH=$PATH:$REPO_PATH/cfd/tools/Paraview/ParaView-5.11.2-MPI-Linux-Python3.9-x86_64/bin
 
-alias getTime='$UTILS/pipelines/helyx/debug/getTime.sh'
-alias debugTime='$UTILS/pipelines/helyx/debug/debugTime.sh'
+alias getTime='bash $UTILS/pipelines/helyx/debug/getTime.sh'
+alias debugTime='bash $UTILS/pipelines/helyx/debug/debugTime.sh'
 
 EOF
