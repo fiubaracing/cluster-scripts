@@ -181,7 +181,8 @@ def helyx_menu_setup():
             "Enter the node ID to debug time on (e.g., 1 for c1): ")
 
         subprocess.run([
-            "getTime",
+            "bash",
+            MENU_PWD + "/pipelines/helyx/debug/getTime.sh",
             node_id,
         ], check=True)
 
@@ -192,7 +193,8 @@ def helyx_menu_setup():
             "Enter the time value to debug (e.g., 1000): ")
 
         subprocess.run([
-            "debugTime",
+            "bash",
+            MENU_PWD + "/pipelines/helyx/debug/debugTime.sh",
             node_id,
             time_val,
         ], check=True)
