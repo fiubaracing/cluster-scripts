@@ -32,7 +32,7 @@ UNIX_USER = get_unix_username()
 
 class KeyInput:
     """
-    Handles reading a single keystroke from the user without 
+    Handles reading a single keystroke from the user without
     requiring them to press Enter. Works on Windows and Unix.
     """
 
@@ -176,6 +176,27 @@ def helyx_menu_setup():
             type
         ], check=True)
 
+    def getTime():
+        node_id = input(
+            "Enter the node ID to debug time on (e.g., 1 for c1): ")
+
+        subprocess.run([
+            "getTime",
+            node_id,
+        ], check=True)
+
+    def debugTime():
+        node_id = input(
+            "Enter the node ID to debug time on (e.g., 1 for c1): ")
+        time_val = input(
+            "Enter the time value to debug (e.g., 1000): ")
+
+        subprocess.run([
+            "debugTime",
+            node_id,
+            time_val,
+        ], check=True)
+
     helyx_menu = OptionNode("HELYX MENU")
     # Example action
     helyx_menu.add_child(
@@ -188,6 +209,18 @@ def helyx_menu_setup():
             name="Run check mesh only",
             handler=lambda: run_pipeline("check")
         ))
+    helyx_menu.add_child(
+        OptionNode(
+            name="Get time on nodes",
+            handler=getTime
+        )
+    )
+    helyx_menu.add_child(
+        OptionNode(
+            name="Debug time on nodes",
+            handler=debugTime
+        )
+    )
     return helyx_menu
 
 
