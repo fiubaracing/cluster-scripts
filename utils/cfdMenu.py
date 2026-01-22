@@ -213,13 +213,13 @@ def helyx_menu_setup():
         ))
     helyx_menu.add_child(
         OptionNode(
-            name="Get time on nodes",
+            name="Get the last time iteration on nodes",
             handler=getTime
         )
     )
     helyx_menu.add_child(
         OptionNode(
-            name="Debug time on nodes",
+            name="Debug a specific time on nodes",
             handler=debugTime
         )
     )
