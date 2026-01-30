@@ -1,0 +1,57 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX(R): Open-source CFD for Enterprise                 |
+|   o   O   o      | Version: v4.4.0                                          |
+|    o     o       | Engys Ltd. http://www.engys.com                          |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location system;
+    object fvSolution;
+}
+    solvers
+    {
+        p
+        {
+            solver GAMG;
+            agglomerator faceAreaPair;
+            mergeLevels 1;
+            cacheAgglomeration true;
+            nCellsInCoarsestLevel 200;
+            smoother symGaussSeidel;
+            minIter 1;
+            scaleCorrection true;
+            tolerance 1e-10;
+            relTol 0.01;
+        }
+        U
+        {
+            solver smoothSolver;
+            smoother symGaussSeidel;
+            minIter 1;
+            tolerance 1e-6;
+            relTol 0.1;
+            nSweeps 2;
+        }
+        k
+        {
+            solver smoothSolver;
+            smoother symGaussSeidel;
+            minIter 1;
+            tolerance 1e-06;
+            relTol 0.1;
+        }
+        omega
+        {
+            solver smoothSolver;
+            smoother symGaussSeidel;
+            minIter 1;
+            tolerance 1e-06;
+            relTol 0.1;
+        }
+    }
+

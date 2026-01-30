@@ -1,0 +1,639 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX(R): Open-source CFD for Enterprise                 |
+|   o   O   o      | Version: v4.4.0                                          |
+|    o     o       | Engys Ltd. http://www.engys.com                          |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location system;
+    object postDict;
+}
+    visualisations
+    {
+        baseMesh
+        {
+        }
+        geometry
+        {
+            VR1
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                opacity 0.1;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 24;
+                    numberOfLines 0;
+                    numberOfCells 12;
+                    originalBounds ( -7.0 14.0 -7.0 7.0 -2.0 2.0 );
+                    transformedBounds ( -7.0 14.0 -7.0 7.0 -2.0 2.0 );
+                }
+            }
+            VR2
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                opacity 0.1;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 24;
+                    numberOfLines 0;
+                    numberOfCells 12;
+                    originalBounds ( -5.0 12.0 -5.0 5.0 -2.0 2.0 );
+                    transformedBounds ( -5.0 12.0 -5.0 5.0 -2.0 2.0 );
+                }
+            }
+            VR3
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                opacity 0.1;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 24;
+                    numberOfLines 0;
+                    numberOfCells 12;
+                    originalBounds ( -4.0 10.0 -4.0 4.0 -2.0 2.0 );
+                    transformedBounds ( -4.0 10.0 -4.0 4.0 -2.0 2.0 );
+                }
+            }
+            VR4
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                opacity 0.1;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 24;
+                    numberOfLines 0;
+                    numberOfCells 12;
+                    originalBounds ( -3.0 8.0 -3.0 3.0 -2.0 2.0 );
+                    transformedBounds ( -3.0 8.0 -3.0 3.0 -2.0 2.0 );
+                }
+            }
+            VR5
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                opacity 0.1;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 24;
+                    numberOfLines 0;
+                    numberOfCells 12;
+                    originalBounds ( -2.0 6.0 -2.0 2.0 -2.0 2.0 );
+                    transformedBounds ( -2.0 6.0 -2.0 2.0 -2.0 2.0 );
+                }
+            }
+            VR6
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                opacity 0.1;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 24;
+                    numberOfLines 0;
+                    numberOfCells 12;
+                    originalBounds ( -1.5 4.0 -1.5 1.5 -2.0 2.0 );
+                    transformedBounds ( -1.5 4.0 -1.5 1.5 -2.0 2.0 );
+                }
+            }
+            VR7
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                opacity 0.1;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 24;
+                    numberOfLines 0;
+                    numberOfCells 12;
+                    originalBounds ( -1.0 2.0 -1.0 1.0 -2.0 2.0 );
+                    transformedBounds ( -1.0 2.0 -1.0 1.0 -2.0 2.0 );
+                }
+            }
+            domain
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                opacity 0.2;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 24;
+                    numberOfLines 0;
+                    numberOfCells 12;
+                    originalBounds ( -8.0 16.0 -8.0 8.0 -2.0 2.0 );
+                    transformedBounds ( -8.0 16.0 -8.0 8.0 -2.0 2.0 );
+                }
+            }
+            domain2D_split_Outlet
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 6;
+                    numberOfLines 0;
+                    numberOfCells 4;
+                    originalBounds ( 12.0 12.0 -6.0 6.0 0.0 0.180000007 );
+                    transformedBounds ( 12.0 12.0 -6.0 6.0 0.0 0.180000007 );
+                }
+                parentName domain2D_split;
+            }
+            domain2D_split_Inlet
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 6;
+                    numberOfLines 0;
+                    numberOfCells 4;
+                    originalBounds ( -6.0 -6.0 -6.0 6.0 0.0 0.180000007 );
+                    transformedBounds ( -6.0 -6.0 -6.0 6.0 0.0 0.180000007 );
+                }
+                parentName domain2D_split;
+            }
+            domain2D_split_Bottom
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 6;
+                    numberOfLines 0;
+                    numberOfCells 4;
+                    originalBounds ( -6.0 12.0 -6.0 -6.0 0.0 0.180000007 );
+                    transformedBounds ( -6.0 12.0 -6.0 -6.0 0.0 0.180000007 );
+                }
+                parentName domain2D_split;
+            }
+            domain2D_split_Top
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 6;
+                    numberOfLines 0;
+                    numberOfCells 4;
+                    originalBounds ( -6.0 12.0 6.0 6.0 0.0 0.180000007 );
+                    transformedBounds ( -6.0 12.0 6.0 6.0 0.0 0.180000007 );
+                }
+                parentName domain2D_split;
+            }
+            cylinder
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                opacity 0.1;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 200;
+                    numberOfLines 0;
+                    numberOfCells 196;
+                    originalBounds ( -2.0 2.0 -0.5490133762359619 0.449013352394104 -0.5 0.5 );
+                    transformedBounds ( -0.2500000298023224 0.9500000476837158 -0.5488160252571106 0.6488160490989685 -2.0 2.0 );
+                }
+            }
+            flap1
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 1796;
+                    numberOfLines 0;
+                    numberOfCells 1796;
+                    originalBounds ( 0.3542605936527252 0.5278370380401611 0.07781757414340973 0.18646012246608734 0.0 0.001500000013038516 );
+                    transformedBounds ( 0.3542605936527252 0.5278370380401611 0.07781757414340973 0.18646012246608734 0.0 0.001500000013038516 );
+                }
+            }
+            mainPlane
+            {
+                visible false;
+                representation SURFACE_WITH_EDGES;
+                showActiveColor false;
+                showSurfaceLIC false;
+                vectorArray U;
+                dataSetInfo
+                {
+                    numberOfPoints 1694;
+                    numberOfLines 0;
+                    numberOfCells 1694;
+                    originalBounds ( -3.2770269626780646E-6 0.39277318120002747 -0.04044853895902634 0.06881815195083618 0.0 0.001500000013038516 );
+                    transformedBounds ( -3.2770269626780646E-6 0.39277318120002747 -0.04044853895902634 0.06881815195083618 0.0 0.001500000013038516 );
+                }
+            }
+        }
+        regions
+        {
+            region0
+            {
+                volumeMesh
+                {
+                    visible false;
+                    colorField "p.CELL";
+                    representation SURFACE_WITH_EDGES;
+                    showActiveColor false;
+                    showSurfaceLIC false;
+                    vectorArray U;
+                    dataSetInfo
+                    {
+                        numberOfPoints 1318338;
+                        numberOfLines 0;
+                        numberOfCells 655753;
+                        originalBounds ( -6.0 12.0 -6.0 6.0 0.0 0.18000000715255737 );
+                        transformedBounds ( -6.0 12.0 -6.0 6.0 0.0 0.18000000715255737 );
+                    }
+                }
+                Outlet
+                {
+                    visible true;
+                    colorField "p.CELL";
+                    representation SURFACE_WITH_EDGES;
+                    showActiveColor false;
+                    showSurfaceLIC false;
+                    vectorArray U;
+                    dataSetInfo
+                    {
+                        numberOfPoints 158;
+                        numberOfLines 0;
+                        numberOfCells 78;
+                        originalBounds ( 12.0 12.0 -6.0 6.0 0.0 0.18000000715255737 );
+                        transformedBounds ( 12.0 12.0 -6.0 6.0 0.0 0.18000000715255737 );
+                    }
+                }
+                Inlet
+                {
+                    visible true;
+                    colorField "p.CELL";
+                    representation SURFACE_WITH_EDGES;
+                    showActiveColor false;
+                    showSurfaceLIC false;
+                    vectorArray U;
+                    dataSetInfo
+                    {
+                        numberOfPoints 82;
+                        numberOfLines 0;
+                        numberOfCells 40;
+                        originalBounds ( -6.0 -6.0 -6.0 6.0 0.0 0.18000000715255737 );
+                        transformedBounds ( -6.0 -6.0 -6.0 6.0 0.0 0.18000000715255737 );
+                    }
+                }
+                Bottom
+                {
+                    visible true;
+                    colorField "p.CELL";
+                    representation SURFACE_WITH_EDGES;
+                    showActiveColor false;
+                    showSurfaceLIC false;
+                    vectorArray U;
+                    dataSetInfo
+                    {
+                        numberOfPoints 122;
+                        numberOfLines 0;
+                        numberOfCells 60;
+                        originalBounds ( -6.0 12.0 -6.0 -6.0 0.0 0.18000000715255737 );
+                        transformedBounds ( -6.0 12.0 -6.0 -6.0 0.0 0.18000000715255737 );
+                    }
+                }
+                Top
+                {
+                    visible true;
+                    colorField "p.CELL";
+                    representation SURFACE_WITH_EDGES;
+                    showActiveColor false;
+                    showSurfaceLIC false;
+                    vectorArray U;
+                    dataSetInfo
+                    {
+                        numberOfPoints 122;
+                        numberOfLines 0;
+                        numberOfCells 60;
+                        originalBounds ( -6.0 12.0 6.0 6.0 0.0 0.18000000715255737 );
+                        transformedBounds ( -6.0 12.0 6.0 6.0 0.0 0.18000000715255737 );
+                    }
+                }
+                flap1
+                {
+                    visible true;
+                    colorField "p.CELL";
+                    representation SURFACE_WITH_EDGES;
+                    showActiveColor false;
+                    showSurfaceLIC false;
+                    vectorArray U;
+                    dataSetInfo
+                    {
+                        numberOfPoints 972;
+                        numberOfLines 0;
+                        numberOfCells 486;
+                        originalBounds ( 0.3542662262916565 0.527713418006897 0.07781945168972015 0.18537969887256622 0.0 0.18000000715255737 );
+                        transformedBounds ( 0.3542662262916565 0.527713418006897 0.07781945168972015 0.18537969887256622 0.0 0.18000000715255737 );
+                    }
+                }
+                mainPlane
+                {
+                    visible true;
+                    colorField "p.CELL";
+                    representation SURFACE_WITH_EDGES;
+                    showActiveColor false;
+                    showSurfaceLIC false;
+                    vectorArray U;
+                    dataSetInfo
+                    {
+                        numberOfPoints 1728;
+                        numberOfLines 0;
+                        numberOfCells 864;
+                        originalBounds ( -2.6768709631141974E-6 0.3917360305786133 -0.0404483787715435 0.06805349886417389 0.0 0.18000000715255737 );
+                        transformedBounds ( -2.6768709631141974E-6 0.3917360305786133 -0.0404483787715435 0.06805349886417389 0.0 0.18000000715255737 );
+                    }
+                }
+                bottomEmptyFaces
+                {
+                    visible true;
+                    colorField "p.CELL";
+                    representation SURFACE_WITH_EDGES;
+                    showActiveColor false;
+                    showSurfaceLIC false;
+                    vectorArray U;
+                    dataSetInfo
+                    {
+                        numberOfPoints 659305;
+                        numberOfLines 0;
+                        numberOfCells 655883;
+                        originalBounds ( -6.0 12.0 -6.0 6.0 0.0 0.0 );
+                        transformedBounds ( -6.0 12.0 -6.0 6.0 0.0 0.0 );
+                    }
+                }
+                topEmptyFaces
+                {
+                    visible true;
+                    colorField "p.CELL";
+                    representation SURFACE_WITH_EDGES;
+                    showActiveColor false;
+                    showSurfaceLIC false;
+                    vectorArray U;
+                    dataSetInfo
+                    {
+                        numberOfPoints 659305;
+                        numberOfLines 0;
+                        numberOfCells 655883;
+                        originalBounds ( -6.0 12.0 -6.0 6.0 0.18000000715255737 0.18000000715255737 );
+                        transformedBounds ( -6.0 12.0 -6.0 6.0 0.18000000715255737 0.18000000715255737 );
+                    }
+                }
+                internalBoundaries
+                {
+                }
+                cellZones
+                {
+                }
+                faceZones
+                {
+                }
+            }
+        }
+        objects
+        {
+        }
+        groups
+        {
+        }
+    }
+    groups
+    {
+    }
+    objects
+    {
+    }
+    colorLegends
+    {
+        p
+        {
+            title "p [Pa]";
+        }
+        U-Y
+        {
+            title "U-Y [m/s]";
+        }
+        U-X
+        {
+            title "U-X [m/s]";
+        }
+        U-Z
+        {
+            title "U-Z [m/s]";
+        }
+        U-Mag
+        {
+            title "U-Mag [m/s]";
+        }
+        rho
+        {
+            title "rho [kg/m³]";
+        }
+        k
+        {
+            title "k [m²/s²]";
+        }
+        nut
+        {
+            title "nut [m²/s]";
+        }
+        omega
+        {
+            title "omega [1/s]";
+        }
+        yPlus
+        {
+            title "yPlus";
+        }
+        phi
+        {
+            title "phi [kg/s]";
+        }
+        aspectRatio
+        {
+            title "Aspect Ratio";
+        }
+        pyramids
+        {
+            title "Pyramids [m³]";
+        }
+        weights
+        {
+            title "Weights";
+        }
+        volumeRatio
+        {
+            title "Volume Ratio";
+        }
+        warpage
+        {
+            title "Warpage";
+        }
+        skewness
+        {
+            title "Skewness";
+        }
+        nonOrthogonality
+        {
+            title "Non-orthogonality [deg]";
+        }
+        determinant
+        {
+            title "Determinant";
+        }
+    }
+    scenes
+    {
+    }
+    charts
+    {
+    }
+    displayOptions
+    {
+        background1 ( 0.9372549019607843 0.9372549019607843 0.9372549019607843 );
+        background2 ( 0.8 0.8 0.8 );
+        widgetsColor ( 0.0 0.0 0.0 );
+        showAxes true;
+        showLogo true;
+        cubeAxesOptions
+        {
+            showAxesGrid false;
+            axesGridColor ( 1.0 1.0 1.0 );
+            axesGridLabelColor ( 0.5019607843137255 0.5019607843137255 0.5019607843137255 );
+            showAxesGridTitle false;
+            XAxisTitle "X Axis";
+            YAxisTitle "Y Axis";
+            ZAxisTitle "Z Axis";
+            manualFaceSelect false;
+            showXYmin false;
+            showXYmax false;
+            showYZmin false;
+            showYZmax false;
+            showZXmin false;
+            showZXmax false;
+            useCustomBounds false;
+            XBounds ( 0.0 1.0 );
+            YBounds ( 0.0 1.0 );
+            ZBounds ( 0.0 1.0 );
+            useCustomLabels false;
+            useXDistanceLabel false;
+            useYDistanceLabel false;
+            useZDistanceLabel false;
+            useXDistance 0.0;
+            useYDistance 0.0;
+            useZDistance 0.0;
+        }
+        showTimestep false;
+        timestepLabelFormat "%6.2f [s]";
+        position TOP_RIGHT;
+        timestepLabelFont
+        {
+            font ARIAL;
+            fontSize 12;
+            textColor ( 0.0 0.0 0.0 );
+            textOpacity 1.0;
+            bold false;
+            italics false;
+            shadow false;
+        }
+        vectorWidget
+        {
+            showVectorWidget false;
+            vector bodyAcceleration;
+            vector3DRepOptions
+            {
+                showVector3DRep false;
+                showArrow true;
+                showComponents false;
+                scale 1.0;
+                showTitle false;
+                coordinates ( 0.0 0.7 );
+            }
+            vectorTextRepOptions
+            {
+                showVectorTextRep true;
+                labelFormat "%.2f";
+                fontSize 12;
+                showTextBox false;
+                showTitle true;
+                coordinates ( 0.125 0.7 );
+            }
+        }
+    }
+    colorLegendOptions
+    {
+        visible true;
+        position RIGHT;
+        labelFormat "%6.2f";
+        numberOfLabels 5;
+        thickness 16;
+        height 0.5;
+        vertical true;
+        resolution 256;
+        colorLegendType engys;
+        automaticLabels true;
+        showTicks false;
+        legendLabelFont
+        {
+            font ARIAL;
+            fontSize 12;
+            textColor ( 0.0 0.0 0.0 );
+            textOpacity 1.0;
+            bold false;
+            italics false;
+            shadow false;
+        }
+    }
+

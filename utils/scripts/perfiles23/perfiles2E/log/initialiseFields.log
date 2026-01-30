@@ -1,0 +1,179 @@
+
+Delete Time Folders > 0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0\polyMesh\points0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0\polyMesh\points0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0\polyMesh\points0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0\polyMesh\points0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0\polyMesh\points0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0\polyMesh\points0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0\polyMesh\points0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[CLEARED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0\polyMesh\points0
+Delete Folder
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\postProcessing
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.0                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.0-e875967eab66
+API    : 4.4.0
+Arch   : "LSB;label=32;scalar=64"
+Exec   : caseSetup -parallel -initialiseFields -case D:\AEROFSAE\simulacionesTPP\perfiles2E
+Date   : Jan 29 2026
+Time   : 23:01:35
+Host   : "LAPTOP-JFUJAJ06"
+PID    : 66396
+I/O    : uncollated
+Case   : D:/AEROFSAE/simulacionesTPP/perfiles2E
+nProcs : 8
+Slaves : 
+7
+(
+"LAPTOP-JFUJAJ06.68068"
+"LAPTOP-JFUJAJ06.67980"
+"LAPTOP-JFUJAJ06.53192"
+"LAPTOP-JFUJAJ06.61788"
+"LAPTOP-JFUJAJ06.68020"
+"LAPTOP-JFUJAJ06.54268"
+"LAPTOP-JFUJAJ06.64816"
+)
+
+Pstream initialized with:
+    floatTransfer      : 0
+    nProcsSimpleSum    : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+Create time
+
+
+Defining regions
+================
+region0 : segregatedS
+
+
+Storing existing fields
+=======================
+	k: not found
+	omega: not found
+	nut: not found
+	p: not found
+	U: not found
+	rho: not found
+
+
+
+Creating fields
+===============
+
+region0
+----------------------------------------------------------------------------------------
+CBC modified field k
+
+CBC modified field omega
+
+CBC modified field nut
+
+CBC modified field p
+
+CBC modified field U
+
+
+Initialisation
+--------------
+
+   - U : potentialFlow
+rhoRef is found and set to 1.205
+Creating MRF sources list from fvOptions
+
+No finite volume options present
+   Initialising velocity boundary conditions
+   Switching the absolute flux to relative
+GAMG:  Solving for pPot, Initial residual = 1, Final residual = 0.009858561346, No Iterations 13
+GAMG:  Solving for pPot, Initial residual = 0.002361819943, Final residual = 1.568871415e-05, No Iterations 3
+GAMG:  Solving for pPot, Initial residual = 0.0003322438236, Final residual = 2.442309942e-06, No Iterations 5
+GAMG:  Solving for pPot, Initial residual = 8.877564306e-05, Final residual = 6.605384329e-07, No Iterations 4
+GAMG:  Solving for pPot, Initial residual = 3.071581278e-05, Final residual = 5.992616029e-07, No Iterations 2
+GAMG:  Solving for pPot, Initial residual = 1.255920336e-05, Final residual = 7.735487598e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 5.6951918e-06, Final residual = 5.634770631e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 2.748303923e-06, Final residual = 4.141163024e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 1.489395622e-06, Final residual = 2.998182307e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 8.970512874e-07, Final residual = 2.274538802e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 5.724180649e-07, Final residual = 1.467627392e-07, No Iterations 1
+   Switching the relative flux to absolute
+continuity error = 4.573969896e-05
+   Interpolated Velocity error = 0.0001226993747
+   Updating velocity boundary conditions
+   Switching the absolute flux to relative
+GAMG:  Solving for pPot, Initial residual = 0.003797273902, Final residual = 2.935667859e-05, No Iterations 13
+GAMG:  Solving for pPot, Initial residual = 0.5722186259, Final residual = 0.005449251217, No Iterations 2
+GAMG:  Solving for pPot, Initial residual = 0.0264673897, Final residual = 0.0002137008141, No Iterations 9
+GAMG:  Solving for pPot, Initial residual = 0.004042904059, Final residual = 3.794397818e-05, No Iterations 6
+GAMG:  Solving for pPot, Initial residual = 0.0003446830441, Final residual = 2.576670204e-06, No Iterations 8
+GAMG:  Solving for pPot, Initial residual = 8.994136076e-05, Final residual = 8.218129348e-07, No Iterations 4
+GAMG:  Solving for pPot, Initial residual = 3.410051542e-05, Final residual = 5.139341828e-07, No Iterations 2
+GAMG:  Solving for pPot, Initial residual = 1.470839188e-05, Final residual = 5.87200572e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 6.996991467e-06, Final residual = 4.006986739e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 3.434600286e-06, Final residual = 3.419679554e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 1.810882615e-06, Final residual = 2.898774585e-07, No Iterations 1
+   Switching the relative flux to absolute
+continuity error = 1.609116489e-07
+   Interpolated Velocity error = 4.096080865e-05
+   Updating velocity boundary conditions
+   Switching the absolute flux to relative
+GAMG:  Solving for pPot, Initial residual = 0.2419078139, Final residual = 0.001809761933, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 0.003168385145, Final residual = 2.357565421e-05, No Iterations 7
+GAMG:  Solving for pPot, Initial residual = 0.000711042619, Final residual = 6.765214602e-06, No Iterations 4
+GAMG:  Solving for pPot, Initial residual = 0.0001271652277, Final residual = 1.171110394e-06, No Iterations 5
+GAMG:  Solving for pPot, Initial residual = 5.148075677e-05, Final residual = 6.731396385e-07, No Iterations 2
+GAMG:  Solving for pPot, Initial residual = 2.353317222e-05, Final residual = 8.117833308e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 1.145485308e-05, Final residual = 5.397613335e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 5.730290454e-06, Final residual = 4.630076722e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 3.026442337e-06, Final residual = 3.852104997e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 1.652999886e-06, Final residual = 3.348022046e-07, No Iterations 1
+GAMG:  Solving for pPot, Initial residual = 9.796141966e-07, Final residual = 2.676024208e-07, No Iterations 1
+   Switching the relative flux to absolute
+continuity error = 1.07064132e-07
+   Interpolated Velocity error = 2.98105948e-05
+   Velocity magnitude limited to: 18.1489463
+	Selecting patchDistMethod meshWave
+   Assumed boundary layer thickness: 0.608320447 m
+   - k : turbulentIL
+   - omega : turbulentIL
+   - nut : turbulentIL
+   - p : potentialFlow
+   - rho : equationOfState
+Reading thermophysical properties
+
+
+Material settings
+-----------------
+
+Selecting materials package "fluid".
+pRef [1 -1 -2 0 0 0 0] 101325
+TRef [0 0 0 1 0 0 0] 0
+TConst [0 0 0 1 0 0 0] 300
+
+Solver settings from material properties:
+"isochoric" "incompressible" "constant Cv" "isotropic"
+
+----------------------------------------------------------------------------------------
+
+
+end
+
+Finalising parallel run

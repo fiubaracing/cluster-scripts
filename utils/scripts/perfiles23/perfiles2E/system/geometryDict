@@ -1,0 +1,107 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX(R): Open-source CFD for Enterprise                 |
+|   o   O   o      | Version: v4.4.0                                          |
+|    o     o       | Engys Ltd. http://www.engys.com                          |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location system;
+    object geometryDict;
+}
+    surfaces
+    {
+        VR1
+        {
+            type searchableBox;
+            min ( -7.0 -7.0 -2.0 );
+            max ( 14.0 7.0 2.0 );
+        }
+        VR2
+        {
+            type searchableBox;
+            min ( -5.0 -5.0 -2.0 );
+            max ( 12.0 5.0 2.0 );
+        }
+        VR3
+        {
+            type searchableBox;
+            min ( -4.0 -4.0 -2.0 );
+            max ( 10.0 4.0 2.0 );
+        }
+        VR4
+        {
+            type searchableBox;
+            min ( -3.0 -3.0 -2.0 );
+            max ( 8.0 3.0 2.0 );
+        }
+        VR5
+        {
+            type searchableBox;
+            min ( -2.0 -2.0 -2.0 );
+            max ( 6.0 2.0 2.0 );
+        }
+        VR6
+        {
+            type searchableBox;
+            min ( -1.5 -1.5 -2.0 );
+            max ( 4.0 1.5 2.0 );
+        }
+        VR7
+        {
+            type searchableBox;
+            min ( -1.0 -1.0 -2.0 );
+            max ( 2.0 1.0 2.0 );
+        }
+        domain
+        {
+            type searchableBox;
+            min ( -8.0 -8.0 -2.0 );
+            max ( 16.0 8.0 2.0 );
+        }
+        domain2D_split.stl
+        {
+            type triSurfaceMesh;
+            format ascii;
+            solids ( "Outlet" "Inlet" "Bottom" "Top" );
+        }
+        cylinder
+        {
+            type searchableCylinder;
+            point1 ( -2.0 -0.05 0.0 );
+            point2 ( 2.0 -0.05 0.0 );
+            radius 0.6;
+            resolution 50;
+            transforms
+            (
+                {
+                    type rotate;
+                    linkedFrame true;
+                    aboutPoint ( 0.0 0.0 0.0 );
+                    rollPitchYaw ( 0.0 90.0 0.0 );
+                }
+                {
+                    type translate;
+                    linkedFrame true;
+                    translateVec ( 0.35 0.1 0.0 );
+                }
+            );
+        }
+        flap1.stl
+        {
+            type triSurfaceMesh;
+            format binary;
+            solids ( "solid_1" );
+        }
+        mainPlane.stl
+        {
+            type triSurfaceMesh;
+            format binary;
+            solids ( "solid_1" );
+        }
+    }
+

@@ -1,0 +1,456 @@
+
+Delete Mesh and Processor Folders
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\layerInfo.vtk
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\layerInfo
+[RESET] ProjectDict virtualMesh state
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\constant\regionProperties
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\postProcessing\0
+[RESET] Mesh Statistics
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.0                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.0-e875967eab66
+API    : 4.4.0
+Arch   : "LSB;label=32;scalar=64"
+Exec   : cartesian2DMesh
+Date   : Jan 30 2026
+Time   : 02:48:27
+Host   : "LAPTOP-JFUJAJ06"
+PID    : 67240
+I/O    : uncollated
+Case   : D:/AEROFSAE/simulacionesTPP/perfiles2E
+nProcs : 1
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+--> HELYX Warning : 
+    From function bool Foam::triSurface2DCheck::is2DSurface() const
+    in file ../../src/mesh/cfMesh/meshLibrary/utilities/triSurfaceTools/triSurface2DCheck/triSurface2DCheck.C at line 126
+    z coordinates of the 2D surface are not uniform
+Writting surface with subsets to file badSurfaceWithSubsets.fms
+Setting root cube size and refinement parameters
+Root box ( -16.2 -19.2 -19.11 ) ( 22.2 19.2 19.29 )
+Requested cell size corresponds to octree level 6
+Refining boundary
+Refining boundary boxes to the given size
+Finished refining boundary boxes
+Refining boxes intersecting surface meshes
+Finished refinement of boxes intersecting surface meshes
+Performing automatic refinement
+Performing automatic refinement
+Marking inside/outside.
+Number of internal boxes is 642371
+Number of outside boxes is 1308
+Number of data boxes is 1576
+Number of unknown boxes is 9208
+Refining boxes near DATA boxes
+Marking inside/outside.
+Number of internal boxes is 642377
+Number of outside boxes is 1312
+Number of data boxes is 1578
+Number of unknown boxes is 9208
+Finished refining boxes near DATA boxes
+Extracting polyMesh
+Creating octree vertices
+Octree nodes 1293554
+Resizing points!
+Finished creating octree vertices
+Creating polyMesh from octree
+Reordering boundary faces 
+Finished reordering boundary faces
+Found 1285878 boundary faces 
+Finished creating polyMesh
+Mesh has :
+1291134 vertices 
+2572015 faces
+642149 cells
+Finished extracting polyMesh
+Checking for irregular surface connections
+Checking cells connected to surface vertices
+Found 1285878 boundary faces 
+Found 0 problematic vertices
+Finished checking cells connected to surface vertices
+Checking for non-manifold surface edges
+Found 0 non-manifold edges
+Finished checking for non-manifold surface edges
+Checking faces connections to surface vertices
+Found 0 invalid connections
+Finished checking faces connections to surface vertices
+Finished checking for irregular surface connections
+Found 1285878 boundary faces 
+Found 0 non-mappable cells
+Checking cell connections
+Finished checking cell connections
+Found 1285878 boundary faces 
+Marked 0 faces for decomposition
+Found 1285878 boundary faces 
+Found 0 corners at the surface of the volume mesh
+Found 3160 edge points at the surface of the volume mesh
+Smoothing mesh surface before mapping. Iteration:..
+Found 1285878 boundary faces 
+Found 8 corners at the surface of the volume mesh
+Found 3152 edge points at the surface of the volume mesh
+Found 1285878 boundary faces 
+Found 8 corners at the surface of the volume mesh
+Found 3152 edge points at the surface of the volume mesh
+Found 8 corners at the surface of the volume mesh
+Found 3152 edge points at the surface of the volume mesh
+Optimizing edges. Iteration:.....
+Optimizing surface vertices. Iteration:.....
+Iteration 0. Number of bad faces 0
+Found 1285878 boundary faces 
+Found 8 corners at the surface of the volume mesh
+Found 3152 edge points at the surface of the volume mesh
+Found 8 corners at the surface of the volume mesh
+Found 3152 edge points at the surface of the volume mesh
+Resizing points!
+Starting creating layer cells
+Adding 1584 cells to the mesh
+Finished adding cells to the mesh
+Reordering boundary faces 
+Finished reordering boundary faces
+Finished creating layer cells
+Found 1289054 boundary faces 
+Found 8 corners at the surface of the volume mesh
+Found 3168 edge points at the surface of the volume mesh
+Found 8 corners at the surface of the volume mesh
+Found 3168 edge points at the surface of the volume mesh
+Optimizing edges. Iteration:.....
+Optimizing surface vertices. Iteration:.....
+Iteration 0. Number of bad faces 0
+Starting refining boundary layers
+Found 1289054 boundary faces 
+Found 8 corners at the surface of the volume mesh
+Found 3168 edge points at the surface of the volume mesh
+Detecting layers
+Analysing mesh for bnd layer existence
+Generating hair edges
+Finished with bnd layer detection
+Finished refining boundary-layer faces 
+Number of newly generated cells 12150
+Finished generating new cells 
+Finished refining boundary layers
+Found 1313354 boundary faces 
+Found 8 corners at the surface of the volume mesh
+Found 3168 edge points at the surface of the volume mesh
+Error in face pyramids: 2 faces pointing the wrong way!
+6 zero or negative part tetrahedra detected.
+Iteration 0. Number of bad faces 6
+Iteration 1. Number of bad faces 0
+Renumbering the mesh
+Finished renumbering the mesh
+ExecutionTime = 72.934 s
+ClockTime = 73 s
+End
+
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.0                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.0-e875967eab66
+API    : 4.4.0
+Arch   : "LSB;label=32;scalar=64"
+Exec   : decomposePar -noFunctionObjects -time  -case D:\AEROFSAE\simulacionesTPP\perfiles2E
+Date   : Jan 30 2026
+Time   : 02:49:46
+Host   : "LAPTOP-JFUJAJ06"
+PID    : 66292
+I/O    : uncollated
+Case   : D:/AEROFSAE/simulacionesTPP/perfiles2E
+nProcs : 1
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+rejected ill-formed or empty range: ERROR--> HELYX Warning : 
+    From function Foam::Ostream& Foam::operator<<(Foam::Ostream&, const Foam::token&)
+    in file ../../src/OpenFOAM/db/IOstreams/token/tokenIO.C at line 97
+    Error token
+
+--> HELYX Warning : 
+    From function static Foam::instantList Foam::timeSelector::select0(Foam::Time&, const Foam::argList&)
+    in file ../../src/OpenFOAM/db/Time/timeSelector.C at line 276
+    No time specified or available, selecting 'constant'
+
+
+Decomposing mesh region0
+
+Create mesh
+
+Calculating distribution of cells
+Selecting decompositionMethod scotch
+
+Finished decomposition in 0.609 s
+
+Calculating original mesh data
+
+Distributing cells to processors
+
+Distributing faces to processors
+
+Distributing points to processors
+
+Constructing processor meshes
+
+Processor 0
+    Number of cells = 81927
+    Number of faces shared with processor 1 = 295
+    Number of faces shared with processor 2 = 303
+    Number of faces shared with processor 4 = 29
+    Number of faces shared with processor 5 = 396
+    Number of faces shared with processor 6 = 382
+    Number of processor patches = 5
+    Number of processor faces = 1405
+    Number of boundary faces = 163854
+
+Processor 1
+    Number of cells = 82037
+    Number of faces shared with processor 0 = 295
+    Number of faces shared with processor 2 = 306
+    Number of faces shared with processor 3 = 242
+    Number of faces shared with processor 4 = 102
+    Number of faces shared with processor 6 = 253
+    Number of faces shared with processor 7 = 79
+    Number of processor patches = 6
+    Number of processor faces = 1277
+    Number of boundary faces = 164074
+
+Processor 2
+    Number of cells = 81829
+    Number of faces shared with processor 0 = 303
+    Number of faces shared with processor 1 = 306
+    Number of faces shared with processor 3 = 445
+    Number of faces shared with processor 4 = 61
+    Number of processor patches = 4
+    Number of processor faces = 1115
+    Number of boundary faces = 163671
+
+Processor 3
+    Number of cells = 81864
+    Number of faces shared with processor 1 = 242
+    Number of faces shared with processor 2 = 445
+    Number of faces shared with processor 4 = 50
+    Number of processor patches = 3
+    Number of processor faces = 737
+    Number of boundary faces = 163874
+
+Processor 4
+    Number of cells = 82137
+    Number of faces shared with processor 0 = 29
+    Number of faces shared with processor 1 = 102
+    Number of faces shared with processor 2 = 61
+    Number of faces shared with processor 3 = 50
+    Number of faces shared with processor 5 = 480
+    Number of faces shared with processor 7 = 274
+    Number of processor patches = 6
+    Number of processor faces = 996
+    Number of boundary faces = 164353
+
+Processor 5
+    Number of cells = 82180
+    Number of faces shared with processor 0 = 396
+    Number of faces shared with processor 4 = 480
+    Number of faces shared with processor 6 = 166
+    Number of faces shared with processor 7 = 307
+    Number of processor patches = 4
+    Number of processor faces = 1349
+    Number of boundary faces = 164360
+
+Processor 6
+    Number of cells = 81934
+    Number of faces shared with processor 0 = 382
+    Number of faces shared with processor 1 = 253
+    Number of faces shared with processor 5 = 166
+    Number of faces shared with processor 7 = 455
+    Number of processor patches = 4
+    Number of processor faces = 1256
+    Number of boundary faces = 164746
+
+Processor 7
+    Number of cells = 81975
+    Number of faces shared with processor 1 = 79
+    Number of faces shared with processor 4 = 274
+    Number of faces shared with processor 5 = 307
+    Number of faces shared with processor 6 = 455
+    Number of processor patches = 4
+    Number of processor faces = 1115
+    Number of boundary faces = 164422
+
+Number of processor faces = 4625
+Max number of cells = 82180 (0.2373899003% above average 81985.375)
+Max number of processor patches = 6 (33.33333333% above average 4.5)
+Max number of faces between processors = 1405 (21.51351351% above average 1156.25)
+
+Time = constant
+
+Processor 0: field transfer
+Processor 1: field transfer
+Processor 2: field transfer
+Processor 3: field transfer
+Processor 4: field transfer
+Processor 5: field transfer
+Processor 6: field transfer
+Processor 7: field transfer
+
+End
+
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.0                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.0-e875967eab66
+API    : 4.4.0
+Arch   : "LSB;label=32;scalar=64"
+Exec   : checkMesh -parallel -case D:\AEROFSAE\simulacionesTPP\perfiles2E
+Date   : Jan 30 2026
+Time   : 02:49:50
+Host   : "LAPTOP-JFUJAJ06"
+PID    : 66512
+I/O    : uncollated
+Case   : D:/AEROFSAE/simulacionesTPP/perfiles2E
+nProcs : 8
+Slaves : 
+7
+(
+"LAPTOP-JFUJAJ06.68728"
+"LAPTOP-JFUJAJ06.65524"
+"LAPTOP-JFUJAJ06.70460"
+"LAPTOP-JFUJAJ06.38032"
+"LAPTOP-JFUJAJ06.25784"
+"LAPTOP-JFUJAJ06.50580"
+"LAPTOP-JFUJAJ06.66872"
+)
+
+Pstream initialized with:
+    floatTransfer      : 0
+    nProcsSimpleSum    : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+--> HELYX Warning : 
+    From function static Foam::instantList Foam::timeSelector::select0(Foam::Time&, const Foam::argList&)
+    in file ../../src/OpenFOAM/db/Time/timeSelector.C at line 276
+    No time specified or available, selecting 'constant'
+Checking mesh for region : region0
+
+Time = constant
+
+Mesh stats
+    points:           1318610
+    internal points:  0
+    faces:            2626955
+    internal faces:   1313601
+    cells:            655883
+    faces per cell:   6.008016674
+    boundary patches: 8
+    point zones:      0
+    face zones:       0
+    cell zones:       0
+
+Overall number of cells of each type:
+    hexahedra:     651089
+    prisms:        0
+    wedges:        0
+    pyramids:      0
+    tet wedges:    0
+    tetrahedra:    0
+    polyhedra:     4794
+    Breakdown of polyhedra by number of faces:
+        faces   number of cells
+            7   4330
+            8   464
+
+Checking topology...
+    Boundary definition OK.
+ ***Total number of faces on empty patches is not divisible by the number of cells in the mesh. Hence this mesh is not 1D or 2D.
+    Cell to face addressing OK.
+    Point usage OK.
+    Upper triangular ordering OK.
+    Face vertices OK.
+    Number of regions: 1 (OK).
+    Processor balance 0.9957288878
+
+Checking basic patch addressing...
+ Patch            Faces     Points    Area           Normal        
+ Outlet           78        158       2.160000086    (         1 0 0 )
+ Inlet            40        82        2.160000086    (         -1 0 0 )
+ Bottom           60        126       3.240000129    (         0 -1 0 )
+ Top              60        124       3.240000129    (         0 1 0 )
+ flap1            486       972       0.07693123793  (         2.378216204e-17 -4.756432407e-18 0 )
+ mainPlane        864       1732      0.1499743134   (         -1.041012353e-16 2.776032941e-16 0 )
+ bottomEmptyFaces 655883    663938    215.9839974    (         0 0 -1 )
+ topEmptyFaces    655883    663938    215.9839974    (         0 0 1 )
+
+Checking geometry...
+    Overall domain bounding box ( -6 -6 0 ) ( 12 6 0.1800000072 )
+    Overall domain volume 38.87712107
+    Mesh has 0 geometric (non-empty/wedge) directions ( 0 0 0 )
+    Mesh has 0 solution (non-empty) directions ( 0 0 0 )
+ ***Number of edges not aligned with or perpendicular to non-empty directions: 1374824
+  <<Writing 1199534 points on non-aligned edges to set nonAlignedEdges
+    Boundary openness ( -5.67846894e-18 -1.613143407e-18 -4.924477819e-15 ) OK.
+    Max cell openness = 1.087437123e-15 OK.
+    Max aspect ratio = -1 OK.
+    Minimum face area = 1.302772405e-09. Maximum face area = 0.1329067812.  Face area magnitudes OK.
+    Min volume = 2.344990422e-10. Max volume = 0.02392322157.  Total volume = 38.87712107.  Cell volumes OK.
+    Mesh non-orthogonality Max: 74.02789879 average: 0.2348690287
+   *Number of severely non-orthogonal (> 70 degrees) faces: 1.
+    Non-orthogonality check OK.
+  <<Writing 1 non-orthogonal faces to set nonOrthoFaces
+    Face pyramids OK.
+    Max skewness = 2.460396306 OK.
+    Coupled point location match (average 0) OK.
+
+Warning in 1 mesh checks.
+
+End
+
+Finalising parallel run

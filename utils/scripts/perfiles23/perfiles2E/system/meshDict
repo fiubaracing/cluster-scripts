@@ -1,0 +1,114 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX(R): Open-source CFD for Enterprise                 |
+|   o   O   o      | Version: v4.4.0                                          |
+|    o     o       | Engys Ltd. http://www.engys.com                          |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location system;
+    object meshDict;
+}
+    localRefinement
+    {
+        mainPlane
+        {
+            additionalRefinementLevels 9;
+            refinementThickness 0.01;
+        }
+        flap1
+        {
+            additionalRefinementLevels 9;
+            refinementThickness 0.01;
+        }
+        Outlet
+        {
+            parentName "domain2D_split";
+            additionalRefinementLevels 0;
+        }
+        Inlet
+        {
+            parentName "domain2D_split";
+            additionalRefinementLevels 0;
+        }
+        Bottom
+        {
+            parentName "domain2D_split";
+            additionalRefinementLevels 0;
+        }
+        Top
+        {
+            parentName "domain2D_split";
+            additionalRefinementLevels 0;
+        }
+    }
+    surfaceMeshRefinement
+    {
+        VR7
+        {
+            additionalRefinementLevels 7;
+            surfaceFile "constant/triSurface/VR7.stl";
+        }
+        cylinder
+        {
+            additionalRefinementLevels 8;
+            surfaceFile "constant/triSurface/cylinder.stl";
+        }
+        VR1
+        {
+            additionalRefinementLevels 1;
+            surfaceFile "constant/triSurface/VR1.stl";
+        }
+        VR4
+        {
+            additionalRefinementLevels 4;
+            surfaceFile "constant/triSurface/VR4.stl";
+        }
+        VR3
+        {
+            additionalRefinementLevels 3;
+            surfaceFile "constant/triSurface/VR3.stl";
+        }
+        VR5
+        {
+            additionalRefinementLevels 5;
+            surfaceFile "constant/triSurface/VR5.stl";
+        }
+        VR6
+        {
+            additionalRefinementLevels 6;
+            surfaceFile "constant/triSurface/VR6.stl";
+        }
+        VR2
+        {
+            additionalRefinementLevels 2;
+            surfaceFile "constant/triSurface/VR2.stl";
+        }
+    }
+    boundaryLayers
+    {
+        patchBoundaryLayers
+        {
+            mainPlane
+            {
+                nLayers 10;
+                thicknessRatio 1.3;
+                maxFirstLayerThickness 2.0E-5;
+                allowDiscontinuity true;
+            }
+            flap1
+            {
+                nLayers 10;
+                thicknessRatio 1.3;
+                maxFirstLayerThickness 2.0E-5;
+                allowDiscontinuity true;
+            }
+        }
+    }
+    surfaceFile "constant/triSurface/2Dmesh/2DmeshSurfaces.ebs";
+    maxCellSize 0.9;
+

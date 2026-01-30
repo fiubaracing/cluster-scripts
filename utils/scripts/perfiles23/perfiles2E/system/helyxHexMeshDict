@@ -1,0 +1,154 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX(R): Open-source CFD for Enterprise                 |
+|   o   O   o      | Version: v4.4.0                                          |
+|    o     o       | Engys Ltd. http://www.engys.com                          |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location system;
+    object helyxHexMeshDict;
+}
+    castellatedMesh true;
+    snap true;
+    addLayers true;
+    blockType auto;
+    blockData ( 0.01 0 );
+    crackDetection false;
+    crackTol 0.05;
+    allowTopoChanges true;
+    finalDecomposition ptscotch;
+    meshMode quality;
+    geometry
+    {
+    }
+    castellatedMeshControls
+    {
+        features ( );
+        refinementSurfaces
+        {
+        }
+        refinementRegions
+        {
+        }
+        locationInMesh ( 0 0 0 );
+        maxLocalCells 250000000;
+        maxGlobalCells 1000000000;
+        minRefinementCells 100;
+        maxLoadUnbalance 0.10;
+        nCellsBetweenLevels 2;
+        resolveFeatureAngle -60.;
+        featureRefineAngle 20.;
+        refineSurfaceBoundary false;
+        minBaffleAngle -60.;
+        allowFreeStandingZoneFaces false;
+        balanceThenRefine true;
+        nGapRefinements 0;
+        minZoneRegionSize 1;
+        additionalInsideCheck false;
+        moveCentroidsTol -1;
+        interfaceRefine true;
+        splitCells false;
+        wrapper
+        {
+            wrap false;
+            cutoff 1000.;
+            sigma 3.0;
+            volSources true;
+            volDistance 1.0;
+            meshInMM false;
+            maxIter 200;
+            writeFields false;
+            invert false;
+        }
+    }
+    snapControls
+    {
+        featureEdges
+        {
+        }
+        nOuterIter 1;
+        nPreFeatureIter 0;
+        nSolveIter 10;
+        nFeatureIter 60;
+        globalFeatureEdges true;
+        globalRegionSnap false;
+        nSmoothPatch 2;
+        tolerance 4.0;
+        nRelaxIter 5;
+        zoneFeatureSnapping true;
+        directFeatureSnapping true;
+        geometryFeatureLines true;
+        snapSurfBoundary true;
+        collapseTol 0.25;
+        enlargeStencil false;
+        smoothSnappedSurface true;
+        featureSnapChecks true;
+        concaveTol 0.3;
+        nSliverSmooths 10;
+        mergeBoundaryFaces true;
+    }
+    addLayersControls
+    {
+        layers
+        {
+        }
+        expansionRatio 1.25;
+        finalLayerThickness 0.4;
+        minThickness 0.2;
+        featureAngleMerge 45;
+        featureAngleTerminate 80;
+        nRelaxIter 5;
+        maxFaceThicknessRatio 2.0;
+        maxThicknessToMedialRatio 0.3;
+        minMedialAxisAngle 90;
+        maxLayerIter 30;
+        growConvexEdge true;
+        growConcaveEdge true;
+        growUpPatches true;
+        rebalance false;
+        layerRecovery 1;
+        nSmoothThickness 10;
+        nSmoothSurfaceNormals 6;
+        nSmoothNormals 3;
+        maxProjectionDistance 1E15;
+        maxCellDistortion 50;
+        medialRatioExp 1;
+        growZoneLayers false;
+        writeVTK true;
+    }
+    meshQualityControls
+    {
+        maxNonOrtho 70;
+        maxFaceCentreNonOrtho 180;
+        maxBoundarySkewness 20;
+        maxInternalSkewness 6;
+        maxConcave 80;
+        minFlatness 0.5;
+        minVol 1e-16;
+        minTetQuality -1e30;
+        minArea 1e-13;
+        minEdgeLength -1;
+        minTwist 0.05;
+        minDeterminant 0.0001;
+        minFaceWeight 0.08;
+        minVolRatio 0.02;
+        minTriangleTwist -0.99;
+        nSmoothScale 10;
+        errorReduction 0.75;
+        minVolCollapseRatio -1;
+        faceFaceCells false;
+        minSnapRelativeVolume -1;
+        minSnapRelativeTetVolume -1;
+        maxGaussGreenCentroid -1;
+        maxCellAspectRatio -1;
+        smoothAlignedEdges true;
+        nVolSmoothIter 8;
+    }
+    debug 0;
+    mergeTolerance 1E-6;
+

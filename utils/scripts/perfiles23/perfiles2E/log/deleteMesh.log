@@ -1,0 +1,41 @@
+
+Delete Mesh and Processor Folders
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\layerInfo.vtk
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\layerInfo
+[RESET] ProjectDict virtualMesh state
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\constant\regionProperties
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\system\boundaryConditions\k
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\system\boundaryConditions\nut
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\system\boundaryConditions\omega
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\system\boundaryConditions\p
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\system\boundaryConditions\U
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\constant\polyMesh
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7
+[DELETED] D:\AEROFSAE\simulacionesTPP\perfiles2E\postProcessing\0
+[RESET] Mesh Statistics

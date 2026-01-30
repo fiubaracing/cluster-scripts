@@ -1,0 +1,401 @@
+
+/*---------------------------------------------------------------------------*\
+|       o        |                                                            |
+|    o     o     |  HELYX (R) : Open-source CFD for Enterprise                |
+|   o   O   o    |  Version : 4.4.0                                           |
+|    o     o     |  ENGYS Ltd. <http://engys.com/>                            |
+|       o        |                                                            |
+\*---------------------------------------------------------------------------*/
+Build  : 4.4.0-e875967eab66
+API    : 4.4.0
+Arch   : "LSB;label=32;scalar=64"
+Exec   : checkMesh -constant -writeAllMetrics -parallel -case D:\AEROFSAE\simulacionesTPP\perfiles2E
+Date   : Jan 30 2026
+Time   : 02:50:03
+Host   : "LAPTOP-JFUJAJ06"
+PID    : 70332
+I/O    : uncollated
+Case   : D:/AEROFSAE/simulacionesTPP/perfiles2E
+nProcs : 8
+Slaves : 
+7
+(
+"LAPTOP-JFUJAJ06.65096"
+"LAPTOP-JFUJAJ06.43404"
+"LAPTOP-JFUJAJ06.65292"
+"LAPTOP-JFUJAJ06.67448"
+"LAPTOP-JFUJAJ06.66624"
+"LAPTOP-JFUJAJ06.69752"
+"LAPTOP-JFUJAJ06.69016"
+)
+
+Pstream initialized with:
+    floatTransfer      : 0
+    nProcsSimpleSum    : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Outputting All metric fields: 
+8
+(
+nonOrthogonality
+pyramids
+skewness
+weights
+volumeRatio
+determinant
+warpage
+aspectRatio
+)
+
+Checking mesh for region : region0
+
+Time = constant
+
+Mesh stats
+    points:           1318610
+    internal points:  0
+    faces:            2626955
+    internal faces:   1313601
+    cells:            655883
+    faces per cell:   6.008016674
+    boundary patches: 8
+    point zones:      0
+    face zones:       0
+    cell zones:       0
+
+Overall number of cells of each type:
+    hexahedra:     651089
+    prisms:        0
+    wedges:        0
+    pyramids:      0
+    tet wedges:    0
+    tetrahedra:    0
+    polyhedra:     4794
+    Breakdown of polyhedra by number of faces:
+        faces   number of cells
+            7   4330
+            8   464
+
+Checking topology...
+    Boundary definition OK.
+    Cell to face addressing OK.
+    Point usage OK.
+    Upper triangular ordering OK.
+    Face vertices OK.
+    Number of regions: 1 (OK).
+    Processor balance 0.9957288878
+
+Checking basic patch addressing...
+ Patch            Faces     Points    Area           Normal        
+ Outlet           78        158       2.160000086    (         1 0 0 )
+ Inlet            40        82        2.160000086    (         -1 0 0 )
+ Bottom           60        126       3.240000129    (         0 -1 0 )
+ Top              60        124       3.240000129    (         0 1 0 )
+ flap1            486       972       0.07693123793  (         2.378216204e-17 -4.756432407e-18 0 )
+ mainPlane        864       1732      0.1499743134   (         -1.041012353e-16 2.776032941e-16 0 )
+ bottomEmptyFaces 655883    663938    215.9839974    (         0 0 -1 )
+ topEmptyFaces    655883    663938    215.9839974    (         0 0 1 )
+
+Checking geometry...
+    Overall domain bounding box ( -6 -6 0 ) ( 12 6 0.1800000072 )
+    Overall domain volume 38.87712107
+    Mesh has 2 geometric (non-empty/wedge) directions ( 1 1 0 )
+    Mesh has 2 solution (non-empty) directions ( 1 1 0 )
+    All edges aligned with or perpendicular to non-empty directions.
+    Boundary openness ( -5.67846894e-18 -1.613143407e-18 -4.924477819e-15 ) OK.
+    Max cell openness = 1.087437123e-15 OK.
+    Max aspect ratio = 58.03666731 OK.
+    Minimum face area = 1.302772405e-09. Maximum face area = 0.1329067812.  Face area magnitudes OK.
+    Min volume = 2.344990422e-10. Max volume = 0.02392322157.  Total volume = 38.87712107.  Cell volumes OK.
+    Mesh non-orthogonality Max: 74.02789879 average: 0.2348690287
+   *Number of severely non-orthogonal (> 70 degrees) faces: 1.
+    Non-orthogonality check OK.
+  <<Writing 1 non-orthogonal faces to set nonOrthoFaces
+    Face pyramids OK.
+    Max skewness = 2.460396306 OK.
+    Coupled point location match (average 0) OK.
+  <<Writing 13049 faces in error to set meshQualityFaces
+
+Outputting mesh quality fields... 
+
+Writing field: nonOrthogonality
+
+Calculating nonOrthogonality mesh statistics : 
+ Min : 0 Max : 74.02789879 Ave : 0.2348690287 Std Dev : 1.362989763
+
+Interval, frequency, percentage
+-------------------------------
+0 - 3.701394939 ( 1290421 / 1313601 ) 98.23538502 % 
+3.701394939 - 7.402789879 ( 12127 / 1313601 ) 0.9231874823 % 
+7.402789879 - 11.10418482 ( 5813 / 1313601 ) 0.4425240237 % 
+11.10418482 - 14.80557976 ( 2797 / 1313601 ) 0.2129261473 % 
+14.80557976 - 18.5069747 ( 1374 / 1313601 ) 0.1045979715 % 
+18.5069747 - 22.20836964 ( 511 / 1313601 ) 0.0389007012 % 
+22.20836964 - 25.90976458 ( 368 / 1313601 ) 0.02801459499 % 
+25.90976458 - 29.61115951 ( 137 / 1313601 ) 0.01042934651 % 
+29.61115951 - 33.31255445 ( 18 / 1313601 ) 0.001370279103 % 
+33.31255445 - 37.01394939 ( 9 / 1313601 ) 0.0006851395515 % 
+37.01394939 - 40.71534433 ( 7 / 1313601 ) 0.0005328863178 % 
+40.71534433 - 44.41673927 ( 6 / 1313601 ) 0.000456759701 % 
+44.41673927 - 48.11813421 ( 5 / 1313601 ) 0.0003806330842 % 
+48.11813421 - 51.81952915 ( 1 / 1313601 ) 7.612661683e-05 % 
+51.81952915 - 55.52092409 ( 3 / 1313601 ) 0.0002283798505 % 
+55.52092409 - 59.22231903 ( 2 / 1313601 ) 0.0001522532337 % 
+59.22231903 - 62.92371397 ( 0 / 1313601 ) 0 % 
+62.92371397 - 66.62510891 ( 1 / 1313601 ) 7.612661683e-05 % 
+66.62510891 - 70.32650385 ( 0 / 1313601 ) 0 % 
+70.32650385 - 74.02789879 ( 1 / 1313601 ) 7.612661683e-05 % 
+
+Writing field: pyramids
+
+Calculating pyramids mesh statistics : 
+ Min : 2.142594016e-11 Max : 0.003987203595 Ave : 9.865897369e-06 Std Dev : 8.644314731e-05
+
+Interval, frequency, percentage
+-------------------------------
+2.142594016e-11 - 0.0001993602001 ( 3921236 / 3940556 ) 99.50971386 % 
+0.0001993602001 - 0.0003987203788 ( 10 / 3940556 ) 0.0002537712952 % 
+0.0003987203788 - 0.0005980805575 ( 1790 / 3940556 ) 0.04542506184 % 
+0.0005980805575 - 0.0007974407362 ( 14612 / 3940556 ) 0.3708106166 % 
+0.0007974407362 - 0.0009968009149 ( 0 / 3940556 ) 0 % 
+0.0009968009149 - 0.001196161094 ( 0 / 3940556 ) 0 % 
+0.001196161094 - 0.001395521272 ( 8 / 3940556 ) 0.0002030170362 % 
+0.001395521272 - 0.001594881451 ( 14 / 3940556 ) 0.0003552798133 % 
+0.001594881451 - 0.00179424163 ( 272 / 3940556 ) 0.00690257923 % 
+0.00179424163 - 0.001993601808 ( 22 / 3940556 ) 0.0005582968495 % 
+0.001993601808 - 0.002192961987 ( 42 / 3940556 ) 0.00106583944 % 
+0.002192961987 - 0.002392322166 ( 60 / 3940556 ) 0.001522627771 % 
+0.002392322166 - 0.002591682344 ( 716 / 3940556 ) 0.01817002474 % 
+0.002591682344 - 0.002791042523 ( 815 / 3940556 ) 0.02068236056 % 
+0.002791042523 - 0.002990402702 ( 491 / 3940556 ) 0.0124601706 % 
+0.002990402702 - 0.003189762881 ( 410 / 3940556 ) 0.0104046231 % 
+0.003189762881 - 0.003389123059 ( 44 / 3940556 ) 0.001116593699 % 
+0.003389123059 - 0.003588483238 ( 8 / 3940556 ) 0.0002030170362 % 
+0.003588483238 - 0.003787843417 ( 2 / 3940556 ) 5.075425904e-05 % 
+0.003787843417 - 0.003987203595 ( 4 / 3940556 ) 0.0001015085181 % 
+
+Writing field: skewness
+
+Calculating skewness mesh statistics : 
+ Min : 0 Max : 2.460396306 Ave : 0.0007867084315 Std Dev : 0.02866752522
+
+Interval, frequency, percentage
+-------------------------------
+0 - 0.1230198153 ( 2625933 / 2626955 ) 99.96109564 % 
+0.1230198153 - 0.2460396306 ( 94 / 2626955 ) 0.003578287409 % 
+0.2460396306 - 0.3690594459 ( 51 / 2626955 ) 0.001941411254 % 
+0.3690594459 - 0.4920792612 ( 68 / 2626955 ) 0.002588548338 % 
+0.4920792612 - 0.6150990765 ( 94 / 2626955 ) 0.003578287409 % 
+0.6150990765 - 0.7381188918 ( 29 / 2626955 ) 0.001103939733 % 
+0.7381188918 - 0.8611387071 ( 2 / 2626955 ) 7.613377466e-05 % 
+0.8611387071 - 0.9841585224 ( 2 / 2626955 ) 7.613377466e-05 % 
+0.9841585224 - 1.107178338 ( 2 / 2626955 ) 7.613377466e-05 % 
+1.107178338 - 1.230198153 ( 11 / 2626955 ) 0.0004187357606 % 
+1.230198153 - 1.353217968 ( 19 / 2626955 ) 0.0007232708592 % 
+1.353217968 - 1.476237784 ( 47 / 2626955 ) 0.001789143704 % 
+1.476237784 - 1.599257599 ( 183 / 2626955 ) 0.006966240381 % 
+1.599257599 - 1.722277414 ( 111 / 2626955 ) 0.004225424493 % 
+1.722277414 - 1.845297229 ( 89 / 2626955 ) 0.003387952972 % 
+1.845297229 - 1.968317045 ( 108 / 2626955 ) 0.004111223831 % 
+1.968317045 - 2.09133686 ( 41 / 2626955 ) 0.00156074238 % 
+2.09133686 - 2.214356675 ( 34 / 2626955 ) 0.001294274169 % 
+2.214356675 - 2.337376491 ( 33 / 2626955 ) 0.001256207282 % 
+2.337376491 - 2.460396306 ( 4 / 2626955 ) 0.0001522675493 % 
+
+Writing field: weights
+
+Calculating weights mesh statistics : 
+ Min : 0.05536268991 Max : 0.5 Ave : 0.4963519411 Std Dev : 0.02498799992
+
+Interval, frequency, percentage
+-------------------------------
+0.05536268991 - 0.07759455541 ( 3 / 1313601 ) 0.0002283798505 % 
+0.07759455541 - 0.09982642092 ( 5 / 1313601 ) 0.0003806330842 % 
+0.09982642092 - 0.1220582864 ( 4 / 1313601 ) 0.0003045064673 % 
+0.1220582864 - 0.1442901519 ( 4 / 1313601 ) 0.0003045064673 % 
+0.1442901519 - 0.1665220174 ( 394 / 1313601 ) 0.02999388703 % 
+0.1665220174 - 0.1887538829 ( 197 / 1313601 ) 0.01499694352 % 
+0.1887538829 - 0.2109857484 ( 309 / 1313601 ) 0.0235231246 % 
+0.2109857484 - 0.2332176139 ( 217 / 1313601 ) 0.01651947585 % 
+0.2332176139 - 0.2554494794 ( 1492 / 1313601 ) 0.1135809123 % 
+0.2554494794 - 0.277681345 ( 9281 / 1313601 ) 0.7065311308 % 
+0.277681345 - 0.2999132105 ( 105 / 1313601 ) 0.007993294768 % 
+0.2999132105 - 0.322145076 ( 111 / 1313601 ) 0.008450054469 % 
+0.322145076 - 0.3443769415 ( 183 / 1313601 ) 0.01393117088 % 
+0.3443769415 - 0.366608807 ( 307 / 1313601 ) 0.02337087137 % 
+0.366608807 - 0.3888406725 ( 238 / 1313601 ) 0.01811813481 % 
+0.3888406725 - 0.411072538 ( 742 / 1313601 ) 0.05648594969 % 
+0.411072538 - 0.4333044035 ( 2321 / 1313601 ) 0.1766898777 % 
+0.4333044035 - 0.455536269 ( 11609 / 1313601 ) 0.8837538948 % 
+0.455536269 - 0.4777681345 ( 3584 / 1313601 ) 0.2728377947 % 
+0.4777681345 - 0.5 ( 1282495 / 1313601 ) 97.63200546 % 
+
+Writing field: volumeRatio
+
+Calculating volumeRatio mesh statistics : 
+ Min : 0.04769338848 Max : 1 Ave : 0.9867659079 Std Dev : 0.08284013346
+
+Interval, frequency, percentage
+-------------------------------
+0.04769338848 - 0.09530871906 ( 6 / 1313601 ) 0.000456759701 % 
+0.09530871906 - 0.1429240496 ( 13 / 1313601 ) 0.0009896460188 % 
+0.1429240496 - 0.1905393802 ( 3281 / 1313601 ) 0.2497714298 % 
+0.1905393802 - 0.2381547108 ( 8018 / 1313601 ) 0.6103832138 % 
+0.2381547108 - 0.2857700414 ( 316 / 1313601 ) 0.02405601092 % 
+0.2857700414 - 0.3333853719 ( 200 / 1313601 ) 0.01522532337 % 
+0.3333853719 - 0.3810007025 ( 143 / 1313601 ) 0.01088610621 % 
+0.3810007025 - 0.4286160331 ( 133 / 1313601 ) 0.01012484004 % 
+0.4286160331 - 0.4762313637 ( 160 / 1313601 ) 0.01218025869 % 
+0.4762313637 - 0.5238466942 ( 319 / 1313601 ) 0.02428439077 % 
+0.5238466942 - 0.5714620248 ( 651 / 1313601 ) 0.04955842756 % 
+0.5714620248 - 0.6190773554 ( 534 / 1313601 ) 0.04065161339 % 
+0.6190773554 - 0.666692686 ( 815 / 1313601 ) 0.06204319272 % 
+0.666692686 - 0.7143080165 ( 1050 / 1313601 ) 0.07993294768 % 
+0.7143080165 - 0.7619233471 ( 3666 / 1313601 ) 0.2790801773 % 
+0.7619233471 - 0.8095386777 ( 9979 / 1313601 ) 0.7596675094 % 
+0.8095386777 - 0.8571540083 ( 1544 / 1313601 ) 0.1175394964 % 
+0.8571540083 - 0.9047693388 ( 3832 / 1313601 ) 0.2917171957 % 
+0.9047693388 - 0.9523846694 ( 15897 / 1313601 ) 1.210184828 % 
+0.9523846694 - 1 ( 1263044 / 1313601 ) 96.15126663 % 
+
+Writing field: determinant
+
+Calculating determinant mesh statistics : 
+ Min : 1.274035903e-05 Max : 0.9942258978 Ave : 0.127981017 Std Dev : 0.1434901453
+
+Interval, frequency, percentage
+-------------------------------
+1.274035903e-05 - 0.04972339823 ( 228767 / 655883 ) 34.87923913 % 
+0.04972339823 - 0.09943405611 ( 222922 / 655883 ) 33.98807409 % 
+0.09943405611 - 0.149144714 ( 1824 / 655883 ) 0.2780983804 % 
+0.149144714 - 0.1988553719 ( 120642 / 655883 ) 18.39382939 % 
+0.1988553719 - 0.2485660297 ( 4 / 655883 ) 0.0006098648692 % 
+0.2485660297 - 0.2982766876 ( 3840 / 655883 ) 0.5854702744 % 
+0.2982766876 - 0.3479873455 ( 41246 / 655883 ) 6.288621599 % 
+0.3479873455 - 0.3976980033 ( 4 / 655883 ) 0.0006098648692 % 
+0.3976980033 - 0.4474086612 ( 0 / 655883 ) 0 % 
+0.4474086612 - 0.4971193191 ( 924 / 655883 ) 0.1408787848 % 
+0.4971193191 - 0.546829977 ( 24396 / 655883 ) 3.719565837 % 
+0.546829977 - 0.5965406348 ( 0 / 655883 ) 0 % 
+0.5965406348 - 0.6462512927 ( 4 / 655883 ) 0.0006098648692 % 
+0.6462512927 - 0.6959619506 ( 0 / 655883 ) 0 % 
+0.6959619506 - 0.7456726085 ( 586 / 655883 ) 0.08934520334 % 
+0.7456726085 - 0.7953832663 ( 1733 / 655883 ) 0.2642239546 % 
+0.7953832663 - 0.8450939242 ( 5855 / 655883 ) 0.8926897023 % 
+0.8450939242 - 0.8948045821 ( 146 / 655883 ) 0.02226006773 % 
+0.8948045821 - 0.94451524 ( 322 / 655883 ) 0.04909412197 % 
+0.94451524 - 0.9942258978 ( 2668 / 655883 ) 0.4067798678 % 
+
+Writing field: warpage
+
+Calculating warpage mesh statistics : 
+ Min : 0 Max : 8.281841351e-17 Ave : 3.85259245e-20 Std Dev : 6.548926307e-19
+
+Interval, frequency, percentage
+-------------------------------
+0 - 8.281841351e-17 ( 2626955 / 2626955 ) 100 % 
+
+Writing field: aspectRatio
+
+Calculating aspectRatio mesh statistics : 
+ Min : 1 Max : 58.03666731 Ave : 1.064342988 Std Dev : 0.7906996232
+
+Interval, frequency, percentage
+-------------------------------
+1 - 3.851833365 ( 652247 / 655883 ) 99.44563283 % 
+3.851833365 - 6.703666731 ( 2066 / 655883 ) 0.3149952049 % 
+6.703666731 - 9.555500096 ( 590 / 655883 ) 0.08995506821 % 
+9.555500096 - 12.40733346 ( 317 / 655883 ) 0.04833179088 % 
+12.40733346 - 15.25916683 ( 177 / 655883 ) 0.02698652046 % 
+15.25916683 - 18.11100019 ( 144 / 655883 ) 0.02195513529 % 
+18.11100019 - 20.96283356 ( 114 / 655883 ) 0.01738114877 % 
+20.96283356 - 23.81466692 ( 68 / 655883 ) 0.01036770278 % 
+23.81466692 - 26.66650029 ( 45 / 655883 ) 0.006860979778 % 
+26.66650029 - 29.51833365 ( 30 / 655883 ) 0.004573986519 % 
+29.51833365 - 32.37016702 ( 21 / 655883 ) 0.003201790563 % 
+32.37016702 - 35.22200039 ( 20 / 655883 ) 0.003049324346 % 
+35.22200039 - 38.07383375 ( 11 / 655883 ) 0.00167712839 % 
+38.07383375 - 40.92566712 ( 11 / 655883 ) 0.00167712839 % 
+40.92566712 - 43.77750048 ( 5 / 655883 ) 0.0007623310865 % 
+43.77750048 - 46.62933385 ( 8 / 655883 ) 0.001219729738 % 
+46.62933385 - 49.48116721 ( 1 / 655883 ) 0.0001524662173 % 
+49.48116721 - 52.33300058 ( 3 / 655883 ) 0.0004573986519 % 
+52.33300058 - 55.18483394 ( 2 / 655883 ) 0.0003049324346 % 
+55.18483394 - 58.03666731 ( 3 / 655883 ) 0.0004573986519 % 
+
+
+Mesh OK.
+
+End
+
+Finalising parallel run
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\determinant to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\nonOrthogonality to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\pyramids to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\skewness to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\weights to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\volumeRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\warpage to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\constant\aspectRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor0\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\determinant to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\nonOrthogonality to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\pyramids to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\skewness to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\weights to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\volumeRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\warpage to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\constant\aspectRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor1\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\determinant to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\nonOrthogonality to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\pyramids to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\skewness to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\weights to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\volumeRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\warpage to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\constant\aspectRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor2\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\determinant to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\nonOrthogonality to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\pyramids to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\skewness to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\weights to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\volumeRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\warpage to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\constant\aspectRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor3\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\determinant to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\nonOrthogonality to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\pyramids to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\skewness to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\weights to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\volumeRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\warpage to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\constant\aspectRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor4\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\determinant to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\nonOrthogonality to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\pyramids to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\skewness to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\weights to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\volumeRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\warpage to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\constant\aspectRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor5\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\determinant to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\nonOrthogonality to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\pyramids to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\skewness to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\weights to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\volumeRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\warpage to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\constant\aspectRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor6\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\determinant to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\nonOrthogonality to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\pyramids to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\skewness to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\weights to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\volumeRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\warpage to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
+[MOVED] D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\constant\aspectRatio to D:\AEROFSAE\simulacionesTPP\perfiles2E\processor7\0
