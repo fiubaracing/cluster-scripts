@@ -7,6 +7,7 @@ fi
 
 source /home/admin/variables.config
 
+set -e
 
 #2 Install Base Operating System (BOS)
 
@@ -53,7 +54,7 @@ cp /etc/slurm/cgroup.conf.example /etc/slurm/cgroup.conf
 
 # Identify resource manager hostname on master host
 sed -i -E "s|^[[:space:]]*?[[:space:]]*SlurmctldHost=.*|SlurmctldHost=${sms_name}|" /etc/slurm/slurm.conf
-
+hostnamectl set-hostname ${sms_name}
 
 # Configuración de Topologia, CPUs, Memoria
 sed -i -E "s|^[[:space:]]*?[[:space:]]*NodeName=.*|NodeName=${compute_prefix}[1-${num_computes}] RealMemory=${real_memory} Sockets=${sockets} CoresPerSocket=${cores_per_socket} ThreadsPerCore=${threads_per_core} State=UNKNOWN|" /etc/slurm/slurm.conf
@@ -85,60 +86,62 @@ systemctl enable --now dnsmasq
 
 #3.8.1 build initial BOS image
 
-# TODO 
-# WAIT ROCKY 10 IMAGE TO BE IN DOCKERHUB
-# INSTEAD IF MIGRATION TO ROCKY 10 IS NEEDED
-# USE CENTOS 10 IMAGE
-
 # Build initial chroot image
-wwmkchroot -v rocky-9 $CHROOT
+wwctl container import docker://rockylinux/rockylinux:10.1-minimal --force rocky-10.1
+CHROOT=$(wwctl container show rocky-10.1)
 
 # Enable OpenHPC and EPEL repos inside chroot
-dnf -y --installroot $CHROOT install epel-release
-cp -p /etc/yum.repos.d/OpenHPC*.repo $CHROOT/etc/yum.repos.d
+wwctl container exec rocky-10.1 /bin/bash <<EOF
+microdnf -y install dnf
+dnf -y install epel-release
+EOF
 
+cp -p /etc/yum.repos.d/OpenHPC*.repo $CHROOT/etc/yum.repos.d
+\cp -f -p /etc/pki/rpm-gpg/RPM-GPG-KEY-OpenHPC* $CHROOT/etc/pki/rpm-gpg
 #3.8.2 Add OpenHPC components
 
 # Install compute node base meta-package
-dnf -y --installroot=$CHROOT install ohpc-base-compute
+wwctl container exec rocky-10.1 /bin/bash <<EOF
+dnf -y install ohpc-base-compute
+EOF
 cp -p /etc/resolv.conf $CHROOT/etc/resolv.conf
 
 # copy credential files into $CHROOT to ensure consistent uid/gids for slurm/munge at
 # install. Note that these will be synchronized with future updates via the provisioning system.
-cp /etc/passwd /etc/group $CHROOT/etc
+\cp -f /etc/passwd /etc/group $CHROOT/etc
 
 # Add Slurm client support meta-package and enable munge and slurmd
-dnf -y --installroot=$CHROOT install ohpc-slurm-client
-chroot $CHROOT systemctl enable munge
-chroot $CHROOT systemctl enable slurmd
+wwctl container exec rocky-10.1 /bin/bash <<EOF
+dnf -y install ohpc-slurm-client
+systemctl enable munge
+systemctl enable slurmd
+EOF
 
 # Register Slurm server with computes (using "configless" option)
 echo SLURMD_OPTIONS="--conf-server ${sms_ip}" > $CHROOT/etc/sysconfig/slurmd
 
 # Add Network Time Protocol (NTP) support
-dnf -y --installroot=$CHROOT install chrony
+wwctl container exec rocky-10.1 /bin/bash <<EOF
+dnf -y install chrony
+EOF
 # Identify master host as local NTP server
 echo "server ${sms_ip} iburst" >> $CHROOT/etc/chrony.conf
 
 # Add kernel drivers (matching kernel version on SMS node)
-dnf -y --installroot=$CHROOT install kernel-`uname -r`
+wwctl container exec rocky-10.1 /bin/bash <<EOF
+dnf -y install kernel-`uname -r`
 
 # Include modules user environment
-dnf -y --installroot=$CHROOT install lmod-ohpc
-
+dnf -y install lmod-ohpc
+EOF
 # 3.8.3 Customize system configuration
 
 # Initialize warewulf database and ssh_keys
-wwinit database
-wwinit ssh_keys
+wwctl configure ssh
 
 # Add NFS client mounts of /home and /opt/ohpc/pub to base image
 echo "${sms_ip}:/home /home nfs nfsvers=4,nodev,nosuid 0 0" >> $CHROOT/etc/fstab
-echo "${sms_ip}:/opt/ohpc/pub /opt/ohpc/pub nfs nfsvers=4,nodev 0 0" >> $CHROOT/etc/fstab
-
-# Export /home and OpenHPC public packages from master server
-echo "/home *(rw,no_subtree_check,fsid=10,no_root_squash)" >> /etc/exports
-echo "/opt/ohpc/pub *(ro,no_subtree_check,fsid=11)" >> /etc/exports
+echo "${sms_ip}:/opt /opt nfs nfsvers=4,nodev 0 0" >> $CHROOT/etc/fstab
 
 # Finalize NFS config and restart
 exportfs -a
@@ -159,11 +162,11 @@ echo "*.* @${sms_ip}:514" >> $CHROOT/etc/rsyslog.conf
 echo "Target=\"${sms_ip}\" Protocol=\"udp\"" >> $CHROOT/etc/rsyslog.conf
 
 # Disable most local logging on computes. Emergency and boot logs will remain on the compute nodes
-perl -pi -e "s/^\*\.info/\\#\*\.info/" $CHROOT/etc/rsyslog.conf
-perl -pi -e "s/^authpriv/\\#authpriv/" $CHROOT/etc/rsyslog.conf
-perl -pi -e "s/^mail/\\#mail/" $CHROOT/etc/rsyslog.conf
-perl -pi -e "s/^cron/\\#cron/" $CHROOT/etc/rsyslog.conf
-perl -pi -e "s/^uucp/\\#uucp/" $CHROOT/etc/rsyslog.conf
+sed -i 's/^\*\.info/#*\.info/' $CHROOT/etc/rsyslog.conf
+sed -i 's/^authpriv/#authpriv/' $CHROOT/etc/rsyslog.conf
+sed -i 's/^mail/#mail/' $CHROOT/etc/rsyslog.conf
+sed -i 's/^cron/#cron/' $CHROOT/etc/rsyslog.conf
+sed -i 's/^uucp/#uucp/' $CHROOT/etc/rsyslog.conf
 
 #3.8.4.8 Add ClusterShell
 
@@ -196,47 +199,44 @@ echo "HealthCheckProgram=/usr/sbin/nhc" >> /etc/slurm/slurm.conf
 echo "HealthCheckInterval=${nhc_healtcheck_interval}" >> /etc/slurm/slurm.conf
 
 #3.8.5 Import files
+wwctl overlay mkdir munge /etc/munge
+wwctl overlay import munge /etc/passwd
+wwctl overlay import munge /etc/group
+wwctl overlay import munge /etc/shadow
+wwctl overlay import munge /etc/munge/munge.key
 
-wwsh file import /etc/passwd
-wwsh file import /etc/group
-wwsh file import /etc/shadow
+# Set file permissions to 400 (Read-only by owner)
+wwctl overlay chmod munge /etc/munge/munge.key 0400
 
-wwsh file import /etc/munge/munge.key
+# Set ownership to munge user (Check your container for the correct UID/GID)
+# Assuming 'munge' is the user, Warewulf often handles names, but UIDs are safer.
+MUNGE_UID=$(awk -F: '/^munge:/ {print $3}' /etc/passwd)
+MUNGE_GID=$(awk -F: '/^munge:/ {print $4}' /etc/passwd)
+wwctl overlay chown munge /etc/munge/munge.key $MUNGE_UID:$MUNGE_GID
 
+wwctl profile set default --image rocky-10.1 -y
+wwctl profile set default --runtime-overlays=munge -y
 #3.9 Finalizing provisioning configuration
 
 #3.9.1 Assemble bootstrap image
 
-# Build bootstrap image
-wwbootstrap `uname -r`
-
-#3.9.2 Assemble Virtual Node File System (VNFS) image
-wwvnfs --chroot $CHROOT
+wwctl container build rocky-10.1
 
 #3.9.3 Register nodes for provisioning
 
-# Set provisioning interface as the default networking device
-echo "GATEWAYDEV=${eth_provision}" > /tmp/network.$$
-wwsh -y file import /tmp/network.$$ --name network
-wwsh -y file set network --path /etc/sysconfig/network --mode=0644 --uid=0
-
 # Add nodes to Warewulf data store
 for ((i=0; i<$num_computes; i++)) ; do
-    wwsh -y node new ${c_name[i]} --ipaddr=${c_ip[i]} --hwaddr=${c_mac[i]} -D ${eth_provision}
+    wwctl node add "${c_name[i]}" \
+        --netdev "${eth_provision}" \
+        --ipaddr "${c_ip[i]}" \
+        --hwaddr "${c_mac[i]}" \
+        --profile default
 done
 
-# Additional step required if desiring to use predictable network interface
-# naming schemes (e.g. en4s0f0). Skip if using eth# style names.
-export kargs="${kargs} net.ifnames=1,biosdevname=1"
-wwsh -y provision set --postnetdown=1 "${compute_regex}"
-
-# Define provisioning image for hosts
-wwsh -y provision set "${compute_regex}" --vnfs=rocky9.6 --bootstrap=`uname -r` \
---files=dynamic_hosts,passwd,group,shadow,munge.key,network
-
-# Restart dhcp / update PXE
-systemctl restart dhcpd
-wwsh pxe update
+wwctl profile set default --kernelargs "net.ifnames=1 biosdevname=1" -y
+wwctl profile set default --runtime-overlays=syncuser,munge -y
+mkdir -p /var/lib/tftpboot
+wwctl configure --all
 
 #4 Install OpenHPC Development Components
 
@@ -252,33 +252,37 @@ dnf -y install valgrind-ohpc
 
 #4.2 Compliers
 
-dnf -y install gnu13-compilers-ohpc
+dnf -y install gnu15-compilers-ohpc
 
 #4.3 MPI Stacks
-dnf -y install openmpi5-pmix-gnu13-ohpc mpich-ofi-gnu13-ohpc
+dnf -y install openmpi5-pmix-gnu15-ohpc mpich-ofi-gnu15-ohpc
 
 #4.4 Performance Tools
 
 # Install perf-tools meta-package
-dnf -y install ohpc-gnu13-perf-tools
+dnf -y install ohpc-gnu15-perf-tools
 
 #4.5 Setup default development environment
 
-dnf -y install lmod-defaults-gnu13-openmpi5-ohpc
+dnf -y install lmod-defaults-gnu15-openmpi5-ohpc
 
 #4.6 3rd Party Libraries and Tools
 
 # Install 3rd party libraries/tools meta-packages built with GNU toolchain
-dnf -y install ohpc-gnu13-serial-libs
-dnf -y install ohpc-gnu13-io-libs
-dnf -y install ohpc-gnu13-python-libs
-dnf -y install ohpc-gnu13-runtimes
+dnf -y install ohpc-gnu15-serial-libs
+dnf -y install ohpc-gnu15-io-libs
+dnf -y install ohpc-gnu15-python-libs
+dnf -y install ohpc-gnu15-runtimes
 
 # Install parallel lib meta-packages for all available MPI toolchains
-dnf -y install ohpc-gnu13-mpich-parallel-libs
-dnf -y install ohpc-gnu13-openmpi5-parallel-libs
+dnf -y install ohpc-gnu15-mpich-parallel-libs
+dnf -y install ohpc-gnu15-openmpi5-parallel-libs
 
 #5 Resource Manager Startup
+mkdir -p /home/slurm
+chown slurm:slurm /home/slurm
+sed -i -E "s|^[[:space:]]*?[[:space:]]*SlurmctldLogFile=.*|SlurmctldLogFile=/home/slurm/slurmctld.log|" /etc/slurm/slurm.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*SlurmdLogFile=.*|SlurmdLogFile=/home/slurm/slurmd.log|" /etc/slurm/slurm.conf
 
 # Start munge and slurm controller on master host
 systemctl enable munge
