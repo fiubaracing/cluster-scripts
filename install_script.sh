@@ -138,13 +138,10 @@ EOF
 
 # Initialize warewulf database and ssh_keys
 wwctl configure ssh
-
-# Add NFS client mounts of /home and /opt/ohpc/pub to base image
-echo "${sms_ip}:/home /home nfs nfsvers=4,nodev,nosuid 0 0" >> $CHROOT/etc/fstab
-echo "${sms_ip}:/opt /opt nfs nfsvers=4,nodev 0 0" >> $CHROOT/etc/fstab
+mkdir -p /var/lib/tftpboot
+wwctl configure --all
 
 # Finalize NFS config and restart
-exportfs -a
 systemctl restart nfs-server
 systemctl enable nfs-server
 
@@ -198,7 +195,9 @@ dnf -y --installroot=$CHROOT install nhc-ohpc
 echo "HealthCheckProgram=/usr/sbin/nhc" >> /etc/slurm/slurm.conf
 echo "HealthCheckInterval=${nhc_healtcheck_interval}" >> /etc/slurm/slurm.conf
 
+
 #3.8.5 Import files
+wwctl overlay create munge
 wwctl overlay mkdir munge /etc/munge
 wwctl overlay import munge /etc/passwd
 wwctl overlay import munge /etc/group
@@ -235,8 +234,6 @@ done
 
 wwctl profile set default --kernelargs "net.ifnames=1 biosdevname=1" -y
 wwctl profile set default --runtime-overlays=syncuser,munge -y
-mkdir -p /var/lib/tftpboot
-wwctl configure --all
 
 #4 Install OpenHPC Development Components
 
