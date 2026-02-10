@@ -10,10 +10,8 @@ source $INSTALLER_DIR/.env
 
 CHROOT=${CHROOT:-"/opt/ohpc/admin/images/rocky9.6"}
 
-cp /usr/sbin/pvcreate $CHROOT/usr/sbin/
-cp /usr/sbin/vgcreate $CHROOT/usr/sbin/
-cp /usr/sbin/lvcreate $CHROOT/usr/sbin/
-cp /usr/sbin/mkfs.xfs $CHROOT/usr/sbin/
+dnf -y --installroot=$CHROOT install lvm2
+dnf -y --installroot=$CHROOT install xfsprogs
 
 mkdir -p $CHROOT/etc/systemd/system
 cat > $CHROOT/etc/systemd/system/lvm-setup.service << EOF
@@ -29,7 +27,7 @@ WantedBy=multi-user.target
 EOF
 mkdir -p $CHROOT/usr/local/sbin
 
-cp $INSTALLER_DIR/utils/setup/system/slaves/lvm/create-lvm.sh $CHROOT/usr/local/sbin/create-lvm.sh
+\cp -f $INSTALLER_DIR/utils/setup/system/slaves/lvm/create-lvm.sh $CHROOT/usr/local/sbin/create-lvm.sh
 chmod +x $CHROOT/usr/local/sbin/create-lvm.sh
 
 

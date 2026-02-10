@@ -52,6 +52,15 @@ elif [ "$NUM_DISKS" -eq 1 ]; then
     if mountpoint -q "$MOUNT_POINT"; then
         echo "$MOUNT_POINT is already mounted. Skipping."
     else
+        # Remove all existing volume groups
+        # The previous data on the disks will be lost
+        # This is intended for fresh start setups
+        if vgs --noheadings -o vg_name >/dev/null 2>&1; then
+            for vg in $(vgs --noheadings -o vg_name); do
+            vgremove -y -f "$vg" || true
+            done
+        fi
+
         # Initialize Physical Volume
         pvcreate -y "$DISK"
         
@@ -77,6 +86,14 @@ elif [ "$NUM_DISKS" -eq 2 ]; then
     if mountpoint -q "$MOUNT_POINT"; then
         echo "$MOUNT_POINT is already mounted. Skipping."
     else
+        # Remove all existing volume groups
+        # The previous data on the disks will be lost
+        # This is intended for fresh start setups
+        if vgs --noheadings -o vg_name >/dev/null 2>&1; then
+            for vg in $(vgs --noheadings -o vg_name); do
+            vgremove -y -f "$vg" || true
+            done
+        fi
         # Initialize Physical Volumes
         pvcreate -y "$DISK1" "$DISK2"
         
