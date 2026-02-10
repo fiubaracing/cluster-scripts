@@ -10,7 +10,8 @@ source $INSTALLER_DIR/.env
 
 CHROOT=${CHROOT:-"/opt/ohpc/admin/images/rocky9.6"}
 
-cat $CHROOT/etc/systemd/system/lvm-setup.service << EOF
+mkdir -p $CHROOT/etc/systemd/system
+cat > $CHROOT/etc/systemd/system/lvm-setup.service << EOF
 [Unit]
 Description=LVM Setup Service
 After=network.target
@@ -21,6 +22,7 @@ ExecStart=/usr/local/sbin/create-lvm.sh
 [Install]
 WantedBy=multi-user.target
 EOF
+mkdir -p $CHROOT/usr/local/sbin
 
 cp $INSTALLER_DIR/utils/setup/system/slaves/lvm/create-lvm.sh $CHROOT/usr/local/sbin/create-lvm.sh
 chmod +x $CHROOT/usr/local/sbin/create-lvm.sh
