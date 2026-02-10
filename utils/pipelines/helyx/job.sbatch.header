@@ -36,7 +36,7 @@ echo "Job started on $(date)"
 echo "Running on nodes: $SLURM_JOB_NODELIST using $SLURM_NTASKS tasks"
 set -e
 
-LOCAL_STORAGE_PATH="/tmp/shm"
+LOCAL_STORAGE_PATH="/mnt/simulations"
 
 # Create a unique directory for this job on the local storage
 LOCAL_CASE_DIR="$LOCAL_STORAGE_PATH/job_$SLURM_JOB_ID"
@@ -50,7 +50,18 @@ SECONDS=0
 #------------------------------------------------------------------------------
 retrieve_logs_to_master() {
     # Only the slurm task selected master node retrieves logs
-    if [ "$SLURM_NODEID" -eq 0 ]; then
+    if [ "$SLURM_NODEID" -ne 0 ]; then
+        return
+    fi
+
+    if [ "$?" -ne 0 ]; then
+        echo "[Node $SLURM_NODEID] Simulation failed. Retrieving all files to master node..."
+        rsync -rltz --exclude='system' --exclude='constant' --exclude='processor*' $LOCAL_CASE_DIR/ $WDIR/
+        echo "[Node $SLURM_NODEID] Retrieval complete."
+        echo "[Node $SLURM_NODEID] Cleaning up local case directory..."
+        rm -rf $LOCAL_CASE_DIR/
+        echo "[Node $SLURM_NODEID] Local case directory removed."
+    else
         echo "[Node $SLURM_NODEID] Retrieving logs to master node..."
         rsync -a $LOCAL_CASE_DIR/postProcessing $WDIR/
         rsync -a $LOCAL_CASE_DIR/log.* $WDIR/
