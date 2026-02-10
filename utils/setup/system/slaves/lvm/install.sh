@@ -34,8 +34,4 @@ chmod +x $CHROOT/usr/local/sbin/create-lvm.sh
 mkdir -p $CHROOT/etc/systemd/system/multi-user.target.wants
 ln -sf /etc/systemd/system/lvm-setup.service $CHROOT/etc/systemd/system/multi-user.target.wants/lvm-setup.service
 
-
-MOUNT_POINT="/mnt/simulations"
-mkdir -p "\${CHROOT}\${MOUNT_POINT}"
-
 wwvnfs --chroot $CHROOT rocky9.6
