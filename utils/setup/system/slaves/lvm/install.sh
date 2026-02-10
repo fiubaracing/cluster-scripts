@@ -10,6 +10,11 @@ source $INSTALLER_DIR/.env
 
 CHROOT=${CHROOT:-"/opt/ohpc/admin/images/rocky9.6"}
 
+cp /usr/sbin/pvcreate $CHROOT/usr/sbin/
+cp /usr/sbin/vgcreate $CHROOT/usr/sbin/
+cp /usr/sbin/lvcreate $CHROOT/usr/sbin/
+cp /usr/sbin/mkfs.xfs $CHROOT/usr/sbin/
+
 mkdir -p $CHROOT/etc/systemd/system
 cat > $CHROOT/etc/systemd/system/lvm-setup.service << EOF
 [Unit]
