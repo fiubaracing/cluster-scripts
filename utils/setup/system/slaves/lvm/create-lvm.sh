@@ -8,6 +8,7 @@ LV_NAME="cfd_lv"
 
 # Ensure mount point exists
 mkdir -p "$MOUNT_POINT"
+chmod 777 "$MOUNT_POINT"
 
 # Function to get available disks (excluding system disks containing / or /boot)
 get_available_disks() {

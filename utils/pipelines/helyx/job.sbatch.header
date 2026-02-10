@@ -36,6 +36,9 @@ echo "Job started on $(date)"
 echo "Running on nodes: $SLURM_JOB_NODELIST using $SLURM_NTASKS tasks"
 set -e
 
+# Capture exit status for trap handler
+EXIT_STATUS=0
+
 LOCAL_STORAGE_PATH="/mnt/simulations"
 
 # Create a unique directory for this job on the local storage
@@ -54,7 +57,7 @@ retrieve_logs_to_master() {
         return
     fi
 
-    if [ "$?" -ne 0 ]; then
+    if [ "$EXIT_STATUS" -ne 0 ]; then
         echo "[Node $SLURM_NODEID] Simulation failed. Retrieving all files to master node..."
         rsync -rltz --exclude='system' --exclude='constant' --exclude='processor*' $LOCAL_CASE_DIR/ $WDIR/
         echo "[Node $SLURM_NODEID] Retrieval complete."
@@ -94,9 +97,11 @@ gather_metrics() {
 }
 
 on_exit() {
+    EXIT_STATUS=$?
     retrieve_logs_to_master
     remove_local_case_dir
     gather_metrics
+    exit $EXIT_STATUS
 }
 
 trap on_exit EXIT
