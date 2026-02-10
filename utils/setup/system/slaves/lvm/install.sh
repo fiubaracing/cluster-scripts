@@ -25,15 +25,12 @@ EOF
 cp $INSTALLER_DIR/utils/setup/system/slaves/lvm/create-lvm.sh $CHROOT/usr/local/sbin/create-lvm.sh
 chmod +x $CHROOT/usr/local/sbin/create-lvm.sh
 
-chroot $CHROOT systemctl enable lvm-setup.service
+
+mkdir -p $CHROOT/etc/systemd/system/multi-user.target.wants
+ln -sf /etc/systemd/system/lvm-setup.service $CHROOT/etc/systemd/system/multi-user.target.wants/lvm-setup.service
+
 
 MOUNT_POINT="/mnt/simulations"
-VG_NAME="vg_simulations"
-LV_NAME="cfd_lv"
-
-cat $CHROOT/etc/fstab << EOF
-# LVM Logical Volume for simulations
-/dev/mapper/$VG_NAME-$LV_NAME $MOUNT_POINT ext4 defaults 0 0
-EOF
+mkdir -p "\${CHROOT}\${MOUNT_POINT}"
 
 wwvnfs --chroot $CHROOT rocky9.6
