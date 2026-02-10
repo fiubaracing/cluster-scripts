@@ -34,3 +34,4 @@ bash $UTILS/setup/ipmi/install.sh
 bash $UTILS/setup/system/cloudflared/install.sh
 bash $UTILS/setup/system/path/install.sh
 bash $UTILS/setup/system/disk/install.sh
+bash $UTILS/setup/system/slaves/lvm/install.sh
