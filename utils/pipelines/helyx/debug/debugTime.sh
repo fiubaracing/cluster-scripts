@@ -9,10 +9,11 @@ if [ $# -ne 2 ]; then
   exit 1
 fi
 
+SIMULATION_DIR="/mnt/simulations"
 NODE_ID=$1
 TIME_VAL=$2
 
-pdsh -w c[$NODE_ID] "cat /tmp/shm/*/log.helyxSolve" | awk -v target="$TIME_VAL" '
+pdsh -w c[$NODE_ID] "cat $SIMULATION_DIR/*/log.helyxSolve" | awk -v target="$TIME_VAL" '
     # 1. Detect the Separator (######)
     /################/ {
         # If we found our target in the PREVIOUS block, stop reading.

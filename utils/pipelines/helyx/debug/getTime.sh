@@ -9,5 +9,6 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
+SIMULATION_DIR="/mnt/simulations"
 NODE_ID=$1
-pdsh -w c[$NODE_ID] "cat /tmp/shm/*/log.helyxSolve" | tac | grep -m 1 "Time"
+pdsh -w c[$NODE_ID] "cat $SIMULATION_DIR/*/log.helyxSolve" | tac | grep -m 1 "Time"
