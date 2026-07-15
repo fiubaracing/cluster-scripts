@@ -21,6 +21,7 @@ systemctl stop firewalld
 #3 Install OpenHPC Components
 #3.1 Enable OpenHPC repository for local use
 
+dnf -y install perl
 dnf install -y http://repos.openhpc.community/OpenHPC/4/EL_10/x86_64/ohpc-release-4-1.el10.x86_64.rpm
 
 dnf install -y dnf-plugins-core
@@ -68,11 +69,11 @@ sed -i -E "s|^[[:space:]]*?[[:space:]]*ipaddr:.*|ipaddr: ${sms_ip}|" /etc/warewu
 sed -i -E "s|^[[:space:]]*?[[:space:]]*netmask:.*|netmask: ${internal_netmask}|" /etc/warewulf/warewulf.conf
 sed -i -E "s|^[[:space:]]*?[[:space:]]*network:.*|network: ${internal_ip}|" /etc/warewulf/warewulf.conf
 # dhcp config
-sed -i -E "s|^[[:space:]]*?[[:space:]]*range start:.*|    range start: ${sms_dhcp_start}|" /etc/warewulf/warewulf.conf
-sed -i -E "s|^[[:space:]]*?[[:space:]]*range end:.*|    range end: ${sms_dhcp_end}|" /etc/warewulf/warewulf.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*range start:.*|  range start: ${sms_dhcp_start}|" /etc/warewulf/warewulf.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*range end:.*|  range end: ${sms_dhcp_end}|" /etc/warewulf/warewulf.conf
 # Enable internal interface for provisioning
 ip link set dev ${sms_eth_internal} up
-ip address add ${sms_ip}/${internal_netmask} broadcast + dev ${sms_eth_internal}
+ip address replace ${sms_ip}/${internal_netmask} broadcast + dev ${sms_eth_internal}
 
 dnf -y install httpd 
 dnf -y install dnsmasq
@@ -87,11 +88,11 @@ systemctl enable --now dnsmasq
 #3.8.1 build initial BOS image
 
 # Build initial chroot image
-wwctl container import docker://rockylinux/rockylinux:10.1-minimal --force rocky-10.1
-CHROOT=$(wwctl container show rocky-10.1)
+wwctl container import docker://rockylinux/rockylinux:latest --force rocky-image
+CHROOT=$(wwctl container show rocky-image)
 
 # Enable OpenHPC and EPEL repos inside chroot
-wwctl container exec rocky-10.1 /bin/bash <<EOF
+wwctl container exec rocky-image /bin/bash <<EOF
 microdnf -y install dnf
 dnf -y install epel-release
 EOF
@@ -101,7 +102,7 @@ cp -p /etc/yum.repos.d/OpenHPC*.repo $CHROOT/etc/yum.repos.d
 #3.8.2 Add OpenHPC components
 
 # Install compute node base meta-package
-wwctl container exec rocky-10.1 /bin/bash <<EOF
+wwctl container exec rocky-image /bin/bash <<EOF
 dnf -y install ohpc-base-compute
 EOF
 cp -p /etc/resolv.conf $CHROOT/etc/resolv.conf
@@ -111,7 +112,7 @@ cp -p /etc/resolv.conf $CHROOT/etc/resolv.conf
 \cp -f /etc/passwd /etc/group $CHROOT/etc
 
 # Add Slurm client support meta-package and enable munge and slurmd
-wwctl container exec rocky-10.1 /bin/bash <<EOF
+wwctl container exec rocky-image /bin/bash <<EOF
 dnf -y install ohpc-slurm-client
 systemctl enable munge
 systemctl enable slurmd
@@ -121,14 +122,14 @@ EOF
 echo SLURMD_OPTIONS="--conf-server ${sms_ip}" > $CHROOT/etc/sysconfig/slurmd
 
 # Add Network Time Protocol (NTP) support
-wwctl container exec rocky-10.1 /bin/bash <<EOF
+wwctl container exec rocky-image /bin/bash <<EOF
 dnf -y install chrony
 EOF
 # Identify master host as local NTP server
 echo "server ${sms_ip} iburst" >> $CHROOT/etc/chrony.conf
 
 # Add kernel drivers (matching kernel version on SMS node)
-wwctl container exec rocky-10.1 /bin/bash <<EOF
+wwctl container exec rocky-image /bin/bash <<EOF
 dnf -y install kernel-`uname -r`
 
 # Include modules user environment
@@ -213,13 +214,13 @@ MUNGE_UID=$(awk -F: '/^munge:/ {print $3}' /etc/passwd)
 MUNGE_GID=$(awk -F: '/^munge:/ {print $4}' /etc/passwd)
 wwctl overlay chown munge /etc/munge/munge.key $MUNGE_UID:$MUNGE_GID
 
-wwctl profile set default --image rocky-10.1 -y
+wwctl profile set default --image rocky-image -y
 wwctl profile set default --runtime-overlays=munge -y
 #3.9 Finalizing provisioning configuration
 
 #3.9.1 Assemble bootstrap image
 
-wwctl container build rocky-10.1
+wwctl container build rocky-image
 
 #3.9.3 Register nodes for provisioning
 
