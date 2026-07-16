@@ -1,11 +1,11 @@
 #1 Config variables
 
-if [ ! -f /home/admin/variables.config ]; then
+if [ ! -f ~/variables.config ]; then
     echo "Config file not found!"
     exit
 fi
 
-source /home/admin/variables.config
+source ~/variables.config
 
 set -e
 
