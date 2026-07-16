@@ -21,6 +21,8 @@ systemctl stop firewalld
 #3 Install OpenHPC Components
 #3.1 Enable OpenHPC repository for local use
 
+dnf -y module reset perl
+dnf -y module enable perl:5.24
 dnf -y install perl
 dnf install -y http://repos.openhpc.community/OpenHPC/4/EL_10/x86_64/ohpc-release-4-1.el10.x86_64.rpm
 
@@ -95,6 +97,9 @@ CHROOT=$(wwctl container show rocky-image)
 wwctl container exec rocky-image /bin/bash <<EOF
 microdnf -y install dnf
 dnf -y install epel-release
+dnf -y module reset perl
+dnf -y module enable perl:5.24
+dnf -y install perl
 EOF
 
 cp -p /etc/yum.repos.d/OpenHPC*.repo $CHROOT/etc/yum.repos.d
