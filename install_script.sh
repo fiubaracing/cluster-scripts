@@ -9,6 +9,9 @@ source /home/admin/variables.config
 
 set -e
 
+OHPC_META_VER=4.0-400.ohpc.12.1
+SLURM_OHPC_VER=25.05.3-400.ohpc.5.1
+
 #2 Install Base Operating System (BOS)
 
 if ! grep -qF ${sms_name} /etc/hosts; then
@@ -21,8 +24,6 @@ systemctl stop firewalld
 #3 Install OpenHPC Components
 #3.1 Enable OpenHPC repository for local use
 
-dnf -y module reset perl
-dnf -y module enable perl:5.24
 dnf -y install perl
 dnf install -y http://repos.openhpc.community/OpenHPC/4/EL_10/x86_64/ohpc-release-4-1.el10.x86_64.rpm
 
@@ -32,7 +33,7 @@ dnf config-manager --set-enabled crb
 #3.3 Add provisioning services on master node
 
 # Install base meta-packages
-dnf -y install ohpc-base
+dnf -y install ohpc-base-${OHPC_META_VER}
 dnf -y install warewulf-ohpc
 dnf -y install hwloc-ohpc
 
@@ -47,7 +48,7 @@ systemctl restart chronyd
 #3.4 Add resource management services on master node
 
 # Install slurm server meta-package
-dnf -y install ohpc-slurm-server
+dnf -y install ohpc-slurm-server-${OHPC_META_VER}
 
 # Use ohpc-provided file for starting SLURM configuration
 cp /etc/slurm/slurm.conf.ohpc /etc/slurm/slurm.conf
@@ -95,10 +96,8 @@ CHROOT=$(wwctl container show rocky-image)
 
 # Enable OpenHPC and EPEL repos inside chroot
 wwctl container exec rocky-image /bin/bash <<EOF
-microdnf -y install dnf
+command -v dnf >/dev/null 2>&1 || microdnf -y install dnf
 dnf -y install epel-release
-dnf -y module reset perl
-dnf -y module enable perl:5.24
 dnf -y install perl
 EOF
 
@@ -108,7 +107,7 @@ cp -p /etc/yum.repos.d/OpenHPC*.repo $CHROOT/etc/yum.repos.d
 
 # Install compute node base meta-package
 wwctl container exec rocky-image /bin/bash <<EOF
-dnf -y install ohpc-base-compute
+dnf -y install ohpc-base-compute-${OHPC_META_VER}
 EOF
 cp -p /etc/resolv.conf $CHROOT/etc/resolv.conf
 
@@ -118,7 +117,7 @@ cp -p /etc/resolv.conf $CHROOT/etc/resolv.conf
 
 # Add Slurm client support meta-package and enable munge and slurmd
 wwctl container exec rocky-image /bin/bash <<EOF
-dnf -y install ohpc-slurm-client
+dnf -y install slurm-slurmd-ohpc-${SLURM_OHPC_VER} ohpc-slurm-client-${OHPC_META_VER}
 systemctl enable munge
 systemctl enable slurmd
 EOF
