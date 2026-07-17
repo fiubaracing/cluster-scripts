@@ -91,7 +91,7 @@ systemctl enable --now dnsmasq
 #3.8.1 build initial BOS image
 
 # Build initial chroot image
-wwctl container import docker://rockylinux/rockylinux:latest --force rocky-image
+wwctl container import docker://rockylinux/rockylinux:10.1 --force rocky-image
 CHROOT=$(wwctl container show rocky-image)
 
 # Enable OpenHPC and EPEL repos inside chroot
