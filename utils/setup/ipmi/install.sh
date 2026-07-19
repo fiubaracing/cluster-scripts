@@ -10,8 +10,8 @@ source $INSTALLER_DIR/.env
 
 HEAD_NODE_NUMBER=2
 
-if [ -n $(nmcli -g ipv4.addresses con show $IPMI_INTERFACE | grep -q "$IPMI_IPADDR.$HEAD_NODE_NUMBER")]; then
-    nmcli con mod "$IPMI_INTERFACE" +ipv4.addresses "$IPMI_IPADDR.$HEAD_NODE_NUMBER/${IPMI_NETMASK[0]}"
+if [ -n $(nmcli -g ipv4.addresses con show $IPMI_INTERFACE | grep -q "$IPMI_IPADDR$HEAD_NODE_NUMBER")]; then
+    nmcli con mod "$IPMI_INTERFACE" +ipv4.addresses "$IPMI_IPADDR$HEAD_NODE_NUMBER/${IPMI_NETMASK[0]}"
 fi
 
 # Set IPMI credentials for compute nodes

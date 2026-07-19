@@ -17,7 +17,7 @@ else
 fi
 
 UTILS="$THIS_SCRIPT_DIR/utils"
-INSTALLER_DIR=$THIS_SCRIPT_DIR
+export INSTALLER_DIR=$THIS_SCRIPT_DIR
 
 # Ensure git considers this directory safe to enable git pulls
 git config --global --add safe.directory $INSTALLER_DIR
