@@ -12,7 +12,7 @@ scontrol update NodeName="$1" state=POWER_UP
 #     logger -t slurm_resume "Powering ON node: $host"
     
 #     # Run Warewulf command via sudo
-#     sudo /usr/bin/wwsh ipmi poweron $host
+#     sudo /usr/bin/wwctl power on "$host"
 # done
 
 # echo "Waiting for nodes to power on in background..."

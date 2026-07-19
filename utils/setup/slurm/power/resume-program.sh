@@ -10,7 +10,7 @@ for host in $HOSTS; do
     logger -t slurm_resume "Powering ON node: $host"
     
     # Run Warewulf command via sudo
-    sudo /usr/bin/wwsh ipmi poweron $host
+    sudo /usr/bin/wwctl power on "$host"
 done
 
 exit 0

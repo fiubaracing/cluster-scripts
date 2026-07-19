@@ -55,17 +55,13 @@ echo "Restarting slurmctld to apply changes"
 scontrol reconfigure
 systemctl restart slurmctld
 
-SUDOERS=$(grep -l 'wwsh ipmi' /etc/sudoers.d/* 2>/dev/null)
-
-if [ -n "$SUDOERS" ]; then
-    echo "Sudoers file for wwsh ipmi commands already exists: $SUDOERS"
-    echo "Skipping creation of new sudoers file."
-    exit 0
-fi
-
-bash -c 'cat << EOF > /etc/sudoers.d/slurm-wwsh
-# Allow slurm user to run wwsh ipmi commands without a password
-slurm ALL=(ALL) NOPASSWD: /usr/bin/wwsh ipmi poweron *
-slurm ALL=(ALL) NOPASSWD: /usr/bin/wwsh ipmi poweroff *
+bash -c 'cat << EOF > /etc/sudoers.d/slurm-wwctl
+# Allow slurm user to run Warewulf power commands without a password
+slurm ALL=(ALL) NOPASSWD: /usr/bin/wwctl power on *
+slurm ALL=(ALL) NOPASSWD: /usr/bin/wwctl power off *
 EOF'
-chmod 440 /etc/sudoers.d/slurm-wwsh
+chmod 440 /etc/sudoers.d/slurm-wwctl
+
+if [ -f /etc/sudoers.d/slurm-wwctl ]; then
+    rm -f /etc/sudoers.d/slurm-wwctl
+fi
