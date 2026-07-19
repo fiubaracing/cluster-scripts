@@ -23,6 +23,8 @@ INSTALLER_DIR=$THIS_SCRIPT_DIR
 git config --global --add safe.directory $INSTALLER_DIR
 bash $UTILS/update-menu.sh
 
+cp .env /home/admin/variables.config && bash install_script.sh
+
 # Install SLURM configurations
 if [ -n "${RESEND_API_KEY}" ] && [ -n "${RESEND_VERIFIED_DOMAIN}" ]; then
     bash $UTILS/setup/slurm/email/install.sh
