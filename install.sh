@@ -25,9 +25,9 @@ mkdir -p $INSTALLER_DIR/logs
 git config --global --add safe.directory $INSTALLER_DIR
 bash $UTILS/update-menu.sh
 
-cp .env /home/admin/variables.config
-echo "Installing cluster main configuration"
-bash install_script.sh 2>&1 $INSTALLER_DIR/logs/install.log
+# cp .env /home/admin/variables.config
+# echo "Installing cluster main configuration"
+# bash install_script.sh 2>&1 $INSTALLER_DIR/logs/install.log
 
 # Install SLURM configurations
 if [ -n "${RESEND_API_KEY}" ] && [ -n "${RESEND_VERIFIED_DOMAIN}" ]; then
