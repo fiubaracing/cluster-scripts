@@ -91,11 +91,11 @@ systemctl enable --now dnsmasq
 #3.8.1 build initial BOS image
 
 # Build initial chroot image
-wwctl container import docker://rockylinux/rockylinux:10.1 --force rocky-image
-CHROOT=$(wwctl container show rocky-image)
+wwctl container import docker://almalinux:10 --force alma-image
+CHROOT=$(wwctl container show alma-image)
 
 # Enable OpenHPC and EPEL repos inside chroot
-wwctl container exec rocky-image /bin/bash <<EOF
+wwctl container exec alma-image /bin/bash <<EOF
 command -v dnf >/dev/null 2>&1 || microdnf -y install dnf
 dnf -y install epel-release
 dnf -y install perl
@@ -106,7 +106,7 @@ cp -p /etc/yum.repos.d/OpenHPC*.repo $CHROOT/etc/yum.repos.d
 #3.8.2 Add OpenHPC components
 
 # Install compute node base meta-package
-wwctl container exec rocky-image /bin/bash <<EOF
+wwctl container exec alma-image /bin/bash <<EOF
 dnf -y install ohpc-base-compute-${OHPC_META_VER}
 EOF
 cp -p /etc/resolv.conf $CHROOT/etc/resolv.conf
@@ -116,7 +116,7 @@ cp -p /etc/resolv.conf $CHROOT/etc/resolv.conf
 \cp -f /etc/passwd /etc/group $CHROOT/etc
 
 # Add Slurm client support meta-package and enable munge and slurmd
-wwctl container exec rocky-image /bin/bash <<EOF
+wwctl container exec alma-image /bin/bash <<EOF
 dnf -y install slurm-slurmd-ohpc-${SLURM_OHPC_VER} ohpc-slurm-client-${OHPC_META_VER}
 systemctl enable munge
 systemctl enable slurmd
@@ -126,14 +126,14 @@ EOF
 echo SLURMD_OPTIONS="--conf-server ${sms_ip}" > $CHROOT/etc/sysconfig/slurmd
 
 # Add Network Time Protocol (NTP) support
-wwctl container exec rocky-image /bin/bash <<EOF
+wwctl container exec alma-image /bin/bash <<EOF
 dnf -y install chrony
 EOF
 # Identify master host as local NTP server
 echo "server ${sms_ip} iburst" >> $CHROOT/etc/chrony.conf
 
 # Add kernel drivers (matching kernel version on SMS node)
-wwctl container exec rocky-image /bin/bash <<EOF
+wwctl container exec alma-image /bin/bash <<EOF
 dnf -y install kernel-`uname -r`
 
 # Include modules user environment
@@ -218,13 +218,13 @@ MUNGE_UID=$(awk -F: '/^munge:/ {print $3}' /etc/passwd)
 MUNGE_GID=$(awk -F: '/^munge:/ {print $4}' /etc/passwd)
 wwctl overlay chown munge /etc/munge/munge.key $MUNGE_UID:$MUNGE_GID
 
-wwctl profile set default --image rocky-image -y
+wwctl profile set default --image alma-image -y
 wwctl profile set default --runtime-overlays=munge -y
 #3.9 Finalizing provisioning configuration
 
 #3.9.1 Assemble bootstrap image
 
-wwctl container build rocky-image
+wwctl container build alma-image
 
 #3.9.3 Register nodes for provisioning
 
