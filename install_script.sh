@@ -60,11 +60,13 @@ cp /etc/slurm/cgroup.conf.example /etc/slurm/cgroup.conf
 sed -i -E "s|^[[:space:]]*?[[:space:]]*SlurmctldHost=.*|SlurmctldHost=${sms_name}|" /etc/slurm/slurm.conf
 hostnamectl set-hostname ${sms_name}
 
+node_string=$(IFS=,; echo "${c_name[*]}")
+
 # Configuración de Topologia, CPUs, Memoria
-sed -i -E "s|^[[:space:]]*?[[:space:]]*NodeName=.*|NodeName=${compute_prefix}[1-${num_computes}] RealMemory=${real_memory} Sockets=${sockets} CoresPerSocket=${cores_per_socket} ThreadsPerCore=${threads_per_core} State=UNKNOWN|" /etc/slurm/slurm.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*NodeName=.*|NodeName=${node_string} RealMemory=${real_memory} Sockets=${sockets} CoresPerSocket=${cores_per_socket} ThreadsPerCore=${threads_per_core} State=UNKNOWN|" /etc/slurm/slurm.conf
 
 # Configuración de los nombres de los nodos de cómputo
-sed -i -E "s|^[[:space:]]*?[[:space:]]*PartitionName=.*|PartitionName=normal Nodes=${compute_prefix}[1-${num_computes}] Default=YES MaxTime=INFINITE State=UP Oversubscribe=NO|" /etc/slurm/slurm.conf
+sed -i -E "s|^[[:space:]]*?[[:space:]]*PartitionName=.*|PartitionName=normal Nodes=${node_string} Default=YES MaxTime=INFINITE State=UP Oversubscribe=NO|" /etc/slurm/slurm.conf
 #3.7 Complete basic warewulf setup for master node
 
 # Configure Warewulf provisioning to use desired internal interface
@@ -74,9 +76,13 @@ sed -i -E "s|^[[:space:]]*?[[:space:]]*network:.*|network: ${internal_ip}|" /etc
 # dhcp config
 sed -i -E "s|^[[:space:]]*?[[:space:]]*range start:.*|  range start: ${sms_dhcp_start}|" /etc/warewulf/warewulf.conf
 sed -i -E "s|^[[:space:]]*?[[:space:]]*range end:.*|  range end: ${sms_dhcp_end}|" /etc/warewulf/warewulf.conf
-# Enable internal interface for provisioning
-ip link set dev ${sms_eth_internal} up
-ip address replace ${sms_ip}/${internal_netmask} broadcast + dev ${sms_eth_internal}
+# Enable internal interface for provisioning permanently
+if ! nmcli connection show "${sms_eth_internal}" > /dev/null 2>&1; then
+    nmcli connection add type ethernet ifname "${sms_eth_internal}" con-name "${sms_eth_internal}" ipv4.addresses "${sms_ip}/${internal_netmask}" ipv4.method manual
+else
+    nmcli connection modify "${sms_eth_internal}" ipv4.addresses "${sms_ip}/${internal_netmask}" ipv4.method manual
+fi
+nmcli connection up "${sms_eth_internal}"
 
 dnf -y install httpd 
 dnf -y install dnsmasq
@@ -236,6 +242,9 @@ for ((i=0; i<$num_computes; i++)) ; do
         --hwaddr "${c_mac[i]}" \
         --profile default
 done
+
+# Synchronize Warewulf database with system files (/etc/hosts, DHCP, etc.)
+wwctl configure --all
 
 wwctl profile set default --kernelargs "net.ifnames=1 biosdevname=1" -y
 wwctl profile set default --runtime-overlays=syncuser,munge -y
