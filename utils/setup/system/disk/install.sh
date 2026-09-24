@@ -35,6 +35,8 @@ $CFD_DATA_LVM $CFD_DATA_MOUNT_DIR   $CFD_DATA_FILE_SYSTEM    $CFD_DATA_MOUNT_OPT
 EOF
 mount -a
 
+CHROOT=$(wwctl container show alma-image)
+
 # Set NFS export
 mkdir ${CHROOT}${CFD_DATA_MOUNT_DIR}
 CFD_DATA_FILE_SYSTEM='nfs'
