@@ -52,12 +52,12 @@ node_string=$(IFS=,; echo "${c_name[*]}")
 sed -i -E "s|^[[:space:]]*?[[:space:]]*NodeName=.*|NodeName=${node_string} RealMemory=${real_memory} Sockets=${sockets} CoresPerSocket=${cores_per_socket} ThreadsPerCore=${threads_per_core} State=UNKNOWN|" /etc/slurm/slurm.conf
 sed -i -E "s|^[[:space:]]*?[[:space:]]*PartitionName=.*|PartitionName=normal Nodes=${node_string} Default=YES MaxTime=INFINITE State=UP Oversubscribe=NO|" /etc/slurm/slurm.conf
 
-#3.7 Complete basic warewulf setup for master node
-sed -i -E "s|^[[:space:]]*?[[:space:]]*ipaddr:.*|ipaddr: ${sms_ip}|" /etc/warewulf/warewulf.conf
-sed -i -E "s|^[[:space:]]*?[[:space:]]*netmask:.*|netmask: ${internal_netmask}|" /etc/warewulf/warewulf.conf
-sed -i -E "s|^[[:space:]]*?[[:space:]]*network:.*|network: ${internal_ip}|" /etc/warewulf/warewulf.conf
-sed -i -E "s|^[[:space:]]*?[[:space:]]*range start:.*|  range start: ${sms_dhcp_start}|" /etc/warewulf/warewulf.conf
-sed -i -E "s|^[[:space:]]*?[[:space:]]*range end:.*|  range end: ${sms_dhcp_end}|" /etc/warewulf/warewulf.conf
+# Configure Warewulf provisioning with safe YAML indentation
+sed -i -E "s/^([[:space:]]*)ipaddr:.*/\1ipaddr: ${sms_ip}/" /etc/warewulf/warewulf.conf
+sed -i -E "s/^([[:space:]]*)netmask:.*/\1netmask: ${internal_netmask}/" /etc/warewulf/warewulf.conf
+sed -i -E "s/^([[:space:]]*)network:.*/\1network: ${internal_ip}/" /etc/warewulf/warewulf.conf
+sed -i -E "s/^([[:space:]]*)range start:.*/\1range start: ${sms_dhcp_start}/" /etc/warewulf/warewulf.conf
+sed -i -E "s/^([[:space:]]*)range end:.*/\1range end: ${sms_dhcp_end}/" /etc/warewulf/warewulf.conf
 
 if ! nmcli connection show "${sms_eth_internal}" > /dev/null 2>&1; then
     nmcli connection add type ethernet ifname "${sms_eth_internal}" con-name "${sms_eth_internal}" ipv4.addresses "${sms_ip}/${internal_netmask_cidr}" ipv4.method manual
