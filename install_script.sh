@@ -78,9 +78,9 @@ sed -i -E "s|^[[:space:]]*?[[:space:]]*range start:.*|  range start: ${sms_dhcp_
 sed -i -E "s|^[[:space:]]*?[[:space:]]*range end:.*|  range end: ${sms_dhcp_end}|" /etc/warewulf/warewulf.conf
 # Enable internal interface for provisioning permanently
 if ! nmcli connection show "${sms_eth_internal}" > /dev/null 2>&1; then
-    nmcli connection add type ethernet ifname "${sms_eth_internal}" con-name "${sms_eth_internal}" ipv4.addresses "${sms_ip}/${internal_netmask}" ipv4.method manual
+    nmcli connection add type ethernet ifname "${sms_eth_internal}" con-name "${sms_eth_internal}" ipv4.addresses "${sms_ip}/${internal_netmask_cidr}" ipv4.method manual
 else
-    nmcli connection modify "${sms_eth_internal}" ipv4.addresses "${sms_ip}/${internal_netmask}" ipv4.method manual
+    nmcli connection modify "${sms_eth_internal}" ipv4.addresses "${sms_ip}/${internal_netmask_cidr}" ipv4.method manual
 fi
 nmcli connection up "${sms_eth_internal}"
 
