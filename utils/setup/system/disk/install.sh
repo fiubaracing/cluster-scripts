@@ -35,7 +35,7 @@ $CFD_DATA_LVM $CFD_DATA_MOUNT_DIR   $CFD_DATA_FILE_SYSTEM    $CFD_DATA_MOUNT_OPT
 EOF
 mount -a
 
-CHROOT=$(wwctl container show alma-image)
+CHROOT=$(wwctl container show rocky-9)
 
 # Set NFS export
 mkdir ${CHROOT}${CFD_DATA_MOUNT_DIR}

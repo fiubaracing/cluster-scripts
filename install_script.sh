@@ -72,7 +72,7 @@ systemctl enable --now warewulfd
 
 #3.8 Define compute image for provisioning (Warewulf 4 Method)
 wwctl container import docker://rockylinux:9 --force rocky-9
-CHROOT="/var/lib/warewulf/chroots/rocky-9"
+CHROOT=$(wwctl container show rocky-9)
 
 # Configure standard OHPC 3 packages inside the Warewulf 4 container
 wwctl container exec rocky-9 /bin/bash <<EOF
