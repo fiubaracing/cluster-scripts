@@ -100,9 +100,10 @@ echo "${sms_ip}:/opt/ohpc/pub /opt/ohpc/pub nfs nfsvers=4,nodev 0 0" >> $CHROOT/
 # Export NFS directories from master
 echo "/home *(rw,no_subtree_check,fsid=10,no_root_squash)" >> /etc/exports
 echo "/opt/ohpc/pub *(ro,no_subtree_check,fsid=11)" >> /etc/exports
-exportfs -a
-systemctl restart nfs-server
 systemctl enable nfs-server
+systemctl restart nfs-server
+
+exportfs -a
 
 #3.8.4 Customizations
 # Rsyslog
