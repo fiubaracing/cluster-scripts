@@ -2,10 +2,6 @@
 # Post-solve: Send results back to the shared case directory
 #------------------------------------------------------------------------------
 echo "Finished helyxSolve $(date)"
-
-echo "Staging-Out results to $WDIR $(date)"
-srun -N "$SLURM_NNODES" --ntasks-per-node=1 \
-     bash "$WDIR/pipeline/send_results.sh" "$WDIR" "$LOCAL_CASE_DIR" "$SLURM_NTASKS_PER_NODE"
-echo "Finished send results to master $(date)"
+stage_out
 
 cd "$WDIR"

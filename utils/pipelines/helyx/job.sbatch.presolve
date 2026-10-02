@@ -4,6 +4,7 @@
 echo "Copy split in nodes $(date)"
 srun -N "$SLURM_NNODES" --ntasks-per-node=1 \
      bash "$WDIR/pipeline/copy_tasks.sh" "$WDIR" "$LOCAL_CASE_DIR" "$SLURM_NTASKS_PER_NODE"
+STAGE_IN_DONE=yes
 echo "Finished copy task splits $(date)"
 
 cd "$LOCAL_CASE_DIR"

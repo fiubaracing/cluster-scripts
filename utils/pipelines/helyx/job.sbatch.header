@@ -30,7 +30,7 @@
 #SBATCH --mail-user={{ EMAIL }}
 
 # Send SIGTERM to the batch script 5 minutes before the time limit,
-# so the exit trap has time to retrieve logs and clean up.
+# so the exit trap has time to stage out results and clean up.
 #SBATCH --signal=B:TERM@300
 
 #------------------------------------------------------------------------------
@@ -46,9 +46,14 @@ LOCAL_CASE_DIR="$LOCAL_STORAGE_PATH/job_$SLURM_JOB_ID"
 WDIR="$SLURM_SUBMIT_DIR"
 SECONDS=0
 
+# Set by the pre-solve / stage-out sections
+STAGE_IN_DONE=no
+STAGE_OUT_DONE=no
+
 cd "$WDIR"
 
-# Load the GCC 13 runtime HELYX was built with
+# Load the GCC 13 runtime HELYX was built with (only the compiler: HELYX
+# brings its own Open MPI 4.0.2 through activeBuild.shrc)
 command -v module >/dev/null 2>&1 || source /etc/profile.d/lmod.sh
 module purge
 module load gnu13
@@ -60,14 +65,31 @@ source /mnt/cfd/tools/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc
 set -e
 
 #------------------------------------------------------------------------------
-#  Retrieve logs to the shared case directory
+# Stage-out: copy results from every node back to the shared case directory.
+# Called after helyxSolve, and from the exit trap if the job ends early
+# (solver failure, time limit, scancel -b -s TERM).
+#------------------------------------------------------------------------------
+stage_out() {
+    echo "Staging-Out results to $WDIR $(date)"
+    if srun -N "$SLURM_NNODES" --ntasks-per-node=1 \
+            bash "$WDIR/pipeline/send_results.sh" "$WDIR" "$LOCAL_CASE_DIR"; then
+        STAGE_OUT_DONE=yes
+        echo "Finished send results to master $(date)"
+    else
+        echo "Stage-out FAILED $(date)" >&2
+        return 1
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Fallback: retrieve at least the logs from the first node
 #------------------------------------------------------------------------------
 retrieve_logs_to_master() {
     # The batch script always runs on the first node of the allocation
-    if [ "${SLURM_NODEID:-0}" -eq 0 ] && [ -d "$LOCAL_CASE_DIR" ]; then
+    if [ -d "$LOCAL_CASE_DIR" ]; then
         echo "[Node ${SLURM_NODEID:-0}] Retrieving logs to master node..."
-        [ -d "$LOCAL_CASE_DIR/postProcessing" ] && rsync -a "$LOCAL_CASE_DIR/postProcessing" "$WDIR/"
-        compgen -G "$LOCAL_CASE_DIR/log.*" >/dev/null && rsync -a "$LOCAL_CASE_DIR"/log.* "$WDIR/"
+        [ -d "$LOCAL_CASE_DIR/postProcessing" ] && rsync -rlt "$LOCAL_CASE_DIR/postProcessing" "$WDIR/"
+        compgen -G "$LOCAL_CASE_DIR/log.*" >/dev/null && rsync -rlt "$LOCAL_CASE_DIR"/log.* "$WDIR/"
         echo "[Node ${SLURM_NODEID:-0}] Logs retrieval complete."
     fi
 }
@@ -76,6 +98,11 @@ retrieve_logs_to_master() {
 #  Cleanup local temp directories on all nodes
 #------------------------------------------------------------------------------
 remove_local_case_dir() {
+    # Keep the local copies if the results could not be copied back
+    if [ "$STAGE_IN_DONE" = yes ] && [ "$STAGE_OUT_DONE" != yes ]; then
+        echo "[Node ${SLURM_NODEID:-0}] Stage-out did not complete: keeping $LOCAL_CASE_DIR on $SLURM_JOB_NODELIST for manual recovery"
+        return
+    fi
     echo "[Node ${SLURM_NODEID:-0}] Cleaning up local case directory on all nodes..."
     # One task per node; ${VAR:?} aborts instead of running "rm -rf" on an empty path
     srun -N "$SLURM_NNODES" --ntasks-per-node=1 rm -rf "${LOCAL_CASE_DIR:?}"
@@ -97,13 +124,21 @@ gather_metrics() {
 }
 
 #------------------------------------------------------------------------------
-# Exit handling
+# Exit handling: always try to bring the results back, success or not
 #------------------------------------------------------------------------------
 on_exit() {
     rc=$?
-    set +e          # a failing cleanup step must not abort the rest of the trap
+    set +e          # a failing step must not abort the rest of the trap
     trap - EXIT
-    retrieve_logs_to_master
+
+    if [ "$STAGE_IN_DONE" = yes ] && [ "$STAGE_OUT_DONE" != yes ]; then
+        echo "Job ending with exit code $rc before results were staged out: retrieving them now"
+        stage_out
+    fi
+
+    # If the full stage-out failed, try to save at least the logs
+    [ "$STAGE_OUT_DONE" != yes ] && retrieve_logs_to_master
+
     remove_local_case_dir
     gather_metrics
     echo "Script exit code: $rc"
@@ -111,7 +146,7 @@ on_exit() {
 }
 
 trap on_exit EXIT
-# Without these, bash killed by a signal (scancel, time limit) skips the EXIT trap
+# Without these, bash killed by a signal (time limit, scancel) skips the EXIT trap
 trap 'echo "Received SIGTERM"; exit 143' TERM
 trap 'echo "Received SIGINT";  exit 130' INT
 
