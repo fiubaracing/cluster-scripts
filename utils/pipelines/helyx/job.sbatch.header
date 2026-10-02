@@ -48,6 +48,11 @@ SECONDS=0
 
 cd "$WDIR"
 
+# Load the GCC 13 runtime HELYX was built with
+command -v module >/dev/null 2>&1 || source /etc/profile.d/lmod.sh
+module purge
+module load gnu13
+
 # Source HELYX before "set -e": environment scripts often run commands that
 # return non-zero internally, which would silently kill the job under set -e.
 source /mnt/cfd/tools/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc
