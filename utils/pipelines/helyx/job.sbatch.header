@@ -6,22 +6,22 @@
 #------------------------------------------------------------------------------
 
 # Job name
-#SBATCH --job-name="{{ JOB_NAME }}"       
+#SBATCH --job-name="{{ JOB_NAME }}"
 
 # Number of nodes
-#SBATCH --nodes={{ NODES }}                    
+#SBATCH --nodes={{ NODES }}
 
 # Total number of MPI ranks (nodes * cores/node)
-#SBATCH --ntasks={{ TASKS }}                  
+#SBATCH --ntasks={{ TASKS }}
 
 # Cores per node
-#SBATCH --ntasks-per-node={{ TASKS_PER_NODE }}          
+#SBATCH --ntasks-per-node={{ TASKS_PER_NODE }}
 
 # Standard output log
-#SBATCH --output={{ OUTPUT }}      
+#SBATCH --output={{ OUTPUT }}
 
 # Standard error log
-#SBATCH --error={{ OERROR }}       
+#SBATCH --error={{ OERROR }}
 
 # Email notifications (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-type=ALL
@@ -29,32 +29,41 @@
 # Email address
 #SBATCH --mail-user={{ EMAIL }}
 
+# Send SIGTERM to the batch script 5 minutes before the time limit,
+# so the exit trap has time to retrieve logs and clean up.
+#SBATCH --signal=B:TERM@300
+
 #------------------------------------------------------------------------------
 # Environment Setup
 #------------------------------------------------------------------------------
 echo "Job started on $(date)"
 echo "Running on nodes: $SLURM_JOB_NODELIST using $SLURM_NTASKS tasks"
-set -e
 
 LOCAL_STORAGE_PATH="/tmp/shm"
 
-# Create a unique directory for this job on the local storage
+# Unique directory for this job on the node-local storage
 LOCAL_CASE_DIR="$LOCAL_STORAGE_PATH/job_$SLURM_JOB_ID"
-WDIR=$SLURM_SUBMIT_DIR
-cd $WDIR
-source /mnt/cfd/tools/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc
+WDIR="$SLURM_SUBMIT_DIR"
 SECONDS=0
 
+cd "$WDIR"
+
+# Source HELYX before "set -e": environment scripts often run commands that
+# return non-zero internally, which would silently kill the job under set -e.
+source /mnt/cfd/tools/Engys/HELYXcore-4.4.1/platforms/activeBuild.shrc
+
+set -e
+
 #------------------------------------------------------------------------------
-#  Retrieve logs to master node
+#  Retrieve logs to the shared case directory
 #------------------------------------------------------------------------------
 retrieve_logs_to_master() {
-    # Only the slurm task selected master node retrieves logs
-    if [ "$SLURM_NODEID" -eq 0 ]; then
-        echo "[Node $SLURM_NODEID] Retrieving logs to master node..."
-        rsync -a $LOCAL_CASE_DIR/postProcessing $WDIR/
-        rsync -a $LOCAL_CASE_DIR/log.* $WDIR/
-        echo "[Node $SLURM_NODEID] Logs retrieval complete."
+    # The batch script always runs on the first node of the allocation
+    if [ "${SLURM_NODEID:-0}" -eq 0 ] && [ -d "$LOCAL_CASE_DIR" ]; then
+        echo "[Node ${SLURM_NODEID:-0}] Retrieving logs to master node..."
+        [ -d "$LOCAL_CASE_DIR/postProcessing" ] && rsync -a "$LOCAL_CASE_DIR/postProcessing" "$WDIR/"
+        compgen -G "$LOCAL_CASE_DIR/log.*" >/dev/null && rsync -a "$LOCAL_CASE_DIR"/log.* "$WDIR/"
+        echo "[Node ${SLURM_NODEID:-0}] Logs retrieval complete."
     fi
 }
 
@@ -62,9 +71,10 @@ retrieve_logs_to_master() {
 #  Cleanup local temp directories on all nodes
 #------------------------------------------------------------------------------
 remove_local_case_dir() {
-    echo "[Node $SLURM_NODEID] Cleaning up local case directory..."
-    srun -N $SLURM_NNODES rm -rf $LOCAL_CASE_DIR
-    echo "[Node $SLURM_NODEID] Local case directory removed."
+    echo "[Node ${SLURM_NODEID:-0}] Cleaning up local case directory on all nodes..."
+    # One task per node; ${VAR:?} aborts instead of running "rm -rf" on an empty path
+    srun -N "$SLURM_NNODES" --ntasks-per-node=1 rm -rf "${LOCAL_CASE_DIR:?}"
+    echo "[Node ${SLURM_NODEID:-0}] Local case directory removed."
 }
 
 #------------------------------------------------------------------------------
@@ -78,17 +88,27 @@ gather_metrics() {
     minutes=$(( (TOTAL_RUNTIME % 3600) / 60 ))
     seconds=$(( TOTAL_RUNTIME % 60 ))
 
-    # For padded HH:MM:SS format, use printf
-    printf "Runtime duration: %02dh %02dm %02ds\n" $hours $minutes $seconds
+    printf "Runtime duration: %02dh %02dm %02ds\n" "$hours" "$minutes" "$seconds"
 }
 
+#------------------------------------------------------------------------------
+# Exit handling
+#------------------------------------------------------------------------------
 on_exit() {
+    rc=$?
+    set +e          # a failing cleanup step must not abort the rest of the trap
+    trap - EXIT
     retrieve_logs_to_master
     remove_local_case_dir
     gather_metrics
+    echo "Script exit code: $rc"
+    exit "$rc"
 }
 
 trap on_exit EXIT
+# Without these, bash killed by a signal (scancel, time limit) skips the EXIT trap
+trap 'echo "Received SIGTERM"; exit 143' TERM
+trap 'echo "Received SIGINT";  exit 130' INT
 
 #------------------------------------------------------------------------------
 # HELYX simulation commands
