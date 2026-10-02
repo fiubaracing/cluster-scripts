@@ -8,11 +8,11 @@
 echo "Running mesh"
 helyxRun -parallel helyxHexMesh -overwrite
 
-echo "Running patchSummary"
-helyxRun -parallel patchSummary -constant
-
 echo "Running setup"
 helyxRun -parallel caseSetup
+
+echo "Running patchSummary"
+helyxRun -parallel patchSummary -constant
 
 echo "Running solver"
 helyxRun helyxSolve -parallel
