@@ -58,8 +58,11 @@ sed -i -E "s/^netmask:.*/netmask: ${internal_netmask}/" /etc/warewulf/warewulf.c
 sed -i -E "s/^network:.*/network: ${internal_ip}/" /etc/warewulf/warewulf.conf
 
 # Preserve indentation for nested DHCP range settings
-sed -i -E "s/^([[:space:]]+)range start:.*/\1range start: ${sms_dhcp_start}/" /etc/warewulf/warewulf.conf
-sed -i -E "s/^([[:space:]]+)range end:.*/\1range end: ${sms_dhcp_end}/" /etc/warewulf/warewulf.conf
+sed -i -E "/^dhcp:/,/^[^[:space:]]/ {
+  s/^([[:space:]]+)template:.*/\1template: static/
+  s/^([[:space:]]+)range start:.*/\1range start: ${sms_dhcp_start}/
+  s/^([[:space:]]+)range end:.*/\1range end: ${sms_dhcp_end}/
+}" /etc/warewulf/warewulf.conf
 
 if ! nmcli connection show "${sms_eth_internal}" > /dev/null 2>&1; then
     nmcli connection add type ethernet ifname "${sms_eth_internal}" con-name "${sms_eth_internal}" ipv4.addresses "${sms_ip}/${internal_netmask_cidr}" ipv4.method manual
